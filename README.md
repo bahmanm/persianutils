@@ -1,8 +1,8 @@
-# Introduction #
+## 1. Introduction ##
 
 A collection of utilities for Scala/Java developers who are targeting Persian (Farsi) speaking users.
 
-# Using In Your Scala/Java Project #
+## 2. Using In Your Scala/Java Project ##
 
 Assuming you have [SBT installed](http://www.scala-sbt.org/release/docs/Getting-Started/Setup.html):
 
@@ -13,11 +13,11 @@ $ sbt package
 
 The JAR file is in `target/scala-VERSION`. You can now add it to your project like any other dependency.
 
-# What Is Included? #
+## 3. What Is Included? ##
 
 This is a short review of what you will find in _persianutils_:
 
-## DateConverter ##
+### 3.1 DateConverter ###
 
 `com.bahmanm.persianutils.DateConverter` is a port of the original algorithm (in Fortran) [The Persian calendar for 3000 years](http://www.astro.uni.torun.pl/~kb/Papers/EMP/PersianC-EMP.htm) by Mr. Borkowski to Scala.
 
