@@ -19,7 +19,7 @@ This is a short review of what you will find in _persianutils_:
 
 ### 3.1 DateConverter ###
 
-`com.bahmanm.persianutils.DateConverter` is a port of the original algorithm (in Fortran) [The Persian calendar for 3000 years](http://www.astro.uni.torun.pl/~kb/Papers/EMP/PersianC-EMP.htm) by Mr. Borkowski to Scala.
+`com.bahmanm.persianutils.DateConverter` is the Scala port of the original algorithm (in Fortran) [The Persian calendar for 3000 years](http://www.astro.uni.torun.pl/~kb/Papers/EMP/PersianC-EMP.htm).
 
 ```scala
 import com.bahmanm.persianutils.DateConverter._
