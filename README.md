@@ -79,7 +79,7 @@ val pDate4 = SimpleDate(ds) // initialising from a String
 val gDate4 = persianToGregorian(pDate4)
 ```
 
-#### 3.2 Java ####
+#### 3.1.2 Java ####
 
 ```java
 import com.bahmanm.persianutils.DateConverter;
