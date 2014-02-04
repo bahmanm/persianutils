@@ -34,7 +34,7 @@ This is a short review of what you will find in _persianutils_:
 
 #### 3.1.1 Scala ####
 
-_NOTE: _persianutils_ works with Scala 2.10.x series._
+_NOTE: persianutils works with Scala 2.10.x series._
 
 ```scala
 import com.bahmanm.persianutils.DateConverter._
@@ -60,7 +60,7 @@ val pDate4 = SimpleDate(ds) // initialising from a String
 val gDate4 = persianToGregorian(pDate4)
 ```
 
-#### 3.2 Java ####
+#### 3.1.2 Java ####
 
 ```java
 import com.bahmanm.persianutils.DateConverter;
