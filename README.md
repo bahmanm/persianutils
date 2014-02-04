@@ -7,9 +7,6 @@ A collection of utilities for Scala/Java developers who are targeting Persian (F
 ### 2.1 SBT ###
 
 ```
-...
-resolvers ++= Seq("snapshots", "releases").map(Resolver.sonatypeRepo)
-...
 libraryDependencies ++= Seq(
     "com.bahmanm" %% "persianutils" % "1.0"
 )
@@ -18,22 +15,6 @@ libraryDependencies ++= Seq(
 ### 2.2 Maven ###
 
 ```xml
-...
-<repositories>
-    <repository>
-        <id>sonatypesnapshots</id>
-        <name>sonatype-snapshots</name>
-        <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-        <layout>default</layout>
-    </repository>
-    <repository>
-        <id>sonatypereleases</id>
-        <name>sonatype-releases</name>
-        <url>https://oss.sonatype.org/content/repositories/releases/</url>
-        <layout>default</layout>
-    </repository>
-</repositories>
-...
 <dependencies>
     <dependency>
         <groupId>com.bahmanm</groupId>
