@@ -6,7 +6,7 @@ A collection of utilities for Scala/Java developers who are targeting Persian (F
 
 ### 2.1 SBT ###
 
-```
+```scala
 libraryDependencies ++= Seq(
     "com.bahmanm" %% "persianutils" % "1.0"
 )
@@ -68,9 +68,13 @@ import com.bahmanm.persianutils.DateConverter;
 public class Main {
 
   public static void main(String[] args) {
-    DateConverter.SimpleDate pd = new DateConverter.SimpleDate(1392, 11, 11);
-    DateConverter.SimpleDate gd = DateConverter.persianToGregorian(pd);
-    System.out.println(gd);
+    DateConverter.SimpleDate pd1 = new DateConverter.SimpleDate(1392, 11, 11);
+    DateConverter.SimpleDate gd1 = DateConverter.persianToGregorian(pd1);
+    System.out.println(gd1);
+    
+    DateConverter.SimpleDate gd2 = new DateConverter.SimpleDate(2014, 2, 4);
+    DateConverter.SimpleDate pd2 = DateConverter.gregorianToPersian(gd2);
+    System.out.println(pd2); 
   }
 
 }
