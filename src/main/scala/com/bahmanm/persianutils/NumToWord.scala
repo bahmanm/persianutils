@@ -4,7 +4,7 @@ package com.bahmanm.persianutils
  * @author Amir Karimi (karimi AT dev-frame.com)
  * Example: @code numToWord(123)
  */
-object numToWord {
+object NumToWord {
   /**
    * Converts the specified number to corresponding words.
    */
