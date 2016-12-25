@@ -30,4 +30,34 @@ class DateConverterTest extends mutable.Specification {
     }
   }
 
+  "11om Day 1346" should {
+    "equal January 1st, 1968" in {
+      persianToGregorian(SimpleDate(1346, 10, 11)) must_== SimpleDate(1968, 1, 1)
+    }
+  }
+
+  "Jan 1st, 1968" should {
+    "equal 11om Day 1346" in {
+      gregorianToPersian(SimpleDate(1968, 1, 1)) must_== SimpleDate(1346, 10, 11)
+    }
+  }
+
+  "Jan 2nd, 1968" should {
+    "equal 12om Day 1346" in {
+      gregorianToPersian(SimpleDate(1968, 1, 2)) must_== SimpleDate(1346, 10, 12)
+    }
+  }
+
+  "Jan 1st, 1996" should {
+    "equal 11om Day 1374" in {
+      gregorianToPersian(SimpleDate(1996, 1, 1)) must_== SimpleDate(1374, 10, 11)
+    }
+  }
+
+  "March 20th, 2030" should {
+    "equal 30om Esfand 1408" in {
+      gregorianToPersian(SimpleDate(2030, 3, 20)) must_== SimpleDate(1408, 12, 30)
+    }
+  }
+
 }

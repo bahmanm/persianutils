@@ -20,26 +20,26 @@ object DateConverter {
    * A simple date representation used in DateConverter. It can represent a date in any calendar.
    */
   case class SimpleDate(year: Int, month: Int, day: Int) {
-    
+
     override def toString = year + "/" + month + "/" + day
-    
+
     def asDate = {
       import java.util.Calendar
-      
+
       val c = Calendar.getInstance()
       c.set(Calendar.YEAR, year)
       c.set(Calendar.MONTH, month-1)
       c.set(Calendar.DAY_OF_MONTH, day)
       c.getTime
     }
-    
+
   }
-  
+
   object SimpleDate {
-    
+
     def apply(date: String) = {
       val re = new scala.util.matching.Regex(
-          """(\d\d\d\d)/(\d\d)/(\d\d)""", 
+          """(\d\d\d\d)/(\d\d)/(\d\d)""",
           "year", "month", "day")
       try {
         val re(year, month, day) = date
@@ -49,12 +49,12 @@ object DateConverter {
           throw new InvalidDateException()
       }
     }
-    
+
     def apply(date: java.util.Date) = {
       new SimpleDate(date.getYear + 1900, date.getMonth + 1,
           date.getDate)
     }
-    
+
   }
 
   /**
@@ -130,34 +130,38 @@ object DateConverter {
       2456, 3178) filter { x => x <= pYear }
     val gYear = pYear + 621
     val gLeaps = gYear / 4 - (gYear / 100 + 1) * 3 / 4 - 150
-    val pLeaps = computePersianLeaps(-14, breaks, 0, pYear)
-    val n = computeN(breaks, pYear)
+    val (pLeaps, remainingBreaks) = computePersianLeaps(-14, breaks, 0, pYear)
+    val n = computeN(breaks(0), remainingBreaks, pYear)
     val marchDay = 20 + pLeaps - gLeaps
     val leap1 = (((n + 1) % 33) - 1) % 4
     val leap = if (leap1 == -1) 4 else leap1
     PersianYearInfo(leap, gYear, marchDay)
   }
 
-  private def computeN(breaks: Seq[Int], pYear: Int): Int = {
-    val y2 = breaks.takeRight(2)(0)
-    val y1 = breaks.takeRight(2)(1)
-    val n = pYear - y2
-    val delta = y2 - y1
-    if ((delta - n) < 6)
-      n - delta + (delta + 4) / 33 * 33
-    else
-      n
+  private def computeN(initialBreak: Int, breaks: Seq[Int], pYear: Int): Int = {
+    if (breaks.length < 1)
+      pYear - initialBreak
+    else {
+      val n = pYear - initialBreak
+      val delta = breaks(0) - initialBreak
+      if ((delta - n) < 6)
+        n - delta + (((delta + 4) / 33) * 33)
+      else
+        n
+    }
   }
 
   private def computePersianLeaps(accResult: Int, breaks: Seq[Int],
-                                  previousDelta: Int, pYear: Int): Int = {
-    if (breaks.length < 2) {
+                                  previousDelta: Int, pYear: Int): (Int, Seq[Int]) = {
+    if (pYear < breaks.head)
+      (breaks.head, breaks)
+    else if (breaks.length < 2) {
       val n = pYear - breaks.head
       val accResult1 = accResult + n / 33 * 8 + ((n % 33) + 3) / 4
       if ((previousDelta % 33) == 4 && (previousDelta - n == 4))
-        accResult1 + 1
+        (accResult1 + 1, breaks)
       else
-        accResult1
+        (accResult1, breaks)
     } else {
       val delta = breaks(1) - breaks(0)
       val accResult1 = accResult + delta / 33 * 8 + (delta % 33) / 4
@@ -166,5 +170,3 @@ object DateConverter {
   }
 
 }
-
-
