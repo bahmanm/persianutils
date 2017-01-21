@@ -17,7 +17,8 @@ class InvalidDateException extends Exception {}
 object DateConverter {
 
   /**
-   * A simple date representation used in DateConverter. It can represent a date in any calendar.
+   * A simple date representation used in DateConverter. It can represent a date
+   * in any calendar.
    */
   case class SimpleDate(year: Int, month: Int, day: Int) {
 
@@ -39,8 +40,9 @@ object DateConverter {
 
     def apply(date: String) = {
       val re = new scala.util.matching.Regex(
-          """(\d\d\d\d)/(\d\d)/(\d\d)""",
-          "year", "month", "day")
+        """(\d\d\d\d)/(\d\d)/(\d\d)""",
+        "year", "month", "day"
+      )
       try {
         val re(year, month, day) = date
         new SimpleDate(year.toInt, month.toInt, day.toInt)
@@ -51,8 +53,15 @@ object DateConverter {
     }
 
     def apply(date: java.util.Date) = {
-      new SimpleDate(date.getYear + 1900, date.getMonth + 1,
-          date.getDate)
+      import java.util.Calendar
+
+      val c = Calendar.getInstance()
+      c.setTime(date)
+      new SimpleDate(
+        c.get(Calendar.YEAR),
+        c.get(Calendar.MONTH) + 1,
+        c.get(Calendar.DAY_OF_MONTH)
+      )
     }
 
   }
@@ -138,7 +147,9 @@ object DateConverter {
     PersianYearInfo(leap, gYear, marchDay)
   }
 
-  private def computeN(initialBreak: Int, breaks: Seq[Int], pYear: Int): Int = {
+  private def computeN(
+    initialBreak: Int, breaks: Seq[Int], pYear: Int
+  ): Int = {
     if (breaks.length < 1)
       pYear - initialBreak
     else {
@@ -151,8 +162,10 @@ object DateConverter {
     }
   }
 
-  private def computePersianLeaps(accResult: Int, breaks: Seq[Int],
-                                  previousDelta: Int, pYear: Int): (Int, Seq[Int]) = {
+  private def computePersianLeaps(
+    accResult: Int, breaks: Seq[Int],
+    previousDelta: Int, pYear: Int
+  ): (Int, Seq[Int]) = {
     if (pYear < breaks.head)
       (breaks.head, breaks)
     else if (breaks.length < 2) {
