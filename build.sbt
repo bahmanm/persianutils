@@ -1,5 +1,5 @@
 name := "PersianUtils"
-version := "2.0"
+version := "2.1-SNAPSHOT"
 organization := "com.bahmanm"
 organizationHomepage := Some(url("http://BahmanM.com"))
 description := "A collection of utilities for Scala/Java developers who are targeting Persian (Farsi) speaking users."
