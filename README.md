@@ -8,7 +8,7 @@ A collection of utilities for Scala/Java developers who are targeting Persian (F
 
 ```scala
 libraryDependencies ++= Seq(
-    "com.bahmanm" %% "persianutils" % "1.0"
+    "com.bahmanm" %% "persianutils" % "2.0"
 )
 ```
 
@@ -19,7 +19,7 @@ libraryDependencies ++= Seq(
     <dependency>
         <groupId>com.bahmanm</groupId>
         <artifactId>persianutils_2.10</artifactId>
-        <version>1.0</version>
+        <version>2.0</version>
     </dependency>
 </dependencies>
 ```
@@ -34,7 +34,7 @@ This is a short review of what you will find in _persianutils_:
 
 #### 3.1.1 Scala ####
 
-_NOTE: persianutils works with Scala 2.10.x series._
+_NOTE: persianutils works with Scala 2.10.x and 2.11.x series._
 
 ```scala
 import com.bahmanm.persianutils.DateConverter._
