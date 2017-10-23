@@ -14,11 +14,24 @@ libraryDependencies ++= Seq(
 
 ### 2.2 Maven ###
 
+With Scala 2.10.x:
+
 ```xml
 <dependencies>
     <dependency>
         <groupId>com.bahmanm</groupId>
         <artifactId>persianutils_2.10</artifactId>
+        <version>2.0</version>
+    </dependency>
+</dependencies>
+```
+
+With Scala 2.11.x:
+```xml
+<dependencies>
+    <dependency>
+        <groupId>com.bahmanm</groupId>
+        <artifactId>persianutils_2.11</artifactId>
         <version>2.0</version>
     </dependency>
 </dependencies>
