@@ -2,7 +2,7 @@
 // artifact
 ////////////////////////////////////////////////////////////////////////////////
 name := "persianutils"
-version := "2.0"
+version := "2.1-SNAPSHOT"
 description := "A collection of utilities for Scala/Java developers who are targeting Persian (Farsi) speaking users."
 homepage := Some(url("https://github.com/bahmanm/persianutils"))
 licenses += "Apache 2" -> url("http://www.apache.org/licenses/LICENSE-2.0.txt")
