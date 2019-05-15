@@ -2,7 +2,7 @@
 // artifact
 ////////////////////////////////////////////////////////////////////////////////
 name := "persianutils"
-version := "2.1-SNAPSHOT"
+version := "3.0-SNAPSHOT"
 description := "A collection of utilities for Scala/Java developers who are targeting Persian (Farsi) speaking users."
 homepage := Some(url("https://github.com/bahmanm/persianutils"))
 licenses += "Apache 2" -> url("http://www.apache.org/licenses/LICENSE-2.0.txt")
@@ -12,13 +12,13 @@ organizationHomepage := Some(url("http://BahmanM.com"))
 ////////////////////////////////////////////////////////////////////////////////
 // build
 ////////////////////////////////////////////////////////////////////////////////
-scalaVersion := "2.10.6"
+scalaVersion := "2.12.8"
 libraryDependencies ++= Seq(
-  "org.specs2" %% "specs2" % "2.3.11" % "test"
+  "org.specs2" %% "specs2-core" % "4.3.4" % "test"
 )
 resolvers ++= Seq("snapshots", "releases").map(Resolver.sonatypeRepo)
 scalacOptions in Test ++= Seq("-Yrangepos")
-crossScalaVersions := Seq("2.10.6", "2.11.11")
+crossScalaVersions := Seq("2.11.12", "2.12.8")
 
 ////////////////////////////////////////////////////////////////////////////////
 // sonatype and maven central

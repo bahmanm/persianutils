@@ -1,7 +1,6 @@
 package com.bahmanm.persianutils
 
 import org.specs2._
-import specification._
 import com.bahmanm.persianutils.DateConverter._
 
 class DateConverterTest extends mutable.Specification {
