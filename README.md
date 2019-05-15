@@ -4,11 +4,10 @@ A collection of utilities for Scala/Java developers who are targeting Persian (F
 
 ### 1.1  Scala Compatibility ###
 
-| persianutils|scala | 2.10.x | 2.11.x | 2.12.x |
-|--------------------|--------|--------|--------|
+| persianutils/scala | 2.10.x | 2.11.x | 2.12.x |
+| ------------------ | ------ | ------ | ------ |
 | 2.x                | Yes    | Yes    | No     |
 | 3.x                | No     | Yes    | Yes    |
-
 
 ## 2 Adding To Your Project ##
 
