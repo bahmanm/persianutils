@@ -1,7 +1,6 @@
 package com.bahmanm.persianutils
 
 import org.specs2._
-import specification._
 
 class NumToWordTest extends mutable.Specification {
 
@@ -34,25 +33,25 @@ class NumToWordTest extends mutable.Specification {
       NumToWord(220983) must_== "دویست و بیست هزار و نه‌صد و هشتاد و سه"
     }
   }
-  
+
   "100,000" should {
     "صد هزار" in {
       NumToWord(100000) must_== "صد هزار"
     }
   }
-  
+
   "100,000,000" should {
     "صد میلیون" in {
       NumToWord(100000000) must_== "صد میلیون"
     }
   }
-  
+
   "100,000,000,000" should {
     "صد میلیارد" in {
       NumToWord(100000000000L) must_== "صد میلیارد"
     }
   }
-  
+
   "100,000,000,000,000" should {
     "صد هزار میلیارد" in {
       NumToWord(100000000000000L) must_== "صد هزار میلیارد"
