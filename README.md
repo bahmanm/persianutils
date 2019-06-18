@@ -4,10 +4,11 @@ A collection of utilities for Scala/Java developers who are targeting Persian (F
 
 ### 1.1  Scala Compatibility ###
 
-| persianutils/scala | 2.10.x | 2.11.x | 2.12.x |
-| ------------------ | ------ | ------ | ------ |
-| 2.x                | Yes    | Yes    | No     |
-| 3.x                | No     | Yes    | Yes    |
+| ↓persianutils │ scala→ | 2.10.x | 2.11.x | 2.12.x |
+|------------------------|--------|--------|--------|
+| 2.x                    | Yes    | Yes    | No     |
+| 3.x                    | No     | Yes    | Yes    |
+
 
 ## 2 Adding To Your Project ##
 
@@ -15,28 +16,11 @@ A collection of utilities for Scala/Java developers who are targeting Persian (F
 
 ```scala
 libraryDependencies ++= Seq(
-    "com.bahmanm" %% "persianutils" % "3.0-SNAPSHOT"
+    "com.bahmanm" %% "persianutils" % "3.0" // or 2.0
 )
 ```
 
 ### 2.2 Maven ###
-
-Enable Sonatype's snapshot repository (in `pom.xml`):
-
-```xml
-<repositories>
-  <repository>
-    <id>oss.sonatype.org-snapshot</id>
-    <url>http://oss.sonatype.org/content/repositories/snapshots</url>
-    <releases>
-      <enabled>false</enabled>
-    </releases>
-    <snapshots>
-      <enabled>true</enabled>
-    </snapshots>
-  </repository>
-</repositories>
-```
 
 With Scala 2.12.x:
 
@@ -45,7 +29,7 @@ With Scala 2.12.x:
     <dependency>
         <groupId>com.bahmanm</groupId>
         <artifactId>persianutils_2.12</artifactId>
-        <version>3.0-SNAPSHOT</version>
+        <version>3.0</version>
     </dependency>
 </dependencies>
 ```
@@ -56,7 +40,18 @@ With Scala 2.11.x:
     <dependency>
         <groupId>com.bahmanm</groupId>
         <artifactId>persianutils_2.11</artifactId>
-        <version>3.0-SNAPSHOT</version>
+        <version>3.0</version>
+    </dependency>
+</dependencies>
+```
+
+With Scala 2.10.x:
+```xml
+<dependencies>
+    <dependency>
+        <groupId>com.bahmanm</groupId>
+        <artifactId>persianutils_2.10</artifactId>
+        <version>2.0</version>
     </dependency>
 </dependencies>
 ```

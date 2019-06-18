@@ -2,7 +2,7 @@
 // artifact
 ////////////////////////////////////////////////////////////////////////////////
 name := "persianutils"
-version := "3.0-SNAPSHOT"
+version := "3.0"
 description := "A collection of utilities for Scala/Java developers who are targeting Persian (Farsi) speaking users."
 homepage := Some(url("https://github.com/bahmanm/persianutils"))
 licenses += "Apache 2" -> url("http://www.apache.org/licenses/LICENSE-2.0.txt")
@@ -49,7 +49,7 @@ developers := List(
   Developer(
     id    = "amirkarimi",
     name  = "Amir Karimi",
-    email = "na@na.com",
-    url   = url("http://amirkarimi.github.io/")
+    email = "a.karimi.k@gmail.com",
+    url   = url("http://amirkarimi.me/")
   )
 )
