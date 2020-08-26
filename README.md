@@ -4,10 +4,11 @@ A collection of utilities for Scala/Java developers who are targeting Persian (F
 
 ### 1.1  Scala Compatibility ###
 
-| ↓persianutils │ scala→ | 2.10.x | 2.11.x | 2.12.x |
-|------------------------|--------|--------|--------|
-| 2.x                    | Yes    | Yes    | No     |
-| 3.x                    | No     | Yes    | Yes    |
+| ↓persianutils │ scala→ | 2.10.x | 2.11.x | 2.12.x | 2.13.x |
+|------------------------|--------|--------|--------|--------|
+| 2.x                    |    X   |    X   |    -   |    -   |
+| 3.x                    |    -   |    X   |    X   |    -   |
+| 4.x                    |    -   |    X   |    X   |    X   |
 
 
 ## 2 Adding To Your Project ##
@@ -16,11 +17,23 @@ A collection of utilities for Scala/Java developers who are targeting Persian (F
 
 ```scala
 libraryDependencies ++= Seq(
-    "com.bahmanm" %% "persianutils" % "3.0" // or 2.0
+    "com.bahmanm" %% "persianutils" % "4.0" // or 2.0
 )
 ```
 
 ### 2.2 Maven ###
+
+With Scala 2.13.x:
+
+```xml
+<dependencies>
+    <dependency>
+        <groupId>com.bahmanm</groupId>
+        <artifactId>persianutils_2.13</artifactId>
+        <version>4.0</version>
+    </dependency>
+</dependencies>
+```
 
 With Scala 2.12.x:
 
@@ -29,7 +42,7 @@ With Scala 2.12.x:
     <dependency>
         <groupId>com.bahmanm</groupId>
         <artifactId>persianutils_2.12</artifactId>
-        <version>3.0</version>
+        <version>4.0</version>
     </dependency>
 </dependencies>
 ```
@@ -40,7 +53,7 @@ With Scala 2.11.x:
     <dependency>
         <groupId>com.bahmanm</groupId>
         <artifactId>persianutils_2.11</artifactId>
-        <version>3.0</version>
+        <version>4.0</version>
     </dependency>
 </dependencies>
 ```
