@@ -22,7 +22,7 @@ object DateConverter {
    */
   case class SimpleDate(year: Int, month: Int, day: Int) {
 
-    override def toString = year + "/" + month + "/" + day
+    override def toString = s"$year/$month/$day"
 
     def asDate = {
       import java.util.Calendar
