@@ -44,10 +44,12 @@ object DateConverter {
         "year", "month", "day"
       )
       try {
-        val re(year, month, day) = date
-        new SimpleDate(year.toInt, month.toInt, day.toInt)
+        date match {
+          case re(year, month, day) =>
+            new SimpleDate(year.toInt, month.toInt, day.toInt)
+        }
       } catch {
-        case _ : Throwable =>
+        case _: Throwable =>
           throw new InvalidDateException()
       }
     }
