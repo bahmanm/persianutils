@@ -12,13 +12,13 @@ organizationHomepage := Some(url("http://BahmanM.com"))
 ////////////////////////////////////////////////////////////////////////////////
 // build
 ////////////////////////////////////////////////////////////////////////////////
-scalaVersion := "2.13.3"
+scalaVersion := "2.13.11"
 libraryDependencies ++= Seq(
-  "org.specs2" %% "specs2-core" % "4.10.3" % "test"
+  "org.specs2" %% "specs2-core" % "4.20.0" % "test"
 )
 resolvers ++= Seq("snapshots", "releases").map(Resolver.sonatypeRepo)
 scalacOptions in Test ++= Seq("-Yrangepos")
-crossScalaVersions := Seq("2.11.12", "2.12.12", "2.13.3")
+crossScalaVersions := Seq("2.12.18", "2.13.11", "3.3.0")
 
 ////////////////////////////////////////////////////////////////////////////////
 // sonatype and maven central
