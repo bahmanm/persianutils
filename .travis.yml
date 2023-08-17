@@ -2,19 +2,12 @@
 language: scala
 
 dist: jammy
-addons:
-  apt:
-    packages:
-      - openjdk-11-jdk
-      - openjdk-17-jdk
+
+jdk:
+  - openjdk11
+  - openjdk17
 
 scala:
   - 2.12.18
   - 2.13.11
   - 3.3.0
-
-script: >-
-  jdk_switcher use openjdk11
-  && sbt ++$TRAVIS_SCALA_VERSION test
-  && jdk_switcher use openjdk17
-  && sbt ++$TRAVIS_SCALA_VERSION test
