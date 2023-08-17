@@ -27,13 +27,8 @@ crossScalaVersions := Seq("2.12.18", "2.13.11", "3.3.0")
 useGpg := true
 publishMavenStyle := true
 pomIncludeRepository := { _ => false }
-publishTo := {
-  val nexus = "https://oss.sonatype.org/"
-  if (isSnapshot.value)
-    Some("snapshots" at nexus + "content/repositories/snapshots")
-  else
-    Some("releases"  at nexus + "service/local/staging/deploy/maven2")
-}
+versionScheme := Some("semver-spec")
+publishTo := sonatypePublishToBundle.value
 scmInfo := Some(
   ScmInfo(
     url("https://github.com/bahmanm/persianutils"),
