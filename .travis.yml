@@ -5,8 +5,8 @@ dist: jammy
 addons:
   apt:
     packages:
-      - openjdk11
-      - openjdk17
+      - openjdk-11-jdk
+      - openjdk-17-jdk
 
 scala:
   - 2.12.18
