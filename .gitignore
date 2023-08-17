@@ -1,7 +1,7 @@
 *.class
 *.log
-~*
-*~
+*~*
+*\#*
 
 # sbt specific
 dist/*
@@ -16,4 +16,3 @@ project/plugins/project/
 .cache
 .classpath
 .project
-/project/
