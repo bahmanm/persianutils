@@ -1,0 +1,17 @@
+---
+language: scala
+
+scala:
+  - 2.12.18
+  - 2.13.11
+  - 3.3.0
+
+jdk:
+  - openjdk11
+  - openjdk17
+
+dist: focal
+addons:
+  apt:
+    packages:
+      - openjd17
