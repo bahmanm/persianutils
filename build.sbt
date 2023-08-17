@@ -16,7 +16,8 @@ scalaVersion := "2.13.11"
 libraryDependencies ++= Seq(
   "org.specs2" %% "specs2-core" % "4.20.0" % "test"
 )
-resolvers ++= Seq("snapshots", "releases").map(Resolver.sonatypeRepo)
+resolvers ++= Resolver.sonatypeOssRepos("snapshots")
+resolvers ++= Resolver.sonatypeOssRepos("releases")
 scalacOptions in Test ++= Seq("-Yrangepos")
 crossScalaVersions := Seq("2.12.18", "2.13.11", "3.3.0")
 
@@ -44,12 +45,18 @@ developers := List(
     id    = "bahmanm",
     name  = "Bahman Movaqar",
     email = "Bahman@BahmanM.com",
-    url   = url("http://BahmanM.com")
+    url   = url("https://BahmanM.com/")
   ),
   Developer(
     id    = "amirkarimi",
     name  = "Amir Karimi",
     email = "a.karimi.k@gmail.com",
-    url   = url("http://amirkarimi.me/")
+    url   = url("https://amirkarimi.me/")
+  ),
+  Developer(
+    id    = "KeivanAbdi",
+    name  = "Keivan Abdi",
+    email = "keivan.a.khorsand@gmail.com",
+    url   = url("https://keivanabdi.com/")
   )
 )
