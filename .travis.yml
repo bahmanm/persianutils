@@ -1,7 +1,7 @@
 ---
 language: scala
 
-dist: focal
+dist: jammy
 addons:
   apt:
     packages:
