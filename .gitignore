@@ -16,3 +16,11 @@ project/plugins/project/
 .cache
 .classpath
 .project
+
+# bloop and metals
+/project/.bloop
+/project/project
+/.bloop/
+/.bsp/
+/.metals/
+/project/metals.sbt
