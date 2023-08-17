@@ -1,3 +1,5 @@
+[![Build Status](https://app.travis-ci.com/bahmanm/persianutils.svg?branch=master)](https://app.travis-ci.com/bahmanm/persianutils) ![Static Badge](https://img.shields.io/badge/license-Apache_License_v2.0-blue)
+
 ## 1 Introduction ##
 
 A collection of utilities for Scala/Java developers who are targeting Persian (Farsi) speaking users.
