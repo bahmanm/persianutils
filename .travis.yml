@@ -1,17 +1,46 @@
 ---
 language: scala
-
-scala:
-  - 2.12.18
-  - 2.13.11
-  - 3.3.0
-
-jdk:
-  - openjdk11
-  - openjdk17
-
 dist: focal
-addons:
-  apt:
-    packages:
-      - openjd17
+
+jobs:
+  include:
+
+    ################################################################################
+    # OpenJDK 11
+    - name: Scala 2.12 on OpenJDK 11
+      scala: 2.12.18
+      jdk: openjdk11
+
+    - name: Scala 2.13 on OpenJDK 11
+      scala: 2.13.11
+      jdk: openjdk11
+
+    - name: Scala 3.3 on OpenJDK 11
+      scala: 3.3.0
+      jdk: openjdk11
+
+    ################################################################################
+    # OpenJDK 17
+    - name: Scala 2.12 on OpenJDK 17
+      scala: 2.12.18
+      jdk: openjdk17
+      addons:
+        apt:
+          packages:
+            - openjdk17
+
+    - name: Scala 2.13 on OpenJDK 17
+      scala: 2.13.11
+      jdk: openjdk17
+      addons:
+        apt:
+          packages:
+            - openjdk17
+
+    - name: Scala 3.3 on OpenJDK 17
+      scala: 3.3.0
+      jdk: openjdk17
+      addons:
+        apt:
+          packages:
+            - openjdk17
