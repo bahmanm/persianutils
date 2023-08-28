@@ -27,18 +27,12 @@ before_install: >-
   git fetch --tags
 
 stages:
-  - name: compile
   - name: test
   - name: release
     if: ((branch = master AND type = push) OR (tag IS present)) AND NOT fork
 
 jobs:
   include:
-    - stage: compile
-      name: compile
-      script: >-
-        sbt compile
-
     - stage: test
       name: test
       script: >-
