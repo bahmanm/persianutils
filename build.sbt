@@ -2,7 +2,6 @@
 // artifact
 ////////////////////////////////////////////////////////////////////////////////
 name := "persianutils"
-version := "5.0-SNAPSHOT"
 description := "A collection of utilities for Scala/Java developers who are targeting Persian (Farsi) speaking users."
 homepage := Some(url("https://github.com/bahmanm/persianutils"))
 licenses += "Apache 2" -> url("http://www.apache.org/licenses/LICENSE-2.0.txt")
@@ -25,10 +24,8 @@ crossScalaVersions := Seq("2.12.18", "2.13.11", "3.3.0")
 // sonatype and maven central
 ////////////////////////////////////////////////////////////////////////////////
 useGpg := true
-publishMavenStyle := true
 pomIncludeRepository := { _ => false }
 versionScheme := Some("semver-spec")
-publishTo := sonatypePublishToBundle.value
 scmInfo := Some(
   ScmInfo(
     url("https://github.com/bahmanm/persianutils"),
