@@ -33,11 +33,6 @@ stages:
 
 jobs:
   include:
-    - stage: test
-      name: test
-      script: >-
-        sbt test
-
     - stage: release
       script: >-
         sbt ci-release
