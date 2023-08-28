@@ -27,12 +27,35 @@ before_install: >-
   git fetch --tags
 
 stages:
+  - name: compile
   - name: test
   - name: release
     if: ((branch = master AND type = push) OR (tag IS present)) AND NOT fork
 
 jobs:
   include:
+    - stage: compile
+      name: compile
+      jdk:
+        - openjdk17
+      scala:
+        - 2.12.18
+        - 2.13.11
+        - 3.3.0
+      script: >-
+        sbt compile
+
+    - stage: test
+      name: test
+      script: >-
+        sbt test
+
     - stage: release
+      jdk:
+        - openjdk11
+      scala:
+        - 2.12.18
+        - 2.13.11
+        - 3.3.0
       script: >-
         sbt ci-release
