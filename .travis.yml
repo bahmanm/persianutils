@@ -19,6 +19,7 @@ before_cache: >-
 
 cache:
   directories:
+    - $HOME/.m2/repository
     - $HOME/.cache/coursier
     - $HOME/.ivy2/cache
     - $HOME/.sbt
@@ -36,12 +37,8 @@ jobs:
   include:
     - stage: compile
       name: compile
-      scala:
-        - 2.12.18
-        - 2.13.11
-        - 3.3.0
       script: >-
-        sbt compile
+        sbt ++$TRAVIS_SCALA_VERSION compile test:compile
 
     - stage: test
       name: test
@@ -49,11 +46,5 @@ jobs:
         sbt test
 
     - stage: release
-      jdk:
-        - openjdk11
-      scala:
-        - 2.12.18
-        - 2.13.11
-        - 3.3.0
       script: >-
-        sbt ci-release
+        sbt ++$TRAVIS_SCALA_VERSION ci-release
