@@ -1,4 +1,39 @@
 ---
+####################################################################################################
+# templates
+####################################################################################################
+
+_compile: &compile
+  language: scala
+  scala:
+    - OVERRIDE
+  jdk:
+    - OVERRIDE
+  script: >-
+    sbt ++$TRAVIS_SCALA_VERSION compile Test/compile
+
+_test: &test
+  language: scala
+  scala:
+    - OVERRIDE
+  jdk:
+    - OVERRIDE
+  script: >-
+    sbt ++$TRAVIS_SCALA_VERSION test
+
+_release: &release
+  language: scala
+  scala:
+    - OVERRIDE
+  jdk:
+    - openjdk11
+  script: >-
+    sbt ++$TRAVIS_SCALA_VERSION ci-release
+
+####################################################################################################
+# general
+####################################################################################################
+
 os: linux
 dist: jammy
 
@@ -7,6 +42,10 @@ stages:
   - name: test
   - name: release
     if: ((branch = master AND type = push) OR (tag IS present)) AND NOT fork
+
+####################################################################################################
+# jobs
+####################################################################################################
 
 jobs:
   include:
@@ -150,34 +189,3 @@ cache:
 
 before_install: >-
   git fetch --tags
-
-####################################################################################################
-# templates
-####################################################################################################
-
-_compile: &compile
-  language: scala
-  scala:
-    - OVERRIDE
-  jdk:
-    - OVERRIDE
-  script: >-
-    sbt ++$TRAVIS_SCALA_VERSION compile Test/compile
-
-_test: &test
-  language: scala
-  scala:
-    - OVERRIDE
-  jdk:
-    - OVERRIDE
-  script: >-
-    sbt ++$TRAVIS_SCALA_VERSION test
-
-_release: &release
-  language: scala
-  scala:
-    - OVERRIDE
-  jdk:
-    - openjdk11
-  script: >-
-    sbt ++$TRAVIS_SCALA_VERSION ci-release
