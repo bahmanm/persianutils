@@ -2,20 +2,135 @@
 os: linux
 dist: jammy
 
-# jdk:
-#   - openjdk11
-#   - openjdk17
+stages:
+  - name: compile
+  - name: test
+  - name: release
+    if: ((branch = master AND type = push) OR (tag IS present)) AND NOT fork
 
-# language: scala
-# scala:
-#   - 2.12.18
-#   - 2.13.11
-#   - 3.3.0
+jobs:
+  include:
 
-# env:
-#   matrix:
-#     - TEST_COMMAND="compile Test/Compile"
-#     - TEST_COMMAND="test"
+    ################################################################################################
+    # compile
+    ################################################################################################
+
+    - stage: compile
+      <<: *compile
+      scala:
+        - 2.12.18
+      jdk:
+        - openjdk11
+
+    - stage: compile
+      <<: *compile
+      scala:
+        - 2.12.18
+      jdk:
+        - openjdk17
+
+
+    - stage: compile
+      <<: *compile
+      scala:
+        - 2.13.11
+      jdk:
+        - openjdk11
+
+    - stage: compile
+      <<: *compile
+      scala:
+        - 2.13.11
+      jdk:
+        - openjdk17
+
+    ## 3.3
+
+    - stage: compile
+      <<: *compile
+      scala:
+        - 3.3.0
+      jdk:
+        - openjdk11
+
+    - stage: compile
+      <<: *compile
+      scala:
+        - 3.3.0
+      jdk:
+        - openjdk17
+
+    ################################################################################################
+    # test
+    ################################################################################################
+
+    - stage: test
+      <<: *test
+      scala:
+        - 2.12.18
+      jdk:
+        - openjdk11
+
+    - stage: test
+      <<: *test
+      scala:
+        - 2.12.18
+      jdk:
+        - openjdk17
+
+
+    - stage: test
+      <<: *test
+      scala:
+        - 2.13.11
+      jdk:
+        - openjdk11
+
+    - stage: test
+      <<: *test
+      scala:
+        - 2.13.11
+      jdk:
+        - openjdk17
+
+    ## 3.3
+
+    - stage: test
+      <<: *test
+      scala:
+        - 3.3.0
+      jdk:
+        - openjdk11
+
+    - stage: test
+      <<: *test
+      scala:
+        - 3.3.0
+      jdk:
+        - openjdk17
+
+    ################################################################################################
+    # release
+    ################################################################################################
+
+    - stage: release
+      <<: *release
+      scala:
+        - 2.12.18
+
+    - stage: release
+      <<: *release
+      scala:
+        - 2.13.11
+
+    - stage: release
+      <<: *release
+      scala:
+        - 3.3.0
+
+####################################################################################################
+# cache
+####################################################################################################
 
 before_cache: >-
   rm -fv $HOME/.ivy2/.sbt.ivy.lock \
@@ -29,96 +144,40 @@ cache:
     - $HOME/.ivy2/cache
     - $HOME/.sbt
 
+####################################################################################################
+# ci-release
+####################################################################################################
+
 before_install: >-
   git fetch --tags
 
-stages:
-  - name: compile
-  - name: test
-  - name: release
-    if: ((branch = master AND type = push) OR (tag IS present)) AND NOT fork
+####################################################################################################
+# templates
+####################################################################################################
 
-jobs:
-  include:
-    - stage: compile
-      language: scala
-      scala:
-        - 2.12.18
-      jdk:
-        - openjdk11
-        - openjdk17
-      script: >-
-        sbt compile Test/compile
+_compile: &compile
+  language: scala
+  scala:
+    - OVERRIDE
+  jdk:
+    - OVERRIDE
+  script: >-
+    sbt ++$TRAVIS_SCALA_VERSION compile Test/compile
 
-    # - stage: compile
-    #   language: scala
-    #   scala:
-    #     - 2.12.18
-    #   jdk:
-    #     - openjdk17
-    #   script: >-
-    #     sbt compile Test/compile
+_test: &test
+  language: scala
+  scala:
+    - OVERRIDE
+  jdk:
+    - OVERRIDE
+  script: >-
+    sbt ++$TRAVIS_SCALA_VERSION test
 
-    - stage: compile
-      language: scala
-      scala:
-        - 2.13.11
-      jdk:
-        - openjdk11
-      script: >-
-        sbt compile Test/compile
-
-    - stage: compile
-      language: scala
-      scala:
-        - 2.13.11
-      jdk:
-        - openjdk17
-      script: >-
-        sbt compile Test/compile
-
-    - stage: compile
-      language: scala
-      scala:
-        - 3.3.0
-      jdk:
-        - openjdk11
-      script: >-
-        sbt compile Test/compile
-
-    - stage: compile
-      language: scala
-      scala:
-        - 3.3.0
-      jdk:
-        - openjdk17
-      script: >-
-        sbt compile Test/compile
-
-    ################################################################################################
-
-    - stage: test
-      language: scala
-      scala:
-        - 2.12.18
-        - 2.13.11
-        - 3.3.0
-      jdk:
-        - openjdk11
-        - openjdk17
-      script: >-
-        sbt test
-
-    ################################################################################################
-
-    - stage: release
-      language: scala
-      scala:
-        - 2.12.18
-        - 2.13.11
-        - 3.3.0
-      jdk:
-        - openjdk11
-        - openjdk17
-      script: >-
-        sbt +ci-release
+_release: &release
+  language: scala
+  scala:
+    - OVERRIDE
+  jdk:
+    - openjdk11
+  script: >-
+    sbt ++$TRAVIS_SCALA_VERSION ci-release
