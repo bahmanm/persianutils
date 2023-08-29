@@ -36,8 +36,6 @@ jobs:
   include:
     - stage: compile
       name: compile
-      jdk:
-        - openjdk17
       scala:
         - 2.12.18
         - 2.13.11
