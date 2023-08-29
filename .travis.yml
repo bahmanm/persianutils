@@ -46,17 +46,18 @@ jobs:
         - 2.12.18
       jdk:
         - openjdk11
-      script: >-
-        sbt compile Test/compile
-
-    - stage: compile
-      language: scala
-      scala:
-        - 2.12.18
-      jdk:
         - openjdk17
       script: >-
         sbt compile Test/compile
+
+    # - stage: compile
+    #   language: scala
+    #   scala:
+    #     - 2.12.18
+    #   jdk:
+    #     - openjdk17
+    #   script: >-
+    #     sbt compile Test/compile
 
     - stage: compile
       language: scala
