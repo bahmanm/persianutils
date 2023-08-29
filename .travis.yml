@@ -1,16 +1,21 @@
 ---
-language: scala
-
+os: linux
 dist: jammy
 
 jdk:
   - openjdk11
   - openjdk17
 
+language: scala
 scala:
   - 2.12.18
   - 2.13.11
   - 3.3.0
+
+env:
+  matrix:
+    - TEST_COMMAND="compile Test/Compile"
+    - TEST_COMMAND="test"
 
 before_cache: >-
   rm -fv $HOME/.ivy2/.sbt.ivy.lock \
@@ -28,23 +33,12 @@ before_install: >-
   git fetch --tags
 
 stages:
-  - name: compile
   - name: test
   - name: release
     if: ((branch = master AND type = push) OR (tag IS present)) AND NOT fork
 
 jobs:
   include:
-    - stage: compile
-      name: compile
-      script: >-
-        sbt ++$TRAVIS_SCALA_VERSION compile test:compile
-
-    - stage: test
-      name: test
-      script: >-
-        sbt test
-
     - stage: release
       script: >-
-        sbt ++$TRAVIS_SCALA_VERSION ci-release
+        sbt +ci-release
