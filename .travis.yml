@@ -49,7 +49,6 @@ stages:
 
 jobs:
   include:
-
     ################################################################################################
     # compile
     ################################################################################################
@@ -68,18 +67,17 @@ jobs:
       jdk:
         - openjdk17
 
-
     - stage: compile
       <<: *compile
       scala:
-        - 2.13.11
+        - 2.13.12
       jdk:
         - openjdk11
 
     - stage: compile
       <<: *compile
       scala:
-        - 2.13.11
+        - 2.13.12
       jdk:
         - openjdk17
 
@@ -117,18 +115,17 @@ jobs:
       jdk:
         - openjdk17
 
-
     - stage: test
       <<: *test
       scala:
-        - 2.13.11
+        - 2.13.12
       jdk:
         - openjdk11
 
     - stage: test
       <<: *test
       scala:
-        - 2.13.11
+        - 2.13.12
       jdk:
         - openjdk17
 
@@ -160,7 +157,7 @@ jobs:
     - stage: release
       <<: *release
       scala:
-        - 2.13.11
+        - 2.13.12
 
     - stage: release
       <<: *release
