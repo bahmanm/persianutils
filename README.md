@@ -6,12 +6,12 @@ A collection of utilities for Scala/Java developers who are targeting Persian (F
 
 ### 1.1  Scala Compatibility ###
 
-| ↓persianutils │ scala→ | 2.10.x | 2.11.x | 2.12.x | 2.13.x |
-|------------------------|--------|--------|--------|--------|
-| 2.x                    |    X   |    X   |    -   |    -   |
-| 3.x                    |    -   |    X   |    X   |    -   |
-| 4.x                    |    -   |    X   |    X   |    X   |
-
+| ⬇ persianutils ❚ scala ➡ | 2.10.x | 2.11.x | 2.12.x | 2.13.x | 3.x  |
+|----------------------------|--------|--------|--------|--------|------|
+| 5.x                        |   ❌   |   ❌   |  ✅   |   ✅   |  ✅  |
+| 4.x                        |   ❌   |   ✅   |  ✅   |   ✅   |  ❌  |
+| 3.x                        |   ❌   |   ✅   |  ✅   |   ❌   |  ❌  |
+| 2.x                        |   ✅   |   ✅   |  ❌   |   ❌   |  ❌  |
 
 ## 2 Adding To Your Project ##
 
@@ -19,11 +19,23 @@ A collection of utilities for Scala/Java developers who are targeting Persian (F
 
 ```scala
 libraryDependencies ++= Seq(
-    "com.bahmanm" %% "persianutils" % "4.0" // or 2.0
+    "com.bahmanm" %% "persianutils" % "5.0.0"
 )
 ```
 
 ### 2.2 Maven ###
+
+With Scala 3.x:
+
+```xml
+<dependencies>
+    <dependency>
+        <groupId>com.bahmanm</groupId>
+        <artifactId>persianutils_3</artifactId>
+        <version>5.0</version>
+    </dependency>
+</dependencies>
+```
 
 With Scala 2.13.x:
 
@@ -32,7 +44,7 @@ With Scala 2.13.x:
     <dependency>
         <groupId>com.bahmanm</groupId>
         <artifactId>persianutils_2.13</artifactId>
-        <version>4.0</version>
+        <version>5.0</version>
     </dependency>
 </dependencies>
 ```
@@ -44,29 +56,7 @@ With Scala 2.12.x:
     <dependency>
         <groupId>com.bahmanm</groupId>
         <artifactId>persianutils_2.12</artifactId>
-        <version>4.0</version>
-    </dependency>
-</dependencies>
-```
-
-With Scala 2.11.x:
-```xml
-<dependencies>
-    <dependency>
-        <groupId>com.bahmanm</groupId>
-        <artifactId>persianutils_2.11</artifactId>
-        <version>4.0</version>
-    </dependency>
-</dependencies>
-```
-
-With Scala 2.10.x:
-```xml
-<dependencies>
-    <dependency>
-        <groupId>com.bahmanm</groupId>
-        <artifactId>persianutils_2.10</artifactId>
-        <version>2.0</version>
+        <version>5.0</version>
     </dependency>
 </dependencies>
 ```
@@ -80,9 +70,6 @@ This is a short review of what you will find in _persianutils_:
 `com.bahmanm.persianutils.DateConverter` is the Scala port of the original algorithm (in Fortran) [The Persian calendar for 3000 years](http://www.astro.uni.torun.pl/~kb/Papers/EMP/PersianC-EMP.htm).
 
 #### 3.1.1 Scala ####
-
-_NOTE: persianutils 3.x works with Scala 2.11.x and 2.12.x series. If you need to work with
-Scala 2.10.x, please use persianutils 2.0._
 
 ```scala
 import com.bahmanm.persianutils.DateConverter._
@@ -138,4 +125,6 @@ assert(NumToWord(299792458) == "دویست و نود و نه میلیون و ه�
 ```
 
 ## 4 Contributors ##
+
 * [Amir Karimi](https://github.com/AmirKarimi)
+* [Keivan Abdi](https://github.com/KeivanAbdi)

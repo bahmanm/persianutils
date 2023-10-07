@@ -3,7 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 name := "persianutils"
 description := "A collection of utilities for Scala/Java developers who are targeting Persian (Farsi) speaking users."
-version := "5.0-SNAPSHOT"
+version := "5.0"
 homepage := Some(url("https://github.com/bahmanm/persianutils"))
 licenses += "Apache 2" -> url("http://www.apache.org/licenses/LICENSE-2.0.txt")
 organization := "com.bahmanm"
