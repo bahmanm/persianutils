@@ -19,7 +19,7 @@ A collection of utilities for Scala/Java developers who are targeting Persian (F
 
 ```scala
 libraryDependencies ++= Seq(
-    "com.bahmanm" %% "persianutils" % "5.0.0"
+    "com.bahmanm" %% "persianutils" % "5.0"
 )
 ```
 
