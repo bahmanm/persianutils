@@ -15,8 +15,9 @@ jobs:
       - run:
           name: Install the runtime
           command: >-
-            zypper --non-interactive refresh
-            && zypper --non-interactive install java-17-openjdk-devel
+            curl -O --output-dir /etc/zypp/repos.d/ https://www.scala-sbt.org/sbt-rpm.repo
+            && zypper --non-interactive refresh
+            && zypper --non-interactive install java-17-openjdk-devel sbt
             && { source /etc/profile || true; }
 
       - checkout
