@@ -36,6 +36,7 @@ jobs:
       - checkout
 
       - restore_cache:
+          name: Restore cache
           keys:
             - dependencies-{{ checksum "build.sbt" }}
             - dependencies-
@@ -51,6 +52,7 @@ jobs:
             find ~/.sbt -name "*.lock" -print -delete
 
       - save_cache:
+          name: Save cache
           paths:
             - ~/.cache/coursier
             - ~/.sbt
@@ -92,6 +94,7 @@ jobs:
             git fetch --tags
 
       - restore_cache:
+          name: Restore cache
           keys:
             - dependencies-{{ checksum "build.sbt" }}
             - dependencies-
