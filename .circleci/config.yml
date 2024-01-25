@@ -79,7 +79,7 @@ jobs:
           command: >-
             curl -O --output-dir /etc/zypp/repos.d/ https://www.scala-sbt.org/sbt-rpm.repo
             && zypper --non-interactive refresh
-            && zypper --non-interactive install java-11-openjdk-devel sbt
+            && zypper --non-interactive install java-11-openjdk-devel sbt git
             && { source /etc/profile || true; }
 
       - checkout
