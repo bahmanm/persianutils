@@ -51,9 +51,7 @@ jobs:
 
       - save_cache:
           paths:
-            - ~/.m2/repository
             - ~/.cache/coursier
-            - ~/.ivy2/cache
             - ~/.sbt
           key: dependencies-{{ checksum "build.sbt" }}
 
