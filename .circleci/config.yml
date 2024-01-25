@@ -5,7 +5,6 @@ version: 2.1
 
 jobs:
   build:
-    working_directory: ~/persianutils
     docker:
       - image: opensuse/tumbleweed:latest
         environment:
@@ -46,6 +45,11 @@ jobs:
 
       - store_test_results:
           path: target/test-reports
+
+    working_directory: ~/persianutils
+    parameters:
+      openjdk_version: string
+      scala_version: string
 
 ####################################################################################################
 
