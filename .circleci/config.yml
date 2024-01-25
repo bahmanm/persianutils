@@ -3,13 +3,17 @@ version: 2.1
 
 ####################################################################################################
 
-jobs:
-  build:
+executors:
+  docker:
     docker:
       - image: opensuse/tumbleweed:latest
         environment:
           LANG: en_US.UTF-8
           JVM_OPTS: -Xmx1024m
+
+jobs:
+  build:
+    executor: docker
 
     steps:
       - run:
@@ -56,7 +60,7 @@ jobs:
 ####################################################################################################
 
 workflows:
-  workflow:
+  build_test:
     jobs:
       - build:
           matrix:
