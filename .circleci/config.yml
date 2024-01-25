@@ -19,11 +19,11 @@ jobs:
 
     steps:
       - run:
-          name: Install OpenJDK << matrix.openjdk_version >> and sbt
+          name: Install OpenJDK << parameters.openjdk_version >> and sbt
           command: >-
             curl -O --output-dir /etc/zypp/repos.d/ https://www.scala-sbt.org/sbt-rpm.repo
             && zypper --non-interactive refresh
-            && zypper --non-interactive install java-<< matrix.openjdk_version >>-openjdk-devel sbt
+            && zypper --non-interactive install java-<< parameters.openjdk_version >>-openjdk-devel sbt
             && { source /etc/profile || true; }
 
       - checkout
@@ -34,9 +34,9 @@ jobs:
             - dependencies-
 
       - run:
-          name: Compile - Scala << matrix.scala_version >>  with OpenJDK << matrix.openjdk_version >>
+          name: Compile - Scala << parameters.scala_version >>  with OpenJDK << parameters.openjdk_version >>
           command: >-
-            sbt ++<< matrix.scala_version >> compile Test/compile
+            sbt ++<< parameters.scala_version >> compile Test/compile
 
       - save_cache:
           paths:
@@ -45,9 +45,9 @@ jobs:
           key: dependencies-{{ checksum "build.sbt" }}
 
       - run:
-          name: Test - Scala << matrix.scala_version >>  with OpenJDK << matrix.openjdk_version >>
+          name: Test - Scala << parameters.scala_version >>  with OpenJDK << parameters.openjdk_version >>
           command: >-
-            sbt ++<< matrix.scala_version >> test
+            sbt ++<< parameters.scala_version >> test
 
       - store_test_results:
           path: target/test-reports
