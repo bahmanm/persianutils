@@ -43,7 +43,7 @@ jobs:
       - run:
           name: Compile - OpenJDK << parameters.openjdk_version >>
           command: >-
-            sbt '+ compile Test/compile'
+            sbt '+ compile ; Test/compile'
 
       - run:
           name: Clean the locks before saving the cache
