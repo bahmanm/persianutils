@@ -8,8 +8,12 @@ executors:
     docker:
       - image: opensuse/tumbleweed:latest
         environment:
-          LANG: en_US.UTF-8
-          JVM_OPTS: -Xmx1024m
+          LANG: "en_US.UTF-8"
+          JVM_OPTS: "-Xmx1024m"
+          PGP_PASSPHRASE: "$PGP_PASSPHRASE"
+          PGP_SECRET: "$PGP_SECRET"
+          SONATYPE_PASSWORD: "$SONATYPE_PASSWORD"
+          SONATYPE_USERNAME: "$SONATYPE_USERNAME"
 
 ####################################################################################################
 
@@ -38,9 +42,18 @@ jobs:
           command: >-
             sbt ++<< parameters.scala_version >> compile Test/compile
 
+      - run:
+          name: Clean the logs before saving the cache
+          command: >-
+            rm -fv $HOME/.ivy2/.sbt.ivy.lock
+            ; find $HOME/.ivy2/cache -name "ivydata-*.properties" -print -delete
+            ; find $HOME/.sbt -name "*.lock" -print -delete
+
       - save_cache:
           paths:
+            - ~/.m2/repository
             - ~/.cache/coursier
+            - ~/.ivy2/cache
             - ~/.sbt
           key: dependencies-{{ checksum "build.sbt" }}
 
@@ -60,6 +73,43 @@ jobs:
       scala_version:
         type: string
 
+  ##################################################################################################
+
+  release:
+    executor: docker
+
+    steps:
+      - run:
+          name: Install OpenJDK << parameters.openjdk_version >> and sbt
+          command: >-
+            curl -O --output-dir /etc/zypp/repos.d/ https://www.scala-sbt.org/sbt-rpm.repo
+            && zypper --non-interactive refresh
+            && zypper --non-interactive install java-11-openjdk-devel sbt
+            && { source /etc/profile || true; }
+
+      - checkout
+
+      - run:
+          name: Ensure tags are fetched
+          command: >-
+            git fetch --tags
+
+      - restore_cache:
+          keys:
+            - dependencies-{{ checksum "build.sbt" }}
+            - dependencies-
+
+      - run:
+          name: Release - Scala << parameters.scala_version >>
+          command: >-
+            sbt ++<< parameters.scala_version >> ci-release
+
+    working_directory: ~/persianutils
+
+    parameters:
+      scala_version:
+        type: string
+
 ####################################################################################################
 
 workflows:
@@ -69,4 +119,15 @@ workflows:
           matrix:
             parameters:
               openjdk_version: ["11", "17"]
+              scala_version: ["2.12.18", "2.13.12", "3.3.0"]
+  release:
+    jobs:
+      - release:
+          requires:
+            - build_test
+          filters:
+            tags:
+              only: /^v.+/
+          matrix:
+            parameters:
               scala_version: ["2.12.18", "2.13.12", "3.3.0"]
