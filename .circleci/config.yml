@@ -43,7 +43,7 @@ jobs:
       - run:
           name: Compile - OpenJDK << parameters.openjdk_version >>
           command: >-
-            sbt + compile Test/compile
+            sbt '+ compile Test/compile'
 
       - run:
           name: Clean the locks before saving the cache
@@ -59,7 +59,7 @@ jobs:
       - run:
           name: Test - OpenJDK << parameters.openjdk_version >>
           command: >-
-            sbt + test
+            sbt '+ test'
 
       - store_test_results:
           path: target/test-reports
@@ -99,7 +99,7 @@ jobs:
       - run:
           name: Release
           command: >-
-            sbt + ci-release
+            sbt '+ ci-release'
 
     working_directory: ~/persianutils
 
