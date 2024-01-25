@@ -113,15 +113,13 @@ jobs:
 ####################################################################################################
 
 workflows:
-  build_test:
+  build_test_release:
     jobs:
       - build_test:
           matrix:
             parameters:
               openjdk_version: ["11", "17"]
               scala_version: ["2.12.18", "2.13.12", "3.3.0"]
-  release:
-    jobs:
       - release:
           requires:
             - build_test
