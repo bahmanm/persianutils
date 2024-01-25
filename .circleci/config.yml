@@ -28,7 +28,9 @@ jobs:
           command: >-
             curl -O --output-dir /etc/zypp/repos.d/ https://www.scala-sbt.org/sbt-rpm.repo
             && zypper --non-interactive refresh
-            && zypper --non-interactive install java-<< parameters.openjdk_version >>-openjdk-devel sbt
+            && zypper --non-interactive install \
+               sbt openssh-clients \
+               java-<< parameters.openjdk_version >>-openjdk-devel \
             && { source /etc/profile || true; }
 
       - checkout
@@ -79,7 +81,7 @@ jobs:
           command: >-
             curl -O --output-dir /etc/zypp/repos.d/ https://www.scala-sbt.org/sbt-rpm.repo
             && zypper --non-interactive refresh
-            && zypper --non-interactive install java-11-openjdk-devel sbt git
+            && zypper --non-interactive install java-11-openjdk-devel sbt git openssh-clients
             && { source /etc/profile || true; }
 
       - checkout
