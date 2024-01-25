@@ -48,8 +48,10 @@ jobs:
 
     working_directory: ~/persianutils
     parameters:
-      openjdk_version: string
-      scala_version: string
+      openjdk_version:
+        type: string
+      scala_version:
+        type: string
 
 ####################################################################################################
 
