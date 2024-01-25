@@ -1,4 +1,4 @@
-[![CircleCI](https://dl.circleci.com/status-badge/img/circleci/UMKeFZ8ns9T9vi5aquTfVT/BwGU1tm7aeza7w99ccaEMW/tree/master.svg?style=shield&circle-token=5e36fc8081188acfe70ef6ad2dcc22361079afdf)](https://dl.circleci.com/status-badge/redirect/circleci/UMKeFZ8ns9T9vi5aquTfVT/BwGU1tm7aeza7w99ccaEMW/tree/master)) ![Static Badge](https://img.shields.io/badge/license-Apache_License_v2.0-blue)
+[![CircleCI](https://dl.circleci.com/status-badge/img/circleci/UMKeFZ8ns9T9vi5aquTfVT/BwGU1tm7aeza7w99ccaEMW/tree/master.svg?style=shield&circle-token=5e36fc8081188acfe70ef6ad2dcc22361079afdf)](https://dl.circleci.com/status-badge/redirect/circleci/UMKeFZ8ns9T9vi5aquTfVT/BwGU1tm7aeza7w99ccaEMW/tree/master) ![Static Badge](https://img.shields.io/badge/license-Apache_License_v2.0-blue)
 
 ## 1 Introduction ##
 
