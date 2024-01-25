@@ -2,7 +2,7 @@
 version: 2
 
 jobs:
-  compile:
+  build:
     docker:
       - image: opensuse/tumbleweed:latest
         environment:
