@@ -80,7 +80,7 @@ jobs:
 
     steps:
       - run:
-          name: Install OpenJDK << parameters.openjdk_version >> and sbt
+          name: Install OpenJDK and sbt
           command: >-
             curl -O --output-dir /etc/zypp/repos.d/ https://www.scala-sbt.org/sbt-rpm.repo
             && zypper --non-interactive refresh
