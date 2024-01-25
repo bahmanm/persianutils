@@ -1,9 +1,10 @@
 ---
 version: 2.1
 
+####################################################################################################
+
 jobs:
-  ##################################################################################################
-  openjdk17:
+  build:
     working_directory: ~/persianutils
     docker:
       - image: opensuse/tumbleweed:latest
@@ -12,6 +13,14 @@ jobs:
           JVM_OPTS: -Xmx1024m
 
     steps:
+      - run:
+          name: Install OpenJDK << matrix.openjdk_version >> and sbt
+          command: >-
+            curl -O --output-dir /etc/zypp/repos.d/ https://www.scala-sbt.org/sbt-rpm.repo
+            && zypper --non-interactive refresh
+            && zypper --non-interactive install java-<< matrix.openjdk_version >>-openjdk-devel sbt
+            && { source /etc/profile || true; }
+
       - checkout
 
       - restore_cache:
@@ -20,19 +29,9 @@ jobs:
             - dependencies-
 
       - run:
-          name: Compile - Scala 2.12.18 with OpenJDK 17
+          name: Compile - Scala << matrix.scala_version >>  with OpenJDK << matrix.openjdk_version >>
           command: >-
-            sbt ++2.12.18 compile Test/compile
-
-      - run:
-          name: Compile - Scala 2.13.12 with OpenJDK 17
-          command: >-
-            sbt ++2.13.12 compile Test/compile
-
-      - run:
-          name: Compile - Scala 3.3.0 with OpenJDK 17
-          command: >-
-            sbt ++3.3.0 compile Test/compile
+            sbt ++<< matrix.scala_version >> compile Test/compile
 
       - save_cache:
           paths:
@@ -41,75 +40,9 @@ jobs:
           key: dependencies-{{ checksum "build.sbt" }}
 
       - run:
-          name: Test - Scala 2.12.18 with OpenJDK 17
+          name: Test - Scala << matrix.scala_version >>  with OpenJDK << matrix.openjdk_version >>
           command: >-
-            sbt ++2.12.18 test
-
-      - run:
-          name: Test - Scala 2.13.12 with OpenJDK 17
-          command: >-
-            sbt ++2.13.12 test
-
-      - run:
-          name: Test - Scala 3.3.0 with OpenJDK 17
-          command: >-
-            sbt ++3.3.0 test
-
-      - store_test_results:
-          path: target/test-reports
-
-  ##################################################################################################
-  openjdk11:
-    working_directory: ~/persianutils
-    docker:
-      - image: opensuse/tumbleweed:latest
-        environment:
-          LANG: en_US.UTF-8
-          JVM_OPTS: -Xmx1024m
-
-    steps:
-      - checkout
-
-      - restore_cache:
-          keys:
-            - dependencies-{{ checksum "build.sbt" }}
-            - dependencies-
-
-      - run:
-          name: Compile - Scala 2.12.18 with OpenJDK 17
-          command: >-
-            sbt ++2.12.18 compile Test/compile
-
-      - run:
-          name: Compile - Scala 2.13.12 with OpenJDK 17
-          command: >-
-            sbt ++2.13.12 compile Test/compile
-
-      - run:
-          name: Compile - Scala 3.3.0 with OpenJDK 17
-          command: >-
-            sbt ++3.3.0 compile Test/compile
-
-      - save_cache:
-          paths:
-            - ~/.cache/coursier
-            - ~/.sbt
-          key: dependencies-{{ checksum "build.sbt" }}
-
-      - run:
-          name: Test - Scala 2.12.18 with OpenJDK 17
-          command: >-
-            sbt ++2.12.18 test
-
-      - run:
-          name: Test - Scala 2.13.12 with OpenJDK 17
-          command: >-
-            sbt ++2.13.12 test
-
-      - run:
-          name: Test - Scala 3.3.0 with OpenJDK 17
-          command: >-
-            sbt ++3.3.0 test
+            sbt ++<< matrix.scala_version >> test
 
       - store_test_results:
           path: target/test-reports
@@ -117,21 +50,10 @@ jobs:
 ####################################################################################################
 
 workflows:
-  build:
+  workflow:
     jobs:
-      - openjdk17:
-          pre-steps:
-            - run:
-                command: >-
-                  curl -O --output-dir /etc/zypp/repos.d/ https://www.scala-sbt.org/sbt-rpm.repo
-                  && zypper --non-interactive refresh
-                  && zypper --non-interactive install java-17-openjdk-devel sbt
-                  && { source /etc/profile || true; }
-      - openjdk11:
-          pre-steps:
-            - run:
-                command: >-
-                  curl -O --output-dir /etc/zypp/repos.d/ https://www.scala-sbt.org/sbt-rpm.repo
-                  && zypper --non-interactive refresh
-                  && zypper --non-interactive install java-11-openjdk-devel sbt
-                  && { source /etc/profile || true; }
+      - build:
+          matrix:
+            parameters:
+              openjdk_version: ["11", "17"]
+              scala_version: ["2.12.18", "2.13.12", "3.3.0"]
