@@ -1,0 +1,48 @@
+---
+version: 2
+
+jobs:
+  compile:
+    docker:
+      - image: opensuse/tumbleweed:latest
+        environment:
+          LANG: en_US.UTF-8
+          JVM_OPTS: -Xmx1024m
+
+    working_directory: ~/persianutils
+
+    steps:
+      - run:
+          name: Install the runtime
+          command: >-
+            zypper --non-interactive refresh
+            && zypper --non-interactive install java-17-openjdk-devel
+            && { source /etc/profile || true; }
+
+      - checkout
+
+      - restore_cache:
+          keys:
+            - dependencies-{{ checksum "build.sbt" }}
+            - dependencies-
+
+      - run:
+          name: Fetch the dependencies and compile
+          command: >-
+            sbt ++2.13.12 compile Test/compile
+
+      - save_cache:
+          paths:
+            - ~/.m2/repository
+            - ~/.cache/coursier
+            - ~/.ivy2/cache
+            - ~/.sbt
+          key: dependencies-{{ checksum "build.sbt" }}
+
+      - run:
+          name: Run the tests
+          command: >-
+            sbt ++2.13.12 test
+
+      - store_test_results:
+          path: target/test-reports
