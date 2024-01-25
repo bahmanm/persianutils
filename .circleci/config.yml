@@ -1,0 +1,125 @@
+---
+version: 2.1
+
+####################################################################################################
+
+executors:
+  docker:
+    resource_class: medium
+    docker:
+      - image: opensuse/tumbleweed:latest
+        environment:
+          LANG: "en_US.UTF-8"
+          JVM_OPTS: "-Xmx1024m"
+          PGP_PASSPHRASE: "$PGP_PASSPHRASE"
+          PGP_SECRET: "$PGP_SECRET"
+          SONATYPE_PASSWORD: "$SONATYPE_PASSWORD"
+          SONATYPE_USERNAME: "$SONATYPE_USERNAME"
+
+####################################################################################################
+
+jobs:
+  build_test:
+    executor: docker
+
+    steps:
+      - run:
+          name: Install OpenJDK << parameters.openjdk_version >> and sbt
+          command: >-
+            curl -O --output-dir /etc/zypp/repos.d/ https://www.scala-sbt.org/sbt-rpm.repo
+            && zypper --non-interactive refresh
+            && zypper --non-interactive install \
+               sbt openssh-clients \
+               java-<< parameters.openjdk_version >>-openjdk-devel \
+            && { source /etc/profile || true; }
+
+      - checkout
+
+      - restore_cache:
+          name: Restore cache
+          keys:
+            - dependencies-{{ checksum "build.sbt" }}
+            - dependencies-
+
+      - run:
+          name: Compile - OpenJDK << parameters.openjdk_version >>
+          command: >-
+            sbt '+ compile ; Test/compile'
+
+      - run:
+          name: Clean the locks before saving the cache
+          command: >-
+            find ~/.sbt -name "*.lock" -print -delete
+
+      - save_cache:
+          name: Save cache
+          paths:
+            - ~/.cache/coursier
+            - ~/.sbt
+          key: dependencies-{{ checksum "build.sbt" }}
+
+      - run:
+          name: Test - OpenJDK << parameters.openjdk_version >>
+          command: >-
+            sbt '+ test'
+
+      - store_test_results:
+          path: target/test-reports
+
+    working_directory: ~/persianutils
+
+    parameters:
+      openjdk_version:
+        type: string
+
+  ##################################################################################################
+
+  release:
+    executor: docker
+
+    steps:
+      - run:
+          name: Install OpenJDK and sbt
+          command: >-
+            curl -O --output-dir /etc/zypp/repos.d/ https://www.scala-sbt.org/sbt-rpm.repo
+            && zypper --non-interactive refresh
+            && zypper --non-interactive install java-11-openjdk-devel sbt git openssh-clients
+            && { source /etc/profile || true; }
+
+      - checkout
+
+      - run:
+          name: Ensure tags are fetched
+          command: >-
+            git fetch --tags
+
+      - restore_cache:
+          name: Restore cache
+          keys:
+            - dependencies-{{ checksum "build.sbt" }}
+            - dependencies-
+
+      - run:
+          name: Release
+          command: >-
+            sbt '+ ci-release'
+
+    working_directory: ~/persianutils
+
+####################################################################################################
+
+workflows:
+  build_test_release:
+    jobs:
+      - build_test:
+          matrix:
+            parameters:
+              openjdk_version: ["11", "17"]
+      - release:
+          requires:
+            - build_test
+          filters:
+            tags:
+              only: /^v.+/
+            branches:
+              ignore: /.*/
