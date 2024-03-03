@@ -7,7 +7,7 @@ executors:
   docker:
     resource_class: medium
     docker:
-      - image: opensuse/tumbleweed:latest
+      - image: bdockerimg/sdkman:opensuse-tumbleweed
         environment:
           LANG: "en_US.UTF-8"
           JVM_OPTS: "-Xmx1024m"
@@ -25,13 +25,16 @@ jobs:
     steps:
       - run:
           name: Install OpenJDK << parameters.openjdk_version >> and sbt
+          shell: "/usr/bin/env -S bash -e -o pipefail -l"
           command: >-
-            curl -O --output-dir /etc/zypp/repos.d/ https://www.scala-sbt.org/sbt-rpm.repo
-            && zypper --non-interactive refresh
-            && zypper --non-interactive install \
-               sbt openssh-clients \
-               java-<< parameters.openjdk_version >>-openjdk-devel \
-            && { source /etc/profile || true; }
+            sdk list java
+            | cut -d\| -nf6
+            | sed 's/\s//'
+            | grep '<< parameters.openjdk_version >>.*-tem'
+            | sort -r
+            | head -n1 > /tmp/java.version
+            && sdk install java $(</tmp/java.version)
+            && sdk install sbt
 
       - checkout
 
@@ -43,11 +46,13 @@ jobs:
 
       - run:
           name: Compile - OpenJDK << parameters.openjdk_version >>
+          shell: "/usr/bin/env -S bash -e -o pipefail -l"
           command: >-
             sbt '+ compile ; Test/compile'
 
       - run:
           name: Clean the locks before saving the cache
+          shell: "/usr/bin/env -S bash -e -o pipefail -l"
           command: >-
             find ~/.sbt -name "*.lock" -print -delete
 
@@ -60,6 +65,7 @@ jobs:
 
       - run:
           name: Test - OpenJDK << parameters.openjdk_version >>
+          shell: "/usr/bin/env -S bash -e -o pipefail -l"
           command: >-
             sbt '+ test'
 
@@ -79,17 +85,23 @@ jobs:
 
     steps:
       - run:
-          name: Install OpenJDK and sbt
+          name: Install OpenJDK 11 and sbt
+          shell: "/usr/bin/env -S bash -e -o pipefail -l"
           command: >-
-            curl -O --output-dir /etc/zypp/repos.d/ https://www.scala-sbt.org/sbt-rpm.repo
-            && zypper --non-interactive refresh
-            && zypper --non-interactive install java-11-openjdk-devel sbt git openssh-clients
-            && { source /etc/profile || true; }
+            sdk list java
+            | cut -d\| -nf6
+            | sed 's/\s//'
+            | grep '11.*-tem'
+            | sort -r
+            | head -n1 > /tmp/java.version
+            && sdk install java $(</tmp/java.version)
+            && sdk install sbt
 
       - checkout
 
       - run:
           name: Ensure tags are fetched
+          shell: "/usr/bin/env -S bash -e -o pipefail -l"
           command: >-
             git fetch --tags
 
@@ -101,6 +113,7 @@ jobs:
 
       - run:
           name: Release
+          shell: "/usr/bin/env -S bash -e -o pipefail -l"
           command: >-
             sbt '+ ci-release'
 
