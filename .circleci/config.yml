@@ -25,14 +25,14 @@ jobs:
     steps:
       - run:
           name: Install OpenJDK << parameters.openjdk_version >> and sbt
-          shell: /bin/bash -l
+          shell: "/bin/bash -l"
           command: >-
             sdk list java
-            | perl \
-                -F '/\|/' -l \
-                -E 'BEGIN { @vs=(); }' \
-                -E 'push(@vs, $1)  if $F[5] =~ /\s*(<< parameters.openjdk_version >>.+-tem)/;' \
-                -E 'END { sort @vs; say $vs[0]; }' > /tmp/java.version \
+            | cut -d\| -nf6
+            | sed 's/\s//'
+            | grep '<< parameters.openjdk_version >>.*-tem'
+            | sort -r
+            | head -n1 > /tmp/java.version
             && sdk install java $(</tmp/java.version)
             && sdk install sbt
 
@@ -85,15 +85,15 @@ jobs:
 
     steps:
       - run:
-          name: Install OpenJDK and sbt
+          name: Install OpenJDK 11 and sbt
           shell: "/bin/bash -l"
           command: >-
             sdk list java
-            | perl \
-                -F '/\|/' -l \
-                -E 'BEGIN { @vs=(); }' \
-                -E 'push(@vs, $1)  if $F[5] =~ /\s*(11.+-tem)/;' \
-                -E 'END { sort @vs; say $vs[0]; }' > /tmp/java.version \
+            | cut -d\| -nf6
+            | sed 's/\s//'
+            | grep '11.*-tem'
+            | sort -r
+            | head -n1 > /tmp/java.version
             && sdk install java $(</tmp/java.version)
             && sdk install sbt
 
