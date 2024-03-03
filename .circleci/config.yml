@@ -25,7 +25,7 @@ jobs:
     steps:
       - run:
           name: Install OpenJDK << parameters.openjdk_version >> and sbt
-          shell: "/bin/bash -l"
+          shell: "/usr/bin/env -S bash -e -o pipefail -l"
           command: >-
             sdk list java
             | cut -d\| -nf6
@@ -46,13 +46,13 @@ jobs:
 
       - run:
           name: Compile - OpenJDK << parameters.openjdk_version >>
-          shell: "/bin/bash -l"
+          shell: "/usr/bin/env -S bash -e -o pipefail -l"
           command: >-
             sbt '+ compile ; Test/compile'
 
       - run:
           name: Clean the locks before saving the cache
-          shell: "/bin/bash -l"
+          shell: "/usr/bin/env -S bash -e -o pipefail -l"
           command: >-
             find ~/.sbt -name "*.lock" -print -delete
 
@@ -65,7 +65,7 @@ jobs:
 
       - run:
           name: Test - OpenJDK << parameters.openjdk_version >>
-          shell: "/bin/bash -l"
+          shell: "/usr/bin/env -S bash -e -o pipefail -l"
           command: >-
             sbt '+ test'
 
@@ -86,7 +86,7 @@ jobs:
     steps:
       - run:
           name: Install OpenJDK 11 and sbt
-          shell: "/bin/bash -l"
+          shell: "/usr/bin/env -S bash -e -o pipefail -l"
           command: >-
             sdk list java
             | cut -d\| -nf6
@@ -101,7 +101,7 @@ jobs:
 
       - run:
           name: Ensure tags are fetched
-          shell: "/bin/bash -l"
+          shell: "/usr/bin/env -S bash -e -o pipefail -l"
           command: >-
             git fetch --tags
 
@@ -113,7 +113,7 @@ jobs:
 
       - run:
           name: Release
-          shell: "/bin/bash -l"
+          shell: "/usr/bin/env -S bash -e -o pipefail -l"
           command: >-
             sbt '+ ci-release'
 
