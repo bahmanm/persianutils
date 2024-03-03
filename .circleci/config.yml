@@ -7,7 +7,7 @@ executors:
   docker:
     resource_class: medium
     docker:
-      - image: opensuse/tumbleweed:latest
+      - image: bdockerimg/sdkman:opensuse-tumbleweed
         environment:
           LANG: "en_US.UTF-8"
           JVM_OPTS: "-Xmx1024m"
@@ -26,12 +26,14 @@ jobs:
       - run:
           name: Install OpenJDK << parameters.openjdk_version >> and sbt
           command: >-
-            curl -O --output-dir /etc/zypp/repos.d/ https://www.scala-sbt.org/sbt-rpm.repo
-            && zypper --non-interactive refresh
-            && zypper --non-interactive install \
-               sbt openssh-clients \
-               java-<< parameters.openjdk_version >>-openjdk-devel \
-            && { source /etc/profile || true; }
+            sdk list java
+            | perl \
+                -F '/\|/' -l \
+                -E 'BEGIN { @vs=(); }' \
+                -E 'push(@vs, $1)  if $F[5] =~ /\s*(<< parameters.openjdk_version >>.+-tem)/;' \
+                -E 'END { sort @vs; say $vs[0]; }' > /tmp/java.version \
+            && sdk install java $(</tmp/java.version)
+            && sdk install sbt
 
       - checkout
 
@@ -81,10 +83,14 @@ jobs:
       - run:
           name: Install OpenJDK and sbt
           command: >-
-            curl -O --output-dir /etc/zypp/repos.d/ https://www.scala-sbt.org/sbt-rpm.repo
-            && zypper --non-interactive refresh
-            && zypper --non-interactive install java-11-openjdk-devel sbt git openssh-clients
-            && { source /etc/profile || true; }
+            sdk list java
+            | perl \
+                -F '/\|/' -l \
+                -E 'BEGIN { @vs=(); }' \
+                -E 'push(@vs, $1)  if $F[5] =~ /\s*(11.+-tem)/;' \
+                -E 'END { sort @vs; say $vs[0]; }' > /tmp/java.version \
+            && sdk install java $(</tmp/java.version)
+            && sdk install sbt
 
       - checkout
 
