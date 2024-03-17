@@ -129,7 +129,4 @@ assert(NumToWord(100) == "صد")
 assert(NumToWord(299792458) == "دویست و نود و نه میلیون و هفتصد و نود و دو هزار و چهارصد و پنجاه و هشت")
 ```
 
-## 4 Contributors ##
 
-* [Amir Karimi](https://github.com/AmirKarimi)
-* [Keivan Abdi](https://github.com/KeivanAbdi)
