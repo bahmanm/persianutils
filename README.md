@@ -1,6 +1,11 @@
-[![CircleCI](https://dl.circleci.com/status-badge/img/circleci/UMKeFZ8ns9T9vi5aquTfVT/BwGU1tm7aeza7w99ccaEMW/tree/master.svg?style=shield&circle-token=5e36fc8081188acfe70ef6ad2dcc22361079afdf)](https://dl.circleci.com/status-badge/redirect/circleci/UMKeFZ8ns9T9vi5aquTfVT/BwGU1tm7aeza7w99ccaEMW/tree/master) ![Static Badge](https://img.shields.io/badge/license-Apache_License_v2.0-blue)
-
 ## 1 Introduction ##
+[![CircleCI](https://dl.circleci.com/status-badge/img/circleci/UMKeFZ8ns9T9vi5aquTfVT/BwGU1tm7aeza7w99ccaEMW/tree/master.svg?style=svg&circle-token=CCIPRJ_SpcW3fS7iXjTT8gJQcYhei_ad25651fdb49ac759b7725219d8c85b88907fe39)](https://dl.circleci.com/status-badge/redirect/circleci/UMKeFZ8ns9T9vi5aquTfVT/BwGU1tm7aeza7w99ccaEMW/tree/master)
+[![Matrix](https://img.shields.io/matrix/github-bahmanm-persianutils%3Amatrix.org?server_fqdn=matrix.org&style=flat&logo=matrix&logoColor=white&color=0e80c0)](https://matrix.to/#/#github-bahmanm-persianutils:matrix.org)
+![Maven Central Version](https://img.shields.io/maven-central/v/com.bahmanm/persianutils_3?style=flat&logo=scala&logoColor=white&label=3.x)
+![Maven Central Version](https://img.shields.io/maven-central/v/com.bahmanm/persianutils_2.13?style=flat&logo=scala&logoColor=white&label=2.13.x)
+![Maven Central Version](https://img.shields.io/maven-central/v/com.bahmanm/persianutils_2.12?style=flat&logo=scala&logoColor=white&label=2.12.x)
+![Maven Central Version](https://img.shields.io/maven-central/v/com.bahmanm/persianutils_2.11?style=flat&logo=scala&logoColor=white&label=2.11.x)
+
 
 A collection of utilities for Scala/Java developers who are targeting Persian (Farsi) speaking users.
 
