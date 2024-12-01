@@ -5,6 +5,7 @@
 ![Maven Central Version](https://img.shields.io/maven-central/v/com.bahmanm/persianutils_2.13?style=flat&logo=scala&logoColor=white&label=2.13.x)
 ![Maven Central Version](https://img.shields.io/maven-central/v/com.bahmanm/persianutils_2.12?style=flat&logo=scala&logoColor=white&label=2.12.x)
 ![Maven Central Version](https://img.shields.io/maven-central/v/com.bahmanm/persianutils_2.11?style=flat&logo=scala&logoColor=white&label=2.11.x)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fbahmanm%2Fpersianutils.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fbahmanm%2Fpersianutils?ref=badge_shield)
 
 A collection of utilities for Scala/Java developers who are targeting Persian (Farsi) speaking users.
 
@@ -131,3 +132,7 @@ assert(NumToWord(299792458) == "دویست و نود و نه میلیون و ه�
 ```
 
 
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fbahmanm%2Fpersianutils.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fbahmanm%2Fpersianutils?ref=badge_large)
