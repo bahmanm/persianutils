@@ -14,7 +14,7 @@ organizationHomepage := Some(url("http://BahmanM.com"))
 ////////////////////////////////////////////////////////////////////////////////
 scalaVersion := "2.13.16"
 libraryDependencies ++= Seq(
-  "org.specs2" %% "specs2-core" % "4.21.0" % "test"
+  "org.specs2" %% "specs2-core" % "4.22.0" % "test"
 )
 resolvers ++= Resolver.sonatypeOssRepos("snapshots")
 resolvers ++= Resolver.sonatypeOssRepos("releases")
