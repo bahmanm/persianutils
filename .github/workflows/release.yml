@@ -29,6 +29,9 @@ jobs:
           java-version: "11"
           cache: "sbt"
 
+      - name: Set up sbt
+        uses: sbt/setup-sbt@v1
+
       - name: Run cross-test verification
         run: sbt '+ test'
 
