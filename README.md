@@ -82,40 +82,42 @@ This is a short review of what you will find in _persianutils_:
 import com.bahmanm.persianutils.DateConverter._
 
 // NOTE: months and days are 1-indexed, i.e. December is 12 or Farvardin is 1
-val gDate1 = SimpleDate(2013, 12, 11)
+val gDate1 = GregorianDate(2013, 12, 11)
 val pDate1 = gregorianToPersian(gDate1)
-print(pDate1)  // OUTPUT: SimpleDate(1392,9,20) -> 20om Azar 1392
+print(pDate1)  // OUTPUT: PersianDate(1392,9,20) -> 20om Azar 1392
 
 
-val pDate2 = SimpleDate(1392, 1, 1)
+val pDate2 = PersianDate(1392, 1, 1)
 val gDate2 = persianToGregorian(pDate2)
-print(gDate2) // OUTPUT: SimpleDate(2013,3,21) -> March 21st 2013
-
-
-val d = java.util.Calendar.getInstance().getTime()
-val gDate3 = SimpleDate(date) // iniatlising from a java.util.Date
-val pDate3 = gregorianToPersian(gDate3)
+print(gDate2) // OUTPUT: GregorianDate(2013,3,21) -> March 21st 2013
 
 
 val ds = "1392/09/24"
-val pDate4 = SimpleDate(ds) // initialising from a String
-val gDate4 = persianToGregorian(pDate4)
+val pDate3 = PersianDate(ds) // initialising from a String
+val gDate3 = persianToGregorian(pDate3)
+
+
+val d = java.util.Calendar.getInstance().getTime()
+val sDate = SimpleDate(d) // initialising legacy SimpleDate from a java.util.Date
+val pDate4 = gregorianToPersian(sDate)
 ```
 
 #### 3.1.2 Java 
 
 ```java
 import com.bahmanm.persianutils.DateConverter;
+import com.bahmanm.persianutils.PersianDate;
+import com.bahmanm.persianutils.GregorianDate;
 
 public class Main {
 
   public static void main(String[] args) {
-    DateConverter.SimpleDate pd1 = new DateConverter.SimpleDate(1392, 11, 11);
-    DateConverter.SimpleDate gd1 = DateConverter.persianToGregorian(pd1);
+    PersianDate pd1 = new PersianDate(1392, 11, 11);
+    GregorianDate gd1 = DateConverter.persianToGregorian(pd1);
     System.out.println(gd1);
 
-    DateConverter.SimpleDate gd2 = new DateConverter.SimpleDate(2014, 2, 4);
-    DateConverter.SimpleDate pd2 = DateConverter.gregorianToPersian(gd2);
+    GregorianDate gd2 = new GregorianDate(2014, 2, 4);
+    PersianDate pd2 = DateConverter.gregorianToPersian(gd2);
     System.out.println(pd2);
   }
 
@@ -130,9 +132,6 @@ import com.bahmanm.persianutils.NumToWord
 assert(NumToWord(100) == "صد")
 assert(NumToWord(299792458) == "دویست و نود و نه میلیون و هفتصد و نود و دو هزار و چهارصد و پنجاه و هشت")
 ```
-
-
-
 
 ## License
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fbahmanm%2Fpersianutils.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fbahmanm%2Fpersianutils?ref=badge_large)
