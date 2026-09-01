@@ -59,4 +59,23 @@ class DateConverterTest extends mutable.Specification {
     }
   }
 
+  "Strongly typed PersianDate and GregorianDate" should {
+    "convert GregorianDate to PersianDate" in {
+      val gDate = GregorianDate(2012, 2, 29)
+      val pDate = gregorianToPersian(gDate)
+      pDate must_== PersianDate(1390, 12, 10)
+    }
+
+    "convert PersianDate to GregorianDate" in {
+      val pDate = PersianDate(1391, 12, 30)
+      val gDate = persianToGregorian(pDate)
+      gDate must_== GregorianDate(2013, 3, 20)
+    }
+
+    "parse string dates" in {
+      PersianDate("1392/09/24") must_== PersianDate(1392, 9, 24)
+      GregorianDate("2013/12/15") must_== GregorianDate(2013, 12, 15)
+    }
+  }
+
 }
