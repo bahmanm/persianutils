@@ -9,6 +9,8 @@
  */
 package com.bahmanm.persianutils
 
+import java.time.LocalDate
+
 class InvalidDateException extends Exception {}
 
 /**
@@ -21,6 +23,17 @@ sealed trait ConvertibleDate {
 
   override def toString: String = s"$year/$month/$day"
 
+  /**
+   * Converts this date to a java.time.LocalDate.
+   */
+  def asLocalDate: LocalDate
+
+  /**
+   * Converts this date to a legacy java.util.Date.
+   *
+   * @deprecated Use [[asLocalDate]] instead. Scheduled for removal in version 7.0.0.
+   */
+  @deprecated("Use asLocalDate instead; will be removed in version 7.0.0", "6.0.0")
   def asDate: java.util.Date = {
     import java.util.Calendar
 
@@ -35,7 +48,15 @@ sealed trait ConvertibleDate {
 /**
  * Represents a date in the Persian (Solar Hijri / Jalali) calendar.
  */
-final case class PersianDate(year: Int, month: Int, day: Int) extends ConvertibleDate
+final case class PersianDate(year: Int, month: Int, day: Int) extends ConvertibleDate {
+
+  /**
+   * Converts this Persian date to its Gregorian java.time.LocalDate equivalent.
+   */
+  override def asLocalDate: LocalDate =
+    DateConverter.persianToGregorian(this).asLocalDate
+
+}
 
 object PersianDate {
 
@@ -44,12 +65,26 @@ object PersianDate {
     PersianDate(y, m, d)
   }
 
+  /**
+   * Constructs a PersianDate from a Gregorian java.time.LocalDate.
+   */
+  def apply(date: LocalDate): PersianDate =
+    DateConverter.gregorianToPersian(GregorianDate(date))
+
 }
 
 /**
  * Represents a date in the Gregorian calendar.
  */
-final case class GregorianDate(year: Int, month: Int, day: Int) extends ConvertibleDate
+final case class GregorianDate(year: Int, month: Int, day: Int) extends ConvertibleDate {
+
+  /**
+   * Converts this Gregorian date to a java.time.LocalDate.
+   */
+  override def asLocalDate: LocalDate =
+    LocalDate.of(year, month, day)
+
+}
 
 object GregorianDate {
 
@@ -57,6 +92,12 @@ object GregorianDate {
     val (y, m, d) = DateConverter.parseDateString(date)
     GregorianDate(y, m, d)
   }
+
+  /**
+   * Constructs a GregorianDate from a java.time.LocalDate.
+   */
+  def apply(date: LocalDate): GregorianDate =
+    GregorianDate(date.getYear, date.getMonthValue, date.getDayOfMonth)
 
 }
 
@@ -77,7 +118,15 @@ object DateConverter {
    * A simple date representation used in DateConverter. Retained for backward
    * compatibility.
    */
-  case class SimpleDate(year: Int, month: Int, day: Int) extends ConvertibleDate
+  case class SimpleDate(year: Int, month: Int, day: Int) extends ConvertibleDate {
+
+    /**
+     * Converts this date to a java.time.LocalDate assuming Gregorian calendar.
+     */
+    override def asLocalDate: LocalDate =
+      LocalDate.of(year, month, day)
+
+  }
 
   object SimpleDate {
 
@@ -86,6 +135,18 @@ object DateConverter {
       new SimpleDate(y, m, d)
     }
 
+    /**
+     * Constructs a SimpleDate from a java.time.LocalDate.
+     */
+    def apply(date: LocalDate): SimpleDate =
+      new SimpleDate(date.getYear, date.getMonthValue, date.getDayOfMonth)
+
+    /**
+     * Constructs a SimpleDate from a legacy java.util.Date.
+     *
+     * @deprecated Use [[apply(date: java.time.LocalDate)]] instead. Scheduled for removal in version 7.0.0.
+     */
+    @deprecated("Use apply(date: java.time.LocalDate) instead; will be removed in version 7.0.0", "6.0.0")
     def apply(date: java.util.Date): SimpleDate = {
       import java.util.Calendar
 
@@ -147,6 +208,14 @@ object DateConverter {
     val pd = gregorianToPersian(GregorianDate(date.year, date.month, date.day))
     SimpleDate(pd.year, pd.month, pd.day)
   }
+
+  /**
+   * Converts a Gregorian date (as java.time.LocalDate) to Persian (a.k.a Jalali) date.
+   * @param date Gregorian date as java.time.LocalDate
+   * @return Persian date as PersianDate
+   */
+  def gregorianToPersian(date: LocalDate): PersianDate =
+    gregorianToPersian(GregorianDate(date))
 
   private case class PersianYearInfo(leap: Int, gYear: Int, marchDay: Int)
 
