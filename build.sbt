@@ -13,12 +13,12 @@ organizationHomepage := Some(url("http://BahmanM.com"))
 ////////////////////////////////////////////////////////////////////////////////
 scalaVersion := "3.9.0"
 libraryDependencies ++= Seq(
-  "org.specs2" %% "specs2-core" % "4.23.0" % "test"
+  "org.scalameta" %% "munit" % "1.3.6" % Test
 )
+testFrameworks += new TestFramework("munit.Framework")
 resolvers ++= Resolver.sonatypeOssRepos("snapshots")
 resolvers ++= Resolver.sonatypeOssRepos("releases")
-scalacOptions in Test ++= Seq("-Yrangepos")
-crossScalaVersions := Seq("2.12.18", "2.13.11", "3.3.1")
+crossScalaVersions := Seq("2.13.18", "3.3.8")
 
 ////////////////////////////////////////////////////////////////////////////////
 // sonatype and maven central
