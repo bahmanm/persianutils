@@ -1,81 +1,60 @@
 package com.bahmanm.persianutils
 
-import org.specs2._
 import com.bahmanm.persianutils.DateConverter._
 
-class DateConverterTest extends mutable.Specification {
+class DateConverterTest extends munit.FunSuite {
 
-  "Feb 29th, 2012" should {
-    "equal 10om Esfand 1390" in {
-      gregorianToPersian(SimpleDate(2012, 2, 29)) must_== SimpleDate(1390, 12, 10)
-    }
+  test("Feb 29th, 2012 should equal 10om Esfand 1390") {
+    assertEquals(gregorianToPersian(SimpleDate(2012, 2, 29)), SimpleDate(1390, 12, 10))
   }
 
-  "Feb 29th, 3292" should {
-    "equal to 11om Esfand 2670" in {
-      gregorianToPersian(SimpleDate(3292, 2, 29)) must_== SimpleDate(2670, 12, 11)
-    }
+  test("Feb 29th, 3292 should equal to 11om Esfand 2670") {
+    assertEquals(gregorianToPersian(SimpleDate(3292, 2, 29)), SimpleDate(2670, 12, 11))
   }
 
-  "30om Esfand 1391" should {
-    "equal March 20th, 2013" in {
-      persianToGregorian(SimpleDate(1391, 12, 30)) must_== SimpleDate(2013, 3, 20)
-    }
+  test("30om Esfand 1391 should equal March 20th, 2013") {
+    assertEquals(persianToGregorian(SimpleDate(1391, 12, 30)), SimpleDate(2013, 3, 20))
   }
 
-  "30om Esfand 1453" should {
-    "equal March 20th, 2075" in {
-      persianToGregorian(SimpleDate(1453, 12, 30)) must_== SimpleDate(2075, 3, 20)
-    }
+  test("30om Esfand 1453 should equal March 20th, 2075") {
+    assertEquals(persianToGregorian(SimpleDate(1453, 12, 30)), SimpleDate(2075, 3, 20))
   }
 
-  "11om Day 1346" should {
-    "equal January 1st, 1968" in {
-      persianToGregorian(SimpleDate(1346, 10, 11)) must_== SimpleDate(1968, 1, 1)
-    }
+  test("11om Day 1346 should equal January 1st, 1968") {
+    assertEquals(persianToGregorian(SimpleDate(1346, 10, 11)), SimpleDate(1968, 1, 1))
   }
 
-  "Jan 1st, 1968" should {
-    "equal 11om Day 1346" in {
-      gregorianToPersian(SimpleDate(1968, 1, 1)) must_== SimpleDate(1346, 10, 11)
-    }
+  test("Jan 1st, 1968 should equal 11om Day 1346") {
+    assertEquals(gregorianToPersian(SimpleDate(1968, 1, 1)), SimpleDate(1346, 10, 11))
   }
 
-  "Jan 2nd, 1968" should {
-    "equal 12om Day 1346" in {
-      gregorianToPersian(SimpleDate(1968, 1, 2)) must_== SimpleDate(1346, 10, 12)
-    }
+  test("Jan 2nd, 1968 should equal 12om Day 1346") {
+    assertEquals(gregorianToPersian(SimpleDate(1968, 1, 2)), SimpleDate(1346, 10, 12))
   }
 
-  "Jan 1st, 1996" should {
-    "equal 11om Day 1374" in {
-      gregorianToPersian(SimpleDate(1996, 1, 1)) must_== SimpleDate(1374, 10, 11)
-    }
+  test("Jan 1st, 1996 should equal 11om Day 1374") {
+    assertEquals(gregorianToPersian(SimpleDate(1996, 1, 1)), SimpleDate(1374, 10, 11))
   }
 
-  "March 20th, 2030" should {
-    "equal 30om Esfand 1408" in {
-      gregorianToPersian(SimpleDate(2030, 3, 20)) must_== SimpleDate(1408, 12, 30)
-    }
+  test("March 20th, 2030 should equal 30om Esfand 1408") {
+    assertEquals(gregorianToPersian(SimpleDate(2030, 3, 20)), SimpleDate(1408, 12, 30))
   }
 
-  "Strongly typed PersianDate and GregorianDate" should {
-    "convert GregorianDate to PersianDate" in {
-      val gDate = GregorianDate(2012, 2, 29)
-      val pDate = gregorianToPersian(gDate)
-      pDate must_== PersianDate(1390, 12, 10)
-    }
+  test("Strongly typed GregorianDate to PersianDate conversion") {
+    val gDate = GregorianDate(2012, 2, 29)
+    val pDate = gregorianToPersian(gDate)
+    assertEquals(pDate, PersianDate(1390, 12, 10))
+  }
 
-    "convert PersianDate to GregorianDate" in {
-      val pDate = PersianDate(1391, 12, 30)
-      val gDate = persianToGregorian(pDate)
-      gDate must_== GregorianDate(2013, 3, 20)
-    }
+  test("Strongly typed PersianDate to GregorianDate conversion") {
+    val pDate = PersianDate(1391, 12, 30)
+    val gDate = persianToGregorian(pDate)
+    assertEquals(gDate, GregorianDate(2013, 3, 20))
+  }
 
-    "parse string dates" in {
-      PersianDate("1392/09/24") must_== PersianDate(1392, 9, 24)
-      GregorianDate("2013/12/15") must_== GregorianDate(2013, 12, 15)
-    }
+  test("Strongly typed date string parsing") {
+    assertEquals(PersianDate("1392/09/24"), PersianDate(1392, 9, 24))
+    assertEquals(GregorianDate("2013/12/15"), GregorianDate(2013, 12, 15))
   }
 
 }

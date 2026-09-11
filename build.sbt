@@ -13,11 +13,11 @@ organizationHomepage := Some(url("http://BahmanM.com"))
 ////////////////////////////////////////////////////////////////////////////////
 scalaVersion := "2.13.18"
 libraryDependencies ++= Seq(
-  "org.specs2" %% "specs2-core" % "4.23.0" % "test"
+  "org.scalameta" %% "munit" % "1.3.6" % Test
 )
+testFrameworks += new TestFramework("munit.Framework")
 resolvers ++= Resolver.sonatypeOssRepos("snapshots")
 resolvers ++= Resolver.sonatypeOssRepos("releases")
-Test / scalacOptions ++= Seq("-Yrangepos")
 crossScalaVersions := Seq("2.13.18", "3.3.8")
 
 ////////////////////////////////////////////////////////////////////////////////
