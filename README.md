@@ -15,10 +15,13 @@ A collection of utilities for Scala/Java developers who are targeting Persian (F
 
 | ⬇ persianutils ❚ scala ➡ | 2.10.x | 2.11.x | 2.12.x | 2.13.x | 3.x  |
 |----------------------------|--------|--------|--------|--------|------|
+| 6.x _(to be released)_     |   ❌   |   ❌   |  ❌   |   ✅   |  ✅  |
 | 5.x                        |   ❌   |   ❌   |  ✅   |   ✅   |  ✅  |
 | 4.x                        |   ❌   |   ✅   |  ✅   |   ✅   |  ❌  |
 | 3.x                        |   ❌   |   ✅   |  ✅   |   ❌   |  ❌  |
 | 2.x                        |   ✅   |   ✅   |  ❌   |   ❌   |  ❌  |
+
+_Note: version 6.x is to be released. For current projects, please use version 5.0._
 
 # 2 Adding To Your Project 
 
@@ -56,17 +59,6 @@ With Scala 2.13.x:
 </dependencies>
 ```
 
-With Scala 2.12.x:
-
-```xml
-<dependencies>
-    <dependency>
-        <groupId>com.bahmanm</groupId>
-        <artifactId>persianutils_2.12</artifactId>
-        <version>5.0</version>
-    </dependency>
-</dependencies>
-```
 
 ## 3 What Is Included? 
 
