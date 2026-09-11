@@ -1,5 +1,6 @@
 package com.bahmanm.persianutils
 
+import java.time.LocalDate
 import com.bahmanm.persianutils.DateConverter._
 
 class DateConverterTest extends munit.FunSuite {
@@ -55,6 +56,44 @@ class DateConverterTest extends munit.FunSuite {
   test("Strongly typed date string parsing") {
     assertEquals(PersianDate("1392/09/24"), PersianDate(1392, 9, 24))
     assertEquals(GregorianDate("2013/12/15"), GregorianDate(2013, 12, 15))
+  }
+
+  test("GregorianDate to and from java.time.LocalDate") {
+    val localDate = LocalDate.of(2012, 2, 29)
+    val gDate = GregorianDate(localDate)
+    assertEquals(gDate, GregorianDate(2012, 2, 29))
+    assertEquals(gDate.asLocalDate, localDate)
+  }
+
+  test("PersianDate to and from java.time.LocalDate") {
+    val localDate = LocalDate.of(2012, 2, 29)
+    val pDate = PersianDate(localDate)
+    assertEquals(pDate, PersianDate(1390, 12, 10))
+    assertEquals(pDate.asLocalDate, localDate)
+
+    val pDate2 = PersianDate(1391, 12, 30)
+    assertEquals(pDate2.asLocalDate, LocalDate.of(2013, 3, 20))
+    assertEquals(PersianDate(LocalDate.of(2013, 3, 20)), pDate2)
+  }
+
+  test("DateConverter.gregorianToPersian with java.time.LocalDate") {
+    val localDate = LocalDate.of(2012, 2, 29)
+    val pDate = gregorianToPersian(localDate)
+    assertEquals(pDate, PersianDate(1390, 12, 10))
+  }
+
+  test("SimpleDate to and from java.time.LocalDate") {
+    val localDate = LocalDate.of(2012, 2, 29)
+    val sDate = SimpleDate(localDate)
+    assertEquals(sDate, SimpleDate(2012, 2, 29))
+    assertEquals(sDate.asLocalDate, localDate)
+  }
+
+  test("Backwards compatibility: deprecated java.util.Date conversions") {
+    val sDate = SimpleDate(2012, 2, 29)
+    val utilDate = sDate.asDate
+    val recreated = SimpleDate(utilDate)
+    assertEquals(recreated, sDate)
   }
 
 }
