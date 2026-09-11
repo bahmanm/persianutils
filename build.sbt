@@ -17,8 +17,8 @@ libraryDependencies ++= Seq(
 )
 resolvers ++= Resolver.sonatypeOssRepos("snapshots")
 resolvers ++= Resolver.sonatypeOssRepos("releases")
-scalacOptions in Test ++= Seq("-Yrangepos")
-crossScalaVersions := Seq("2.12.18", "2.13.11", "3.3.1")
+Test / scalacOptions ++= Seq("-Yrangepos")
+crossScalaVersions := Seq("2.13.18", "3.3.1")
 
 ////////////////////////////////////////////////////////////////////////////////
 // sonatype and maven central
