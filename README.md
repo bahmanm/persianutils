@@ -27,11 +27,22 @@ _Note: version 6.x is to be released. For current projects, please use version 5
 
 ### 2.1 SBT 
 
+For JVM projects:
+
 ```scala
 libraryDependencies ++= Seq(
     "com.bahmanm" %% "persianutils" % "5.0"
 )
 ```
+
+For Scala.js projects:
+
+```scala
+libraryDependencies ++= Seq(
+    "com.bahmanm" %%% "persianutils" % "6.0"
+)
+```
+
 
 ### 2.2 Maven 
 

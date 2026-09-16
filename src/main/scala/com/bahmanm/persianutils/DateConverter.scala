@@ -34,15 +34,9 @@ sealed trait ConvertibleDate {
    * @deprecated Use [[asLocalDate]] instead. Scheduled for removal in version 7.0.0.
    */
   @deprecated("Use asLocalDate instead; will be removed in version 7.0.0", "6.0.0")
-  def asDate: java.util.Date = {
-    import java.util.Calendar
+  def asDate: java.util.Date =
+    new java.util.Date(year - 1900, month - 1, day)
 
-    val c = Calendar.getInstance()
-    c.set(Calendar.YEAR, year)
-    c.set(Calendar.MONTH, month - 1)
-    c.set(Calendar.DAY_OF_MONTH, day)
-    c.getTime
-  }
 }
 
 /**
@@ -147,17 +141,13 @@ object DateConverter {
      * @deprecated Use [[apply(date: java.time.LocalDate)]] instead. Scheduled for removal in version 7.0.0.
      */
     @deprecated("Use apply(date: java.time.LocalDate) instead; will be removed in version 7.0.0", "6.0.0")
-    def apply(date: java.util.Date): SimpleDate = {
-      import java.util.Calendar
-
-      val c = Calendar.getInstance()
-      c.setTime(date)
+    def apply(date: java.util.Date): SimpleDate =
       new SimpleDate(
-        c.get(Calendar.YEAR),
-        c.get(Calendar.MONTH) + 1,
-        c.get(Calendar.DAY_OF_MONTH)
+        date.getYear + 1900,
+        date.getMonth + 1,
+        date.getDate
       )
-    }
+
 
   }
 
