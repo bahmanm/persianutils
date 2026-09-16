@@ -26,52 +26,16 @@ A collection of utilities for Scala/Java developers who are targeting Persian (F
 
 _Note: version 6.x is to be released. For current projects, please use version 5.0._
 
-# 2 Adding To Your Project 
+# 2 Installation 
 
 ### 2.1 SBT 
 
-For JVM projects:
+- JVM: `libraryDependencies += "com.bahmanm" %% "persianutils" % "5.0"`
+- Scala.js: `libraryDependencies += "com.bahmanm" %%% "persianutils" % "5.0"`
 
-```scala
-libraryDependencies ++= Seq(
-    "com.bahmanm" %% "persianutils" % "5.0"
-)
-```
+### 2.2 Other Build Tools
 
-For Scala.js projects:
-
-```scala
-libraryDependencies ++= Seq(
-    "com.bahmanm" %%% "persianutils" % "6.0"
-)
-```
-
-
-### 2.2 Maven 
-
-With Scala 3.x:
-
-```xml
-<dependencies>
-    <dependency>
-        <groupId>com.bahmanm</groupId>
-        <artifactId>persianutils_3</artifactId>
-        <version>5.0</version>
-    </dependency>
-</dependencies>
-```
-
-With Scala 2.13.x:
-
-```xml
-<dependencies>
-    <dependency>
-        <groupId>com.bahmanm</groupId>
-        <artifactId>persianutils_2.13</artifactId>
-        <version>5.0</version>
-    </dependency>
-</dependencies>
-```
+See the [Installation Guide](https://persianutils.bahmanm.com/#quick-installation) for Maven, Mill, Scala-CLI, and Gradle setup instructions.
 
 
 ## 3 What Is Included? 
