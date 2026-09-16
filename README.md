@@ -132,8 +132,11 @@ public class Main {
 ```scala
 import com.bahmanm.persianutils.NumToWord
 
-assert(NumToWord(100) == "صد")
-assert(NumToWord(299792458) == "دویست و نود و نه میلیون و هفتصد و نود و دو هزار و چهارصد و پنجاه و هشت")
+assert(NumToWord.cardinal(100) == "صد")
+assert(NumToWord.cardinal(299792458) == "دویست و نود و نه میلیون و هفتصد و نود و دو هزار و چهارصد و پنجاه و هشت")
+
+assert(NumToWord.ordinal(1) == "یکم")
+assert(NumToWord.ordinal(235) == "دویست و سی و پنجم")
 ```
 
 ## License

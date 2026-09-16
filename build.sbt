@@ -4,7 +4,10 @@ import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 // root aggregate
 ////////////////////////////////////////////////////////////////////////////////
 lazy val root = project.in(file("."))
-  .aggregate(persianutils.jvm, persianutils.js)
+  .aggregate(
+    persianutils.jvm,
+    persianutils.js
+  )
   .settings(
     publish / skip := true,
     scalaVersion := "2.13.18",
@@ -78,3 +81,46 @@ lazy val persianutils = crossProject(JVMPlatform, JSPlatform)
     )
   )
 
+////////////////////////////////////////////////////////////////////////////////
+// smoke-tests module (JVM & Scala.js)
+////////////////////////////////////////////////////////////////////////////////
+lazy val smokeTests = crossProject(JVMPlatform, JSPlatform)
+  .crossType(CrossType.Pure)
+  .in(file("smoke-tests"))
+  .dependsOn(persianutils)
+  .settings(
+    name := "smoke-tests",
+    publish / skip := true,
+    scalaVersion := "2.13.18",
+    crossScalaVersions := Seq("2.13.18", "3.3.8"),
+    libraryDependencies ++= Seq(
+      "org.scalameta" %%% "munit" % "1.3.6" % Test
+    ),
+    testFrameworks += new TestFramework("munit.Framework")
+  )
+  .jvmSettings(
+    libraryDependencies ++= Seq(
+      "org.junit.jupiter" % "junit-jupiter-api" % "5.11.4" % Test
+    ),
+    Test / unmanagedSourceDirectories ++= Seq(
+      (ThisBuild / baseDirectory).value / "smoke-tests" / "jvm" / "src" / "test" / "scala",
+      (ThisBuild / baseDirectory).value / "smoke-tests" / "jvm" / "src" / "test" / "java"
+    )
+  )
+  .jsSettings(
+    libraryDependencies ++= Seq(
+      "io.github.cquiroz" %%% "scala-java-time" % "2.7.0" % Test
+    )
+  )
+
+////////////////////////////////////////////////////////////////////////////////
+// command aliases
+////////////////////////////////////////////////////////////////////////////////
+addCommandAlias(
+  "smokeTestCompile",
+  "+ smokeTestsJVM/Test/compile ; + smokeTestsJS/Test/compile"
+)
+addCommandAlias(
+  "smokeTest",
+  "+ smokeTestsJVM/test ; + smokeTestsJS/test"
+)

@@ -2,20 +2,58 @@ package com.bahmanm.persianutils
 
 /**
  * @author Amir Karimi (karimi AT dev-frame.com)
- * Example: @code numToWord(123)
+ * @author Bahman Movaqar (Bahman AT BahmanM.com)
+ *
+ * Example: @code NumToWord.cardinal(123)
  */
 object NumToWord {
+
   /**
    * Converts the specified number to corresponding words.
+   *
+   * @deprecated Use [[cardinal]] instead. Scheduled for removal in version 7.0.0.
    */
-  def apply(n: Int): String = apply(n.toLong)
-  
+  @deprecated("Use cardinal instead; will be removed in version 7.0.0", "6.0.0")
+  def apply(n: Int): String = cardinal(n)
+
   /**
    * Converts the specified number to corresponding words.
+   *
+   * @deprecated Use [[cardinal]] instead. Scheduled for removal in version 7.0.0.
    */
-  def apply(n: Long): String = n match {
+  @deprecated("Use cardinal instead; will be removed in version 7.0.0", "6.0.0")
+  def apply(n: Long): String = cardinal(n)
+
+  /**
+   * Converts the specified number to corresponding cardinal words.
+   */
+  def cardinal(n: Int): String = cardinal(n.toLong)
+
+  /**
+   * Converts the specified number to corresponding cardinal words.
+   */
+  def cardinal(n: Long): String = n match {
     case 0 => "صفر"
     case _ => numToWords(n, 0)
+  }
+
+  /**
+   * Converts the specified number to corresponding ordinal words.
+   */
+  def ordinal(n: Int): String = ordinal(n.toLong)
+
+  /**
+   * Converts the specified number to corresponding ordinal words.
+   */
+  def ordinal(n: Long): String = toOrdinal(cardinal(n))
+
+  private def toOrdinal(cardinalText: String): String = {
+    if (cardinalText == "سه" || cardinalText.endsWith(" سه"))
+      cardinalText.substring(0, cardinalText.length - 2) + "سوم"
+    else if (cardinalText == "سی" || cardinalText.endsWith(" سی"))
+      cardinalText + "\u200Cام"
+    else
+      cardinalText + "م"
   }
 
   private final val hundredWords = List(

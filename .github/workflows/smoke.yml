@@ -1,4 +1,4 @@
-name: ci
+name: smoke
 
 on:
   push:
@@ -15,6 +15,7 @@ on:
     paths-ignore:
       - "*.md"
       - "LICENSE"
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -24,8 +25,8 @@ permissions:
   contents: read
 
 jobs:
-  ci:
-    name: ci__jdk-${{ matrix.java }}
+  smoke:
+    name: smoke__jdk-${{ matrix.java }}
     runs-on: ubuntu-latest
 
     defaults:
@@ -58,8 +59,8 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Compile library and unit tests
-        run: sbt '+ compile ; + Test/compile'
+      - name: Compile smoke tests
+        run: sbt 'smokeTestCompile'
 
-      - name: Run unit tests
-        run: sbt '+ test'
+      - name: Run smoke tests
+        run: sbt 'smokeTest'
