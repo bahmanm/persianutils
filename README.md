@@ -1,5 +1,6 @@
 # 1 Introduction 
 [![CI](https://github.com/bahmanm/persianutils/actions/workflows/ci.yml/badge.svg)](https://github.com/bahmanm/persianutils/actions/workflows/ci.yml)
+[![Documentation](https://img.shields.io/badge/docs-persianutils.bahmanm.com-007ec6.svg)](https://persianutils.bahmanm.com/)
 [![Matrix](https://img.shields.io/matrix/github-bahmanm-persianutils%3Amatrix.org?server_fqdn=matrix.org&style=flat&logo=matrix&logoColor=white&color=0e80c0)](https://matrix.to/#/#github-bahmanm-persianutils:matrix.org)
 ![Maven Central Version](https://img.shields.io/maven-central/v/com.bahmanm/persianutils_3?style=flat&logo=scala&logoColor=white&label=3.x)
 ![Maven Central Version](https://img.shields.io/maven-central/v/com.bahmanm/persianutils_2.13?style=flat&logo=scala&logoColor=white&label=2.13.x)
@@ -8,6 +9,8 @@
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fbahmanm%2Fpersianutils.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fbahmanm%2Fpersianutils?ref=badge_shield)
 
 A collection of utilities for Scala/Java developers who are targeting Persian (Farsi) speaking users.
+
+> Full documentation, tutorials, and interactive Scaladoc API references are published at [persianutils.bahmanm.com](https://persianutils.bahmanm.com/).
 
 <img alt="persianutils logo" src="https://imgur.com/j1cWx7m.png" style="height: 300px; width: 300px; vertical-align: top" /> 
 
@@ -79,6 +82,8 @@ This is a short review of what you will find in _persianutils_:
 
 `com.bahmanm.persianutils.DateConverter` is the Scala port of the original algorithm (in Fortran) [The Persian calendar for 3000 years](http://www.astro.uni.torun.pl/~kb/Papers/EMP/PersianC-EMP.htm).
 
+_Documentation: [DateConverter Guide](https://persianutils.bahmanm.com/pages/modules/date-converter.html) | [Scaladoc API](https://persianutils.bahmanm.com/api/scala-3/com/bahmanm/persianutils/DateConverter$.html)_
+
 #### 3.1.1 Scala 
 
 ```scala
@@ -129,6 +134,10 @@ public class Main {
 
 ### 3.2 NumToWord
 
+Translates numeric values into written Persian words for both cardinal and ordinal numbering.
+
+_Documentation: [NumToWord Guide](https://persianutils.bahmanm.com/pages/modules/num-to-word.html) | [Scaladoc API](https://persianutils.bahmanm.com/api/scala-3/com/bahmanm/persianutils/NumToWord$.html)_
+
 ```scala
 import com.bahmanm.persianutils.NumToWord
 
@@ -142,6 +151,8 @@ assert(NumToWord.ordinal(235) == "دویست و سی و پنجم")
 ### 3.3 DateToWord
 
 Converts date objects or date components into full verbal Persian expressions.
+
+_Documentation: [DateToWord Guide](https://persianutils.bahmanm.com/pages/modules/date-to-word.html) | [Scaladoc API](https://persianutils.bahmanm.com/api/scala-3/com/bahmanm/persianutils/DateToWord$.html)_
 
 #### 3.3.1 Scala
 
