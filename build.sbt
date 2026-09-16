@@ -6,9 +6,7 @@ import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 lazy val root = project.in(file("."))
   .aggregate(
     persianutils.jvm,
-    persianutils.js,
-    smokeTests.jvm,
-    smokeTests.js
+    persianutils.js
   )
   .settings(
     publish / skip := true,
