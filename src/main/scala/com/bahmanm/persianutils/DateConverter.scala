@@ -37,6 +37,11 @@ sealed trait ConvertibleDate {
   def asDate: java.util.Date =
     new java.util.Date(year - 1900, month - 1, day)
 
+  /**
+   * Converts this date into Persian words.
+   */
+  def toWords: String
+
 }
 
 /**
@@ -49,6 +54,12 @@ final case class PersianDate(year: Int, month: Int, day: Int) extends Convertibl
    */
   override def asLocalDate: LocalDate =
     DateConverter.persianToGregorian(this).asLocalDate
+
+  /**
+   * Converts this Persian date into Persian words.
+   */
+  override def toWords: String =
+    DateToWord(this)
 
 }
 
@@ -77,6 +88,12 @@ final case class GregorianDate(year: Int, month: Int, day: Int) extends Converti
    */
   override def asLocalDate: LocalDate =
     LocalDate.of(year, month, day)
+
+  /**
+   * Converts this Gregorian date into Persian words.
+   */
+  override def toWords: String =
+    DateToWord(this)
 
 }
 
@@ -119,6 +136,12 @@ object DateConverter {
      */
     override def asLocalDate: LocalDate =
       LocalDate.of(year, month, day)
+
+    /**
+     * Converts this date into Persian words assuming Persian calendar.
+     */
+    override def toWords: String =
+      DateToWord.persian(this)
 
   }
 
