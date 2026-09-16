@@ -54,7 +54,7 @@ jobs:
           node-version: "22"
 
       - name: Compile all targets
-        run: sbt '+ compile ; Test/compile'
+        run: sbt '+ compile ; + Test/compile'
 
       - name: Execute test suites
         run: sbt '+ test'

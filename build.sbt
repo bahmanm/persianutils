@@ -6,7 +6,14 @@ import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 lazy val root = project.in(file("."))
   .aggregate(persianutils.jvm, persianutils.js)
   .settings(
-    publish / skip := true
+    publish / skip := true,
+    scalaVersion := "2.13.18",
+    crossScalaVersions := Seq("2.13.18", "3.3.8"),
+    sourcesInBase := false,
+    Compile / sources := Seq.empty,
+    Test / sources := Seq.empty,
+    Compile / unmanagedSourceDirectories := Seq.empty,
+    Test / unmanagedSourceDirectories := Seq.empty
   )
 
 ////////////////////////////////////////////////////////////////////////////////
