@@ -1,0 +1,120 @@
+name: pages
+
+on:
+  push:
+    branches:
+      - "main"
+      - "master"
+    paths:
+      - "docs/**"
+      - "src/**"
+      - "build.sbt"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  pages__build:
+    name: Build site and API documentation
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash -euo pipefail {0}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v6
+        with:
+          distribution: "temurin"
+          java-version: "17"
+          cache: "sbt"
+
+      - name: Set up sbt
+        uses: sbt/setup-sbt@v1
+
+      - name: Generate Scaladoc
+        run: sbt '+ persianutilsJVM/Compile/doc'
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.1"
+          bundler-cache: true
+          working-directory: docs
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v6
+
+      - name: Build Jekyll documentation
+        run: |
+          cd docs
+          bundle exec jekyll build --destination ../_site
+
+      - name: Assemble Scaladoc into site artifact
+        run: |
+          mkdir -p _site/api/scala-3
+          mkdir -p _site/api/scala-2.13
+
+          scala3_api="$(find .jvm/target -type d -path '*/scala-3*/api' | head -n 1)"
+          if [[ -n "$scala3_api" && -d "$scala3_api" ]]; then
+            cp -r "$scala3_api"/* _site/api/scala-3/
+          fi
+
+          scala2_api="$(find .jvm/target -type d -path '*/scala-2.13*/api' | head -n 1)"
+          if [[ -n "$scala2_api" && -d "$scala2_api" ]]; then
+            cp -r "$scala2_api"/* _site/api/scala-2.13/
+          fi
+
+          cat <<'EOF' > _site/api/index.html
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <title>persianutils API Documentation</title>
+            <meta http-equiv="refresh" content="0; url=./scala-3/index.html">
+            <link rel="canonical" href="./scala-3/index.html">
+          </head>
+          <body>
+            <p>Redirecting to <a href="./scala-3/index.html">Scala 3 API Documentation</a>...</p>
+            <p>Looking for Scala 2.13? Visit <a href="./scala-2.13/index.html">Scala 2.13 API Documentation</a>.</p>
+          </body>
+          </html>
+          EOF
+
+      - name: Verify site build
+        run: |
+          test -f _site/index.html
+          test -f _site/CNAME
+          test -f _site/api/index.html
+          test -f _site/api/scala-3/index.html
+          test -f _site/api/scala-2.13/index.html
+
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+
+  pages__deploy:
+    name: Deploy to GitHub Pages
+    needs: pages__build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
