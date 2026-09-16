@@ -59,7 +59,7 @@ jobs:
           node-version: "22"
 
       - name: Compile all targets
-        run: sbt '+ compile ; + Test/compile ; + smokeTests/Test/compile'
+        run: sbt '+ compile ; + Test/compile ; smokeTestCompile'
 
   ci__test:
     name: ci__test (jdk-${{ matrix.java }})
@@ -133,4 +133,4 @@ jobs:
           node-version: "22"
 
       - name: Run smoke tests
-        run: sbt '+ smokeTests/test'
+        run: sbt 'smokeTest'
