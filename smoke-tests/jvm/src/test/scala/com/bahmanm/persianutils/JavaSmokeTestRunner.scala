@@ -10,4 +10,8 @@ class JavaSmokeTestRunner extends munit.FunSuite {
     NumToWordJavaSmokeTest.verify()
   }
 
+  test("Java interoperability: DateToWord") {
+    DateToWordJavaSmokeTest.verify()
+  }
+
 }

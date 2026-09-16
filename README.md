@@ -139,5 +139,51 @@ assert(NumToWord.ordinal(1) == "یکم")
 assert(NumToWord.ordinal(235) == "دویست و سی و پنجم")
 ```
 
+### 3.3 DateToWord
+
+Converts date objects or date components into full verbal Persian expressions.
+
+#### 3.3.1 Scala
+
+```scala
+import com.bahmanm.persianutils.DateToWord
+import com.bahmanm.persianutils.PersianDate
+import com.bahmanm.persianutils.GregorianDate
+
+val pDate = PersianDate(1361, 3, 3)
+assert(pDate.toWords == "سوم خرداد یک هزار و سیصد و شصت و یک")
+assert(DateToWord(pDate) == "سوم خرداد یک هزار و سیصد و شصت و یک")
+
+val gDate = GregorianDate(1992, 12, 3)
+assert(gDate.toWords == "سوم دسامبر یک هزار و نه‌صد و نود و دو")
+assert(DateToWord(gDate) == "سوم دسامبر یک هزار و نه‌صد و نود و دو")
+
+// Using discrete date components
+assert(DateToWord.persian(1402, 1, 1) == "یکم فروردین یک هزار و چهار‌صد و دو")
+assert(DateToWord.gregorian(2023, 3, 21) == "بیست و یکم مارس دو هزار و بیست و سه")
+```
+
+#### 3.3.2 Java
+
+```java
+import com.bahmanm.persianutils.DateToWord;
+import com.bahmanm.persianutils.PersianDate;
+import com.bahmanm.persianutils.GregorianDate;
+
+public class Main {
+
+  public static void main(String[] args) {
+    PersianDate pd = new PersianDate(1361, 3, 3);
+    System.out.println(pd.toWords()); // سوم خرداد یک هزار و سیصد و شصت و یک
+    System.out.println(DateToWord.persian(pd));
+
+    GregorianDate gd = new GregorianDate(1992, 12, 3);
+    System.out.println(gd.toWords()); // سوم دسامبر یک هزار و نه‌صد و نود و دو
+    System.out.println(DateToWord.gregorian(gd));
+  }
+
+}
+```
+
 ## License
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fbahmanm%2Fpersianutils.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fbahmanm%2Fpersianutils?ref=badge_large)
