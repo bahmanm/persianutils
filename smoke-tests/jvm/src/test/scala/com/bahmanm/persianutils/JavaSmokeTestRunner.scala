@@ -14,4 +14,8 @@ class JavaSmokeTestRunner extends munit.FunSuite {
     DateToWordJavaSmokeTest.verify()
   }
 
+  test("Java interoperability: TextSanitiser") {
+    TextSanitiserJavaSmokeTest.verify()
+  }
+
 }

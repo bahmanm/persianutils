@@ -53,47 +53,18 @@ _Documentation: [DateConverter Guide](https://persianutils.bahmanm.com/pages/mod
 ```scala
 import com.bahmanm.persianutils.DateConverter._
 
-// NOTE: months and days are 1-indexed, i.e. December is 12 or Farvardin is 1
-val gDate1 = GregorianDate(2013, 12, 11)
-val pDate1 = gregorianToPersian(gDate1)
-print(pDate1)  // OUTPUT: PersianDate(1392,9,20) -> 20om Azar 1392
-
+val gDate = GregorianDate(2013, 12, 11)
+val pDate = gregorianToPersian(gDate) // PersianDate(1392, 9, 20)
 
 val pDate2 = PersianDate(1392, 1, 1)
-val gDate2 = persianToGregorian(pDate2)
-print(gDate2) // OUTPUT: GregorianDate(2013,3,21) -> March 21st 2013
-
-
-val ds = "1392/09/24"
-val pDate3 = PersianDate(ds) // initialising from a String
-val gDate3 = persianToGregorian(pDate3)
-
-
-val d = java.util.Calendar.getInstance().getTime()
-val sDate = SimpleDate(d) // initialising legacy SimpleDate from a java.util.Date
-val pDate4 = gregorianToPersian(sDate)
+val gDate2 = persianToGregorian(pDate2) // GregorianDate(2013, 3, 21)
 ```
 
 #### 3.1.2 Java 
 
 ```java
-import com.bahmanm.persianutils.DateConverter;
-import com.bahmanm.persianutils.PersianDate;
-import com.bahmanm.persianutils.GregorianDate;
-
-public class Main {
-
-  public static void main(String[] args) {
-    PersianDate pd1 = new PersianDate(1392, 11, 11);
-    GregorianDate gd1 = DateConverter.persianToGregorian(pd1);
-    System.out.println(gd1);
-
-    GregorianDate gd2 = new GregorianDate(2014, 2, 4);
-    PersianDate pd2 = DateConverter.gregorianToPersian(gd2);
-    System.out.println(pd2);
-  }
-
-}
+PersianDate pd = DateConverter.gregorianToPersian(new GregorianDate(2014, 2, 4));   // PersianDate(1392, 11, 15)
+GregorianDate gd = DateConverter.persianToGregorian(new PersianDate(1392, 11, 15)); // GregorianDate(2014, 2, 4)
 ```
 
 ### 3.2 NumToWord
@@ -102,14 +73,20 @@ Translates numeric values into written Persian words for both cardinal and ordin
 
 _Documentation: [NumToWord Guide](https://persianutils.bahmanm.com/pages/modules/num-to-word.html) | [Scaladoc API](https://persianutils.bahmanm.com/api/scala-3/com/bahmanm/persianutils/NumToWord$.html)_
 
+#### 3.2.1 Scala
+
 ```scala
 import com.bahmanm.persianutils.NumToWord
 
 assert(NumToWord.cardinal(100) == "صد")
-assert(NumToWord.cardinal(299792458) == "دویست و نود و نه میلیون و هفتصد و نود و دو هزار و چهارصد و پنجاه و هشت")
-
 assert(NumToWord.ordinal(1) == "یکم")
-assert(NumToWord.ordinal(235) == "دویست و سی و پنجم")
+```
+
+#### 3.2.2 Java
+
+```java
+String hundred = NumToWord.cardinal(100); // صد
+String first = NumToWord.ordinal(1);      // یکم
 ```
 
 ### 3.3 DateToWord
@@ -121,43 +98,38 @@ _Documentation: [DateToWord Guide](https://persianutils.bahmanm.com/pages/module
 #### 3.3.1 Scala
 
 ```scala
-import com.bahmanm.persianutils.DateToWord
 import com.bahmanm.persianutils.PersianDate
-import com.bahmanm.persianutils.GregorianDate
 
 val pDate = PersianDate(1361, 3, 3)
 assert(pDate.toWords == "سوم خرداد یک هزار و سیصد و شصت و یک")
-assert(DateToWord(pDate) == "سوم خرداد یک هزار و سیصد و شصت و یک")
-
-val gDate = GregorianDate(1992, 12, 3)
-assert(gDate.toWords == "سوم دسامبر یک هزار و نه‌صد و نود و دو")
-assert(DateToWord(gDate) == "سوم دسامبر یک هزار و نه‌صد و نود و دو")
-
-// Using discrete date components
-assert(DateToWord.persian(1402, 1, 1) == "یکم فروردین یک هزار و چهار‌صد و دو")
-assert(DateToWord.gregorian(2023, 3, 21) == "بیست و یکم مارس دو هزار و بیست و سه")
 ```
 
 #### 3.3.2 Java
 
 ```java
-import com.bahmanm.persianutils.DateToWord;
-import com.bahmanm.persianutils.PersianDate;
-import com.bahmanm.persianutils.GregorianDate;
+PersianDate pd = new PersianDate(1361, 3, 3);
+String words = pd.toWords(); // سوم خرداد یک هزار و سیصد و شصت و یک
+```
 
-public class Main {
+### 3.4 TextSanitiser
 
-  public static void main(String[] args) {
-    PersianDate pd = new PersianDate(1361, 3, 3);
-    System.out.println(pd.toWords()); // سوم خرداد یک هزار و سیصد و شصت و یک
-    System.out.println(DateToWord.persian(pd));
+Sanitises and normalises Persian text by standardising character variants (such as Arabic Kaf and Yeh), converting numerals, regularising spacing and zero-width non-joiners (ZWNJ), stripping tatweel, and standardising punctuation.
 
-    GregorianDate gd = new GregorianDate(1992, 12, 3);
-    System.out.println(gd.toWords()); // سوم دسامبر یک هزار و نه‌صد و نود و دو
-    System.out.println(DateToWord.gregorian(gd));
-  }
+_Documentation: [TextSanitiser Guide](https://persianutils.bahmanm.com/pages/modules/text-sanitiser.html) | [Scaladoc API](https://persianutils.bahmanm.com/api/scala-3/com/bahmanm/persianutils/TextSanitiser$.html)_
 
-}
+#### 3.4.1 Scala
+
+```scala
+import com.bahmanm.persianutils.TextSanitiser
+
+val cleanText = TextSanitiser.sanitise("  كتاب علي 123 و ١٤٠٣, تست?  ")
+assert(cleanText == "کتاب علی ۱۲۳ و ۱۴۰۳، تست؟")
+```
+
+#### 3.4.2 Java
+
+```java
+String cleanText = TextSanitiser.sanitise("كتاب علي 123?", new SanitiserConfig()); // کتاب علی ۱۲۳؟
 ```
 
 ## License
