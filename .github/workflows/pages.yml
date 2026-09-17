@@ -70,15 +70,21 @@ jobs:
           mkdir -p _site/api/scala-3
           mkdir -p _site/api/scala-2.13
 
-          scala3_api="$(find .jvm/target -type d -path '*/scala-3*/api' | head -n 1)"
-          if [[ -n "$scala3_api" && -d "$scala3_api" ]]; then
-            cp -r "$scala3_api"/* _site/api/scala-3/
+          scala3_api="$(find .jvm/target -maxdepth 3 -type d -name "api" -path "*/scala-3*/*" | head -n 1)"
+          if [[ -z "$scala3_api" || ! -d "$scala3_api" ]]; then
+            echo "ERROR: Unable to locate Scala 3 Scaladoc directory under .jvm/target" >&2
+            exit 1
           fi
+          echo "Found Scala 3 Scaladoc at: $scala3_api"
+          cp -r "$scala3_api"/* _site/api/scala-3/
 
-          scala2_api="$(find .jvm/target -type d -path '*/scala-2.13*/api' | head -n 1)"
-          if [[ -n "$scala2_api" && -d "$scala2_api" ]]; then
-            cp -r "$scala2_api"/* _site/api/scala-2.13/
+          scala2_api="$(find .jvm/target -maxdepth 3 -type d -name "api" -path "*/scala-2.13*/*" | head -n 1)"
+          if [[ -z "$scala2_api" || ! -d "$scala2_api" ]]; then
+            echo "ERROR: Unable to locate Scala 2.13 Scaladoc directory under .jvm/target" >&2
+            exit 1
           fi
+          echo "Found Scala 2.13 Scaladoc at: $scala2_api"
+          cp -r "$scala2_api"/* _site/api/scala-2.13/
 
           cat <<'EOF' > _site/api/index.html
           <!DOCTYPE html>
