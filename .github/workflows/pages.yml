@@ -86,6 +86,8 @@ jobs:
           echo "Found Scala 2.13 Scaladoc at: $scala2_api"
           cp -r "$scala2_api"/* _site/api/scala-2.13/
 
+          cp docs/CNAME _site/CNAME
+
           cat <<'EOF' > _site/api/index.html
           <!DOCTYPE html>
           <html lang="en">
@@ -104,11 +106,6 @@ jobs:
 
       - name: Verify site build
         run: |
-          echo "=== Contents of _site ==="
-          ls -la _site
-          echo "=== Contents of _site/api ==="
-          ls -la _site/api 2>/dev/null || true
-
           for file in _site/index.html _site/CNAME _site/api/index.html _site/api/scala-3/index.html _site/api/scala-2.13/index.html; do
             if [[ ! -f "$file" ]]; then
               echo "ERROR: Missing required artifact: $file" >&2
