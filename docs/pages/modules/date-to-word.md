@@ -1,3 +1,8 @@
+---
+layout: default
+title: "DateToWord"
+---
+
 # DateToWord
 
 `com.bahmanm.persianutils.DateToWord` converts calendar dates into full verbal Persian expressions and natural language strings.

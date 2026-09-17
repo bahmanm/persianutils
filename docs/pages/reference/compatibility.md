@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Compatibility Reference"
+---
+
 # Compatibility Matrix & Runtimes
 
 This document outlines the binary and source compatibility guarantees of `persianutils` across Scala and Java releases.

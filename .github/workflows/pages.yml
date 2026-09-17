@@ -70,15 +70,23 @@ jobs:
           mkdir -p _site/api/scala-3
           mkdir -p _site/api/scala-2.13
 
-          scala3_api="$(find .jvm/target -type d -path '*/scala-3*/api' | head -n 1)"
-          if [[ -n "$scala3_api" && -d "$scala3_api" ]]; then
-            cp -r "$scala3_api"/* _site/api/scala-3/
+          scala3_api="$(find .jvm/target -maxdepth 3 -type d -name "api" -path "*/scala-3*/*" | head -n 1)"
+          if [[ -z "$scala3_api" || ! -d "$scala3_api" ]]; then
+            echo "ERROR: Unable to locate Scala 3 Scaladoc directory under .jvm/target" >&2
+            exit 1
           fi
+          echo "Found Scala 3 Scaladoc at: $scala3_api"
+          cp -r "$scala3_api"/* _site/api/scala-3/
 
-          scala2_api="$(find .jvm/target -type d -path '*/scala-2.13*/api' | head -n 1)"
-          if [[ -n "$scala2_api" && -d "$scala2_api" ]]; then
-            cp -r "$scala2_api"/* _site/api/scala-2.13/
+          scala2_api="$(find .jvm/target -maxdepth 3 -type d -name "api" -path "*/scala-2.13*/*" | head -n 1)"
+          if [[ -z "$scala2_api" || ! -d "$scala2_api" ]]; then
+            echo "ERROR: Unable to locate Scala 2.13 Scaladoc directory under .jvm/target" >&2
+            exit 1
           fi
+          echo "Found Scala 2.13 Scaladoc at: $scala2_api"
+          cp -r "$scala2_api"/* _site/api/scala-2.13/
+
+          cp docs/CNAME _site/CNAME
 
           cat <<'EOF' > _site/api/index.html
           <!DOCTYPE html>
@@ -98,11 +106,13 @@ jobs:
 
       - name: Verify site build
         run: |
-          test -f _site/index.html
-          test -f _site/CNAME
-          test -f _site/api/index.html
-          test -f _site/api/scala-3/index.html
-          test -f _site/api/scala-2.13/index.html
+          for file in _site/index.html _site/CNAME _site/api/index.html _site/api/scala-3/index.html _site/api/scala-2.13/index.html; do
+            if [[ ! -f "$file" ]]; then
+              echo "ERROR: Missing required artifact: $file" >&2
+              exit 1
+            fi
+            echo "Verified artifact: $file"
+          done
 
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v5

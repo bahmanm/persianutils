@@ -1,3 +1,8 @@
+---
+layout: default
+title: "NumToWord"
+---
+
 # NumToWord
 
 `com.bahmanm.persianutils.NumToWord` translates numeric values into written Persian words for both cardinal and ordinal numbering.

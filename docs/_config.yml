@@ -5,3 +5,5 @@ logo: /assets/img/logo-256x256.png
 favicon: /assets/img/favicon.ico
 show_downloads: false
 repository: bahmanm/persianutils
+include:
+  - CNAME
