@@ -51,8 +51,11 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.1"
-          bundler-cache: true
-          working-directory: docs
+
+      - name: Install documentation dependencies
+        run: |
+          cd docs
+          bundle install
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v6
