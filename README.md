@@ -16,13 +16,13 @@ A collection of utilities for Scala/Java developers who are targeting Persian (F
 
 # Compatibility
 
-| ⬇ persianutils ❚ scala ➡ | 2.10.x | 2.11.x | 2.12.x | 2.13.x | 3.x  |
-|----------------------------|--------|--------|--------|--------|------|
-| 6.x _(to be released)_     |   ❌   |   ❌   |  ❌   |   ✅   |  ✅  |
-| 5.x                        |   ❌   |   ❌   |  ✅   |   ✅   |  ✅  |
-| 4.x                        |   ❌   |   ✅   |  ✅   |   ✅   |  ❌  |
-| 3.x                        |   ❌   |   ✅   |  ✅   |   ❌   |  ❌  |
-| 2.x                        |   ✅   |   ✅   |  ❌   |   ❌   |  ❌  |
+| Library Version | Scala 2.10 | Scala 2.11 | Scala 2.12 | Scala 2.13 | Scala 3 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| _6.x (to be released)_ | - | - | - | ✅ | ✅ |
+| 5.x | - | - | ✅ | ✅ | ✅ |
+| 4.x | - | ✅ | ✅ | ✅ | - |
+| 3.x | - | ✅ | ✅ | - | - |
+| 2.x | ✅ | ✅ | - | - | - |
 
 _Note: version 6.x is to be released. For current projects, please use version 5.0._
 
