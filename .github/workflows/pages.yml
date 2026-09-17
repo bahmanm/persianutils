@@ -104,11 +104,18 @@ jobs:
 
       - name: Verify site build
         run: |
-          test -f _site/index.html
-          test -f _site/CNAME
-          test -f _site/api/index.html
-          test -f _site/api/scala-3/index.html
-          test -f _site/api/scala-2.13/index.html
+          echo "=== Contents of _site ==="
+          ls -la _site
+          echo "=== Contents of _site/api ==="
+          ls -la _site/api 2>/dev/null || true
+
+          for file in _site/index.html _site/CNAME _site/api/index.html _site/api/scala-3/index.html _site/api/scala-2.13/index.html; do
+            if [[ ! -f "$file" ]]; then
+              echo "ERROR: Missing required artifact: $file" >&2
+              exit 1
+            fi
+            echo "Verified artifact: $file"
+          done
 
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v5
