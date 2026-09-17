@@ -1,8 +1,3 @@
----
-layout: default
-title: "NumToWord"
----
-
 # NumToWord
 
 `com.bahmanm.persianutils.NumToWord` translates numeric values into written Persian words for both cardinal and ordinal numbering.
@@ -57,7 +52,7 @@ public class NumberWordExample {
 
 ### Navigation
 
-- [Back to Documentation Hub](../../index.html)
-- [DateConverter Guide](./date-converter.html)
-- [DateToWord Guide](./date-to-word.html)
-- [Interactive Scaladoc API (Scala 3)](../../api/scala-3/index.html)
+- [Back to Documentation Hub](../index.md)
+- [DateConverter Guide](date-converter.md)
+- [DateToWord Guide](date-to-word.md)
+- [Interactive Scaladoc API (Scala 3)](../api/scala-3/com/bahmanm/persianutils.html){:target="_blank" rel="noopener"}

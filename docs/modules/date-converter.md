@@ -1,8 +1,3 @@
----
-layout: default
-title: "DateConverter"
----
-
 # DateConverter
 
 `com.bahmanm.persianutils.DateConverter` provides high-precision bidirectional conversion between the Gregorian calendar and the Persian (Solar Hijri) calendar.
@@ -89,7 +84,7 @@ assert(!isPersianLeap(1400))
 
 ### Navigation
 
-- [Back to Documentation Hub](../../index.html)
-- [DateToWord Guide](./date-to-word.html)
-- [NumToWord Guide](./num-to-word.html)
-- [Interactive Scaladoc API (Scala 3)](../../api/scala-3/index.html)
+- [Back to Documentation Hub](../index.md)
+- [DateToWord Guide](date-to-word.md)
+- [NumToWord Guide](num-to-word.md)
+- [Interactive Scaladoc API (Scala 3)](../api/scala-3/com/bahmanm/persianutils.html){:target="_blank" rel="noopener"}

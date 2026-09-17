@@ -1,9 +1,0 @@
-theme: jekyll-theme-minimal
-title: "persianutils"
-description: "Persian (Farsi) Calendar and Language Utilities for Scala and Java"
-logo: /assets/img/logo-256x256.png
-favicon: /assets/img/favicon.ico
-show_downloads: false
-repository: bahmanm/persianutils
-include:
-  - CNAME

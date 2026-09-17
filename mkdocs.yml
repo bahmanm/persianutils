@@ -1,0 +1,81 @@
+site_name: persianutils
+site_description: Persian (Farsi) Calendar and Language Utilities for Scala and Java
+site_url: https://persianutils.bahmanm.com/
+repo_name: bahmanm/persianutils
+repo_url: https://github.com/bahmanm/persianutils
+docs_dir: docs
+site_dir: _site
+
+theme:
+  name: material
+  logo: assets/img/logo-256x256.png
+  favicon: assets/img/favicon.ico
+  font:
+    text: Cantarell
+    code: Oxygen Mono
+  palette:
+    - scheme: solarized-light
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: solarized-dark
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - navigation.expand
+    - navigation.indexes
+    - navigation.top
+    - toc.integrate
+    - content.code.copy
+    - search.suggest
+    - search.highlight
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - tables
+  - attr_list
+
+extra_css:
+  - stylesheets/solarized.css
+  - stylesheets/persian.css
+
+extra_javascript:
+  - javascripts/open-in-new-window.js
+validation:
+  nav:
+    omitted_files: info
+    not_found: ignore
+    absolute_links: info
+  links:
+    not_found: ignore
+    absolute_links: info
+    unrecognized_links: info
+
+nav:
+  - Overview: index.md
+  - Modules:
+      - DateConverter: modules/date-converter.md
+      - DateToWord: modules/date-to-word.md
+      - NumToWord: modules/num-to-word.md
+  - Reference:
+      - Compatibility Matrix: reference/compatibility.md
+      - API (Scala 3): /api/scala-3/com/bahmanm/persianutils.html
+      - API (Scala 2.13): /api/scala-2.13/com/bahmanm/persianutils/index.html
