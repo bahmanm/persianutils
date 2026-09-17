@@ -75,6 +75,7 @@ nav:
       - DateConverter: modules/date-converter.md
       - DateToWord: modules/date-to-word.md
       - NumToWord: modules/num-to-word.md
+      - TextSanitiser: modules/text-sanitiser.md
   - Reference:
       - Compatibility Matrix: reference/compatibility.md
       - API (Scala 3): /api/scala-3/com/bahmanm/persianutils.html
