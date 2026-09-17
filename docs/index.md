@@ -1,3 +1,8 @@
+---
+layout: default
+title: "persianutils"
+---
+
 # persianutils
 
 A robust collection of utilities for Scala and Java developers targeting Persian (Farsi) speaking users, cross-compiled for both JVM and Scala.js environments.

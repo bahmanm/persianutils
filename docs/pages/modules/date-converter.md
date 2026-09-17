@@ -1,3 +1,8 @@
+---
+layout: default
+title: "DateConverter"
+---
+
 # DateConverter
 
 `com.bahmanm.persianutils.DateConverter` provides high-precision bidirectional conversion between the Gregorian calendar and the Persian (Solar Hijri) calendar.
