@@ -24,3 +24,11 @@ project/plugins/project/
 /.bsp/
 /.metals/
 /project/metals.sbt
+
+# Jekyll & Bundler
+.jekyll-cache/
+_site/
+docs/.jekyll-cache/
+docs/_site/
+docs/.bundle/
+docs/Gemfile.lock
