@@ -1,0 +1,253 @@
+:root {
+  --md-text-font: "Cantarell", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --md-code-font: "Oxygen Mono", "Source Code Pro", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --md-typeset-font-size: 0.88rem;
+  --md-typeset-line-height: 1.65;
+  --md-code-font-size: 0.82rem;
+}
+
+body,
+.md-typeset {
+  font-family: var(--md-text-font);
+  font-feature-settings: "kern", "liga", "calt";
+}
+
+code,
+pre,
+kbd,
+.md-typeset pre,
+.md-typeset code {
+  font-family: var(--md-code-font) !important;
+}
+
+.md-typeset h1 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4 {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+[data-md-color-scheme="solarized-light"] {
+  --md-default-fg-color:               #657b83;
+  --md-default-fg-color--light:        #839496;
+  --md-default-fg-color--lighter:      #93a1a1;
+  --md-default-fg-color--lightest:     #eee8d5;
+  --md-default-bg-color:               #fdf6e3;
+  --md-default-bg-color--light:        #eee8d5;
+  --md-default-bg-color--lighter:      #fdf6e3;
+  --md-default-bg-color--lightest:     #ffffff;
+
+  --md-primary-fg-color:               #268bd2;
+  --md-primary-fg-color--light:        #2aa198;
+  --md-primary-fg-color--dark:         #1a6091;
+  --md-primary-bg-color:               #fdf6e3;
+  --md-primary-bg-color--light:        #eee8d5;
+  --md-accent-fg-color:                #2aa198;
+  --md-accent-bg-color:                #eee8d5;
+
+  --md-typeset-a-color:                #268bd2;
+  --md-typeset-mark-color:             rgba(181, 137, 0, 0.2);
+
+  --md-code-fg-color:                  #586e75;
+  --md-code-bg-color:                  #eee8d5;
+  --md-code-hl-color:                  #eee8d5;
+  --md-code-hl-number-color:           #cb4b16;
+  --md-code-hl-special-color:          #dc322f;
+  --md-code-hl-function-color:         #268bd2;
+  --md-code-hl-constant-color:         #d33682;
+  --md-code-hl-keyword-color:          #859900;
+  --md-code-hl-string-color:           #2aa198;
+  --md-code-hl-name-color:             #657b83;
+  --md-code-hl-operator-color:         #859900;
+  --md-code-hl-punctuation-color:      #657b83;
+  --md-code-hl-comment-color:          #93a1a1;
+  --md-code-hl-generic-color:          #657b83;
+  --md-code-hl-variable-color:         #268bd2;
+
+  --md-shadow-z1:                      0 2px 6px rgba(0, 43, 54, 0.06);
+  --md-shadow-z2:                      0 4px 12px rgba(0, 43, 54, 0.1);
+  --md-shadow-z3:                      0 8px 24px rgba(0, 43, 54, 0.14);
+}
+
+[data-md-color-scheme="solarized-dark"] {
+  --md-default-fg-color:               #93a1a1;
+  --md-default-fg-color--light:        #839496;
+  --md-default-fg-color--lighter:      #657b83;
+  --md-default-fg-color--lightest:     rgba(147, 161, 161, 0.2);
+  --md-default-bg-color:               #002b36;
+  --md-default-bg-color--light:        #073642;
+  --md-default-bg-color--lighter:      #002b36;
+  --md-default-bg-color--lightest:     #001f27;
+
+  --md-primary-fg-color:               #268bd2;
+  --md-primary-fg-color--light:        #2aa198;
+  --md-primary-fg-color--dark:         #1a6091;
+  --md-primary-bg-color:               #002b36;
+  --md-primary-bg-color--light:        #073642;
+  --md-accent-fg-color:                #2aa198;
+  --md-accent-bg-color:                #073642;
+
+  --md-typeset-a-color:                #268bd2;
+  --md-typeset-mark-color:             rgba(181, 137, 0, 0.35);
+
+  --md-code-fg-color:                  #93a1a1;
+  --md-code-bg-color:                  #073642;
+  --md-code-hl-color:                  #073642;
+  --md-code-hl-number-color:           #cb4b16;
+  --md-code-hl-special-color:          #dc322f;
+  --md-code-hl-function-color:         #268bd2;
+  --md-code-hl-constant-color:         #d33682;
+  --md-code-hl-keyword-color:          #859900;
+  --md-code-hl-string-color:           #2aa198;
+  --md-code-hl-name-color:             #93a1a1;
+  --md-code-hl-operator-color:         #859900;
+  --md-code-hl-punctuation-color:      #93a1a1;
+  --md-code-hl-comment-color:          #657b83;
+  --md-code-hl-generic-color:          #93a1a1;
+  --md-code-hl-variable-color:         #268bd2;
+
+  --md-shadow-z1:                      0 2px 6px rgba(0, 0, 0, 0.45);
+  --md-shadow-z2:                      0 4px 12px rgba(0, 0, 0, 0.55);
+  --md-shadow-z3:                      0 8px 24px rgba(0, 0, 0, 0.65);
+}
+
+[data-md-color-scheme="solarized-dark"] .md-typeset {
+  color: #93a1a1;
+}
+
+[data-md-color-scheme="solarized-dark"] .md-typeset h1,
+[data-md-color-scheme="solarized-dark"] .md-typeset h2,
+[data-md-color-scheme="solarized-dark"] .md-typeset h3,
+[data-md-color-scheme="solarized-dark"] .md-typeset h4,
+[data-md-color-scheme="solarized-dark"] .md-typeset h5,
+[data-md-color-scheme="solarized-dark"] .md-typeset h6 {
+  color: #eee8d5;
+}
+
+[data-md-color-scheme="solarized-dark"] .md-typeset table:not([class]) {
+  border-color: rgba(147, 161, 161, 0.25);
+  background-color: #002b36;
+}
+
+[data-md-color-scheme="solarized-dark"] .md-typeset table:not([class]) th {
+  background-color: #073642;
+  color: #eee8d5;
+  border-bottom: 1px solid rgba(147, 161, 161, 0.25);
+}
+
+[data-md-color-scheme="solarized-dark"] .md-typeset table:not([class]) td {
+  color: #93a1a1;
+  border-bottom: 1px solid rgba(147, 161, 161, 0.15);
+}
+
+[data-md-color-scheme="solarized-dark"] .md-typeset table:not([class]) td code {
+  background-color: #073642;
+  color: #2aa198;
+}
+
+[data-md-color-scheme="solarized-dark"] .md-nav {
+  color: #93a1a1;
+}
+
+[data-md-color-scheme="solarized-dark"] .md-nav__title {
+  color: #eee8d5 !important;
+  font-weight: 700;
+}
+
+[data-md-color-scheme="solarized-dark"] .md-nav__item--section > .md-nav__link,
+[data-md-color-scheme="solarized-dark"] .md-nav__item--section > .md-nav__link[for] {
+  color: #eee8d5 !important;
+  font-weight: 700;
+}
+
+[data-md-color-scheme="solarized-dark"] .md-nav__link {
+  color: #93a1a1 !important;
+}
+
+[data-md-color-scheme="solarized-dark"] .md-nav__link:hover,
+[data-md-color-scheme="solarized-dark"] .md-nav__link:focus {
+  color: #2aa198 !important;
+}
+
+[data-md-color-scheme="solarized-dark"] .md-nav__item--active > .md-nav__link,
+[data-md-color-scheme="solarized-dark"] .md-nav__link--active,
+[data-md-color-scheme="solarized-dark"] .md-nav__link--active code {
+  color: #268bd2 !important;
+  font-weight: 600;
+}
+
+[data-md-color-scheme="solarized-dark"] .md-nav--secondary .md-nav__link {
+  color: #839496 !important;
+}
+
+[data-md-color-scheme="solarized-dark"] .md-nav--secondary .md-nav__link:hover {
+  color: #2aa198 !important;
+}
+
+[data-md-color-scheme="solarized-dark"] .md-nav--secondary .md-nav__link--active {
+  color: #268bd2 !important;
+  font-weight: 600;
+}
+
+[data-md-color-scheme="solarized-dark"] .md-nav__link--passed {
+  color: #839496 !important;
+}
+
+[data-md-color-scheme="solarized-dark"] .md-nav--integrated > .md-nav__list > .md-nav__item--active .md-nav--secondary {
+  border-left-color: #268bd2 !important;
+}
+
+[data-md-color-scheme="solarized-light"] .md-nav__title {
+  color: #073642 !important;
+  font-weight: 700;
+}
+
+[data-md-color-scheme="solarized-light"] .md-nav__item--section > .md-nav__link,
+[data-md-color-scheme="solarized-light"] .md-nav__item--section > .md-nav__link[for] {
+  color: #073642 !important;
+  font-weight: 700;
+}
+
+[data-md-color-scheme="solarized-light"] .md-nav__link {
+  color: #586e75 !important;
+}
+
+[data-md-color-scheme="solarized-light"] .md-nav__link:hover,
+[data-md-color-scheme="solarized-light"] .md-nav__link:focus {
+  color: #2aa198 !important;
+}
+
+[data-md-color-scheme="solarized-light"] .md-nav__item--active > .md-nav__link,
+[data-md-color-scheme="solarized-light"] .md-nav__link--active {
+  color: #268bd2 !important;
+  font-weight: 600;
+}
+
+[data-md-color-scheme="solarized-light"] .md-nav--secondary .md-nav__link {
+  color: #657b83 !important;
+}
+
+[data-md-color-scheme="solarized-light"] .md-nav--secondary .md-nav__link:hover {
+  color: #2aa198 !important;
+}
+
+[data-md-color-scheme="solarized-light"] .md-nav--secondary .md-nav__link--active {
+  color: #268bd2 !important;
+  font-weight: 600;
+}
+
+.md-typeset table:not([class]) {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 4px;
+}
+
+.md-typeset table:not([class]) th {
+  background-color: var(--md-default-bg-color--light);
+  color: var(--md-default-fg-color);
+  font-weight: 600;
+}

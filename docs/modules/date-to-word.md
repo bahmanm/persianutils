@@ -1,8 +1,3 @@
----
-layout: default
-title: "DateToWord"
----
-
 # DateToWord
 
 `com.bahmanm.persianutils.DateToWord` converts calendar dates into full verbal Persian expressions and natural language strings.
@@ -78,7 +73,7 @@ public class DateVerbalExample {
 
 ### Navigation
 
-- [Back to Documentation Hub](../../index.html)
-- [DateConverter Guide](./date-converter.html)
-- [NumToWord Guide](./num-to-word.html)
-- [Interactive Scaladoc API (Scala 3)](../../api/scala-3/index.html)
+- [Back to Documentation Hub](../index.md)
+- [DateConverter Guide](date-converter.md)
+- [NumToWord Guide](num-to-word.md)
+- [Interactive Scaladoc API (Scala 3)](../api/scala-3/com/bahmanm/persianutils.html){:target="_blank" rel="noopener"}

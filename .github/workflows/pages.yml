@@ -7,6 +7,7 @@ on:
       - "master"
     paths:
       - "docs/**"
+      - "mkdocs.yml"
       - "src/**"
       - "build.sbt"
       - ".github/workflows/pages.yml"
@@ -47,23 +48,20 @@ jobs:
       - name: Generate Scaladoc
         run: sbt '+ persianutilsJVM/Compile/doc'
 
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          ruby-version: "3.1"
+          python-version: "3.11"
+          cache: "pip"
 
       - name: Install documentation dependencies
-        run: |
-          cd docs
-          bundle install
+        run: pip install -r docs/requirements.txt
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v6
 
-      - name: Build Jekyll documentation
-        run: |
-          cd docs
-          bundle exec jekyll build --destination ../_site
+      - name: Build MkDocs documentation
+        run: mkdocs build --strict --site-dir _site
 
       - name: Assemble Scaladoc into site artifact
         run: |
@@ -94,19 +92,41 @@ jobs:
           <head>
             <meta charset="utf-8">
             <title>persianutils API Documentation</title>
-            <meta http-equiv="refresh" content="0; url=./scala-3/index.html">
-            <link rel="canonical" href="./scala-3/index.html">
+            <meta http-equiv="refresh" content="0; url=./scala-3/com/bahmanm/persianutils.html">
+            <link rel="canonical" href="./scala-3/com/bahmanm/persianutils.html">
           </head>
           <body>
-            <p>Redirecting to <a href="./scala-3/index.html">Scala 3 API Documentation</a>...</p>
-            <p>Looking for Scala 2.13? Visit <a href="./scala-2.13/index.html">Scala 2.13 API Documentation</a>.</p>
+            <p>Redirecting to <a href="./scala-3/com/bahmanm/persianutils.html">Scala 3 API Documentation</a>...</p>
+            <p>Looking for Scala 2.13? Visit <a href="./scala-2.13/com/bahmanm/persianutils/index.html">Scala 2.13 API Documentation</a>.</p>
+          </body>
+          </html>
+          EOF
+
+          mkdir -p _site/api/scala-3/com/bahmanm/persianutils
+          cat <<'EOF' > _site/api/scala-3/com/bahmanm/persianutils/index.html
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <title>com.bahmanm.persianutils</title>
+            <meta http-equiv="refresh" content="0; url=../persianutils.html">
+            <link rel="canonical" href="../persianutils.html">
+          </head>
+          <body>
+            <p>Redirecting to <a href="../persianutils.html">com.bahmanm.persianutils</a>...</p>
           </body>
           </html>
           EOF
 
       - name: Verify site build
         run: |
-          for file in _site/index.html _site/CNAME _site/api/index.html _site/api/scala-3/index.html _site/api/scala-2.13/index.html; do
+          for file in \
+            _site/index.html \
+            _site/CNAME \
+            _site/api/index.html \
+            _site/api/scala-3/com/bahmanm/persianutils.html \
+            _site/api/scala-3/com/bahmanm/persianutils/index.html \
+            _site/api/scala-2.13/com/bahmanm/persianutils/index.html; do
             if [[ ! -f "$file" ]]; then
               echo "ERROR: Missing required artifact: $file" >&2
               exit 1

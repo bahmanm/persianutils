@@ -1,8 +1,3 @@
----
-layout: default
-title: "Compatibility Reference"
----
-
 # Compatibility Matrix & Runtimes
 
 This document outlines the binary and source compatibility guarantees of `persianutils` across Scala and Java releases.
@@ -30,8 +25,8 @@ This document outlines the binary and source compatibility guarantees of `persia
 
 ### Navigation
 
-- [Back to Documentation Hub](../../index.html)
-- [DateConverter Guide](../modules/date-converter.html)
-- [DateToWord Guide](../modules/date-to-word.html)
-- [NumToWord Guide](../modules/num-to-word.html)
-- [Interactive Scaladoc API (Scala 3)](../../api/scala-3/index.html)
+- [Back to Documentation Hub](../index.md)
+- [DateConverter Guide](../modules/date-converter.md)
+- [DateToWord Guide](../modules/date-to-word.md)
+- [NumToWord Guide](../modules/num-to-word.md)
+- [Interactive Scaladoc API (Scala 3)](../api/scala-3/com/bahmanm/persianutils.html){:target="_blank" rel="noopener"}

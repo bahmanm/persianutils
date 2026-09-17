@@ -1,11 +1,10 @@
----
-layout: default
-title: "persianutils"
----
-
 # persianutils
 
-A robust collection of utilities for Scala and Java developers targeting Persian (Farsi) speaking users, cross-compiled for both JVM and Scala.js environments.
+<img src="assets/img/logo-256x256.png" alt="persianutils Logo" align="left" width="25%" style="max-width: 25%; margin-right: 1.5rem; margin-bottom: 1rem;" />
+
+`persianutils` is a robust collection of utilities for Scala and Java developers targeting Persian (Farsi) speaking users, cross-compiled for both JVM and Scala.js environments.
+
+<div style="clear: both;"></div>
 
 ---
 
@@ -22,15 +21,15 @@ A robust collection of utilities for Scala and Java developers targeting Persian
 
 #### Core Modules
 
-- [DateConverter Guide](./pages/modules/date-converter.html): Detailed algorithmic background, date representations, and dual-calendar conversion recipes.
-- [DateToWord Guide](./pages/modules/date-to-word.html): Transforming Persian calendar dates into spoken and written words.
-- [NumToWord Guide](./pages/modules/num-to-word.html): Cardinal number to Persian word conversions.
+- [DateConverter Guide](modules/date-converter.md): Detailed algorithmic background, date representations, and dual-calendar conversion recipes.
+- [DateToWord Guide](modules/date-to-word.md): Transforming Persian calendar dates into spoken and written words.
+- [NumToWord Guide](modules/num-to-word.md): Cardinal number to Persian word conversions.
 
 #### Reference & API
 
-- [API Reference (Scala 3)](./api/scala-3/index.html): Interactive Scaladoc for the Scala 3 build.
-- [API Reference (Scala 2.13)](./api/scala-2.13/index.html): Interactive Scaladoc for the Scala 2.13 build.
-- [Compatibility Matrix](./pages/reference/compatibility.html): Platform and runtime matrix across Scala 2.11 through 3.x and Java LTS releases.
+- [API Reference (Scala 3)](api/scala-3/com/bahmanm/persianutils.html){:target="_blank" rel="noopener"}: Interactive Scaladoc for the Scala 3 build.
+- [API Reference (Scala 2.13)](api/scala-2.13/com/bahmanm/persianutils/index.html){:target="_blank" rel="noopener"}: Interactive Scaladoc for the Scala 2.13 build.
+- [Compatibility Matrix](reference/compatibility.md): Platform and runtime matrix across Scala 2.11 through 3.x and Java LTS releases.
 
 ---
 
@@ -90,4 +89,4 @@ val pDate = gregorianToPersian(gDate)
 println(pDate) // PersianDate(1405, 1, 1)
 ```
 
-For comprehensive recipes in both Scala and Java, consult the [individual module guides](./pages/modules/date-converter.html).
+For comprehensive recipes in both Scala and Java, consult the [individual module guides](modules/date-converter.md).

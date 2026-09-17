@@ -1,0 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap");
+
+:root {
+  --md-text-font: "Cantarell", "Vazirmatn", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --md-persian-font: "Vazirmatn", "Cantarell", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+[dir="rtl"],
+:lang(fa),
+.persian {
+  font-family: var(--md-persian-font);
+  direction: rtl;
+  text-align: right;
+  unicode-bidi: isolate;
+  font-feature-settings: "kern" 1;
+}
+
+span.persian,
+code.persian {
+  display: inline-block;
+  direction: rtl;
+  unicode-bidi: isolate;
+  font-family: var(--md-persian-font);
+}
