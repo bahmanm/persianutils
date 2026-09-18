@@ -44,9 +44,9 @@ This is a short review of what you will find in _persianutils_:
 
 ## DateConverter
 
-`com.bahmanm.persianutils.DateConverter` is the Scala port of the original algorithm (in Fortran) [The Persian calendar for 3000 years](http://www.astro.uni.torun.pl/~kb/Papers/EMP/PersianC-EMP.htm).
+`com.bahmanm.persianutils.DateConverter` is the Scala port of the original algorithm (in Fortran) [The Persian calendar for 3000 years](https://www.astro.uni.torun.pl/~kb/Papers/EMP/PersianC-EMP.htm).
 
-_Documentation: [DateConverter Guide](https://persianutils.bahmanm.com/pages/modules/date-converter.html) | [Scaladoc API](https://persianutils.bahmanm.com/api/scala-3/com/bahmanm/persianutils/DateConverter$.html)_
+_Documentation: [DateConverter Guide](https://persianutils.bahmanm.com/modules/date-converter/) | [Scaladoc API](https://persianutils.bahmanm.com/api/scala-3/com/bahmanm/persianutils/DateConverter$.html)_
 
 _Scala:_
 
@@ -71,7 +71,7 @@ GregorianDate gd = DateConverter.persianToGregorian(new PersianDate(1392, 11, 15
 
 Translates numeric values into written Persian words for both cardinal and ordinal numbering.
 
-_Documentation: [NumToWord Guide](https://persianutils.bahmanm.com/pages/modules/num-to-word.html) | [Scaladoc API](https://persianutils.bahmanm.com/api/scala-3/com/bahmanm/persianutils/NumToWord$.html)_
+_Documentation: [NumToWord Guide](https://persianutils.bahmanm.com/modules/num-to-word/) | [Scaladoc API](https://persianutils.bahmanm.com/api/scala-3/com/bahmanm/persianutils/NumToWord$.html)_
 
 _Scala:_
 
@@ -93,7 +93,7 @@ String first = NumToWord.ordinal(1);      // یکم
 
 Converts date objects or date components into full verbal Persian expressions.
 
-_Documentation: [DateToWord Guide](https://persianutils.bahmanm.com/pages/modules/date-to-word.html) | [Scaladoc API](https://persianutils.bahmanm.com/api/scala-3/com/bahmanm/persianutils/DateToWord$.html)_
+_Documentation: [DateToWord Guide](https://persianutils.bahmanm.com/modules/date-to-word/) | [Scaladoc API](https://persianutils.bahmanm.com/api/scala-3/com/bahmanm/persianutils/DateToWord$.html)_
 
 _Scala:_
 
@@ -115,7 +115,7 @@ String words = pd.toWords(); // سوم خرداد یک هزار و سیصد و �
 
 Sanitises and normalises Persian text by standardising character variants (such as Arabic Kaf and Yeh), converting numerals, regularising spacing and zero-width non-joiners (ZWNJ), stripping tatweel, and standardising punctuation.
 
-_Documentation: [TextSanitiser Guide](https://persianutils.bahmanm.com/pages/modules/text-sanitiser.html) | [Scaladoc API](https://persianutils.bahmanm.com/api/scala-3/com/bahmanm/persianutils/TextSanitiser$.html)_
+_Documentation: [TextSanitiser Guide](https://persianutils.bahmanm.com/modules/text-sanitiser/) | [Scaladoc API](https://persianutils.bahmanm.com/api/scala-3/com/bahmanm/persianutils/TextSanitiser$.html)_
 
 _Scala:_
 

@@ -2,7 +2,7 @@
 
 `com.bahmanm.persianutils.DateConverter` provides high-precision bidirectional conversion between the Gregorian calendar and the Persian (Solar Hijri) calendar.
 
-The conversion logic is a Scala implementation based on the 3,000-year astronomical algorithm described in [The Persian calendar for 3000 years](http://www.astro.uni.torun.pl/~kb/Papers/EMP/PersianC-EMP.htm) by Kazimierz M. Borkowski.
+The conversion logic is a Scala implementation based on the 3,000-year astronomical algorithm described in [The Persian calendar for 3000 years](https://www.astro.uni.torun.pl/~kb/Papers/EMP/PersianC-EMP.htm) by Kazimierz M. Borkowski.
 
 ---
 
