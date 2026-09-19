@@ -43,11 +43,10 @@ final case class SanitiserConfig(
  */
 object TextSanitiser {
 
-  private val ConsecutiveZwnj: Regex = "\u200C{2,}".r
-  private val SpacedZwnj: Regex = "(?:[ \t]+\u200C|\u200C[ \t]+)+".r
-  private val MultipleSpaces: Regex = "[ \t]{2,}".r
   private val LeadingSpacing: Regex = "^[ \t\u200C]+".r
   private val TrailingSpacing: Regex = "[ \t\u200C]+$".r
+  private val ZwnjSpacing: Regex = "[ \t]*\u200C[ \t\u200C]*".r
+  private val MultipleSpaces: Regex = "[ \t]{2,}".r
 
   /**
    * Sanitises the given Persian text according to the provided configuration.
@@ -115,11 +114,10 @@ object TextSanitiser {
     val separator = lineWithSeparator.substring(content.length)
 
     val cleanContent = Seq[String => String](
-      ConsecutiveZwnj.replaceAllIn(_, "\u200C"),
-      SpacedZwnj.replaceAllIn(_, " "),
-      MultipleSpaces.replaceAllIn(_, " "),
       LeadingSpacing.replaceAllIn(_, ""),
-      TrailingSpacing.replaceAllIn(_, "")
+      TrailingSpacing.replaceAllIn(_, ""),
+      ZwnjSpacing.replaceAllIn(_, "\u200C"),
+      MultipleSpaces.replaceAllIn(_, " ")
     ).foldLeft(content)((acc, f) => f(acc))
 
     cleanContent + separator

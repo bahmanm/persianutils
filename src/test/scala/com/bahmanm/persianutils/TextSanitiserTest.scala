@@ -43,9 +43,12 @@ class TextSanitiserTest extends munit.FunSuite {
     assertEquals(TextSanitiser.sanitise("سلام    جهان"), "سلام جهان")
     assertEquals(TextSanitiser.sanitise("سلام\u00A0جهان"), "سلام جهان")
     assertEquals(TextSanitiser.sanitise("می\u200C\u200Cروم"), "می\u200Cروم")
-    assertEquals(TextSanitiser.sanitise("کتاب \u200C ها"), "کتاب ها")
-    assertEquals(TextSanitiser.sanitise("کتاب\u200C ها"), "کتاب ها")
-    assertEquals(TextSanitiser.sanitise("کتاب \u200Cها"), "کتاب ها")
+    assertEquals(TextSanitiser.sanitise("کتاب \u200C ها"), "کتاب\u200Cها")
+    assertEquals(TextSanitiser.sanitise("کتاب\u200C ها"), "کتاب\u200Cها")
+    assertEquals(TextSanitiser.sanitise("کتاب \u200Cها"), "کتاب\u200Cها")
+    assertEquals(TextSanitiser.sanitise("می \u200C روم"), "می\u200Cروم")
+    assertEquals(TextSanitiser.sanitise("کتاب   \u200C  \u200C   ها"), "کتاب\u200Cها")
+    assertEquals(TextSanitiser.sanitise("کتاب\t\u200C\tها"), "کتاب\u200Cها")
     assertEquals(TextSanitiser.sanitise("  \u200Cسلام جهان\u200C  "), "سلام جهان")
     assertEquals(
       TextSanitiser.sanitise("سلام\u200B\u200Dجهان\u00AD"),
