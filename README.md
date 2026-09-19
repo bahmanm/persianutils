@@ -16,22 +16,22 @@ A collection of utilities for Scala/Java developers who are targeting Persian (F
 
 # Compatibility
 
-| Library Version | Scala 2.10 | Scala 2.11 | Scala 2.12 | Scala 2.13 | Scala 3 |
+| Library Version | Scala 2.10 | Scala 2.11 | Scala 2.12 | Scala 2.13 | Scala 3.x |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| _6.x (to be released)_ | - | - | - | ✅ | ✅ |
+| 6.x _(not released yet)_ | - | - | - | ✅ | ✅ |
 | 5.x | - | - | ✅ | ✅ | ✅ |
 | 4.x | - | ✅ | ✅ | ✅ | - |
 | 3.x | - | ✅ | ✅ | - | - |
 | 2.x | ✅ | ✅ | - | - | - |
 
-_Note: version 6.x is to be released. For current projects, please use version 5.0._
+_Note: version 6.x is not released yet. For current projects, please use version 5.0._
 
 # Installation
 
 ## SBT
 
 - JVM: `libraryDependencies += "com.bahmanm" %% "persianutils" % "5.0"`
-- Scala.js: `libraryDependencies += "com.bahmanm" %%% "persianutils" % "5.0"`
+- Scala.js (upcoming in 6.x): `libraryDependencies += "com.bahmanm" %%% "persianutils" % "6.0"`
 
 ## Other Build Tools
 
@@ -54,17 +54,17 @@ _Scala:_
 import com.bahmanm.persianutils.DateConverter._
 
 val gDate = GregorianDate(2013, 12, 11)
-val pDate = gregorianToPersian(gDate) // PersianDate(1392, 9, 20)
+val pDate = gregorianToPersian(gDate) // 1392/9/20
 
 val pDate2 = PersianDate(1392, 1, 1)
-val gDate2 = persianToGregorian(pDate2) // GregorianDate(2013, 3, 21)
+val gDate2 = persianToGregorian(pDate2) // 2013/3/21
 ```
 
 _Java:_
 
 ```java
-PersianDate pd = DateConverter.gregorianToPersian(new GregorianDate(2014, 2, 4));   // PersianDate(1392, 11, 15)
-GregorianDate gd = DateConverter.persianToGregorian(new PersianDate(1392, 11, 15)); // GregorianDate(2014, 2, 4)
+PersianDate pd = DateConverter.gregorianToPersian(new GregorianDate(2014, 2, 4));   // 1392/11/15
+GregorianDate gd = DateConverter.persianToGregorian(new PersianDate(1392, 11, 15)); // 2014/2/4
 ```
 
 ## NumToWord

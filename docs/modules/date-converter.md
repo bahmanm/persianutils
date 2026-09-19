@@ -18,22 +18,21 @@ The conversion logic is a Scala implementation based on the 3,000-year astronomi
 
 ```scala
 import com.bahmanm.persianutils.DateConverter._
-import com.bahmanm.persianutils.{GregorianDate, PersianDate, SimpleDate}
 
 // Convert Gregorian to Persian
 val gDate1 = GregorianDate(2013, 12, 11)
 val pDate1 = gregorianToPersian(gDate1)
-println(pDate1) // PersianDate(1392, 9, 20)
+println(pDate1) // 1392/9/20
 
 // Convert Persian to Gregorian
 val pDate2 = PersianDate(1392, 1, 1)
 val gDate2 = persianToGregorian(pDate2)
-println(gDate2) // GregorianDate(2013, 3, 21)
+println(gDate2) // 2013/3/21
 
 // Initialise from formatted string
 val pDate3 = PersianDate("1392/09/24")
 val gDate3 = persianToGregorian(pDate3)
-println(gDate3) // GregorianDate(2013, 12, 15)
+println(gDate3) // 2013/12/15
 
 // Legacy Java Date interoperability
 val legacyDate = java.util.Calendar.getInstance().getTime()

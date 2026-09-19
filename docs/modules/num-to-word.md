@@ -19,7 +19,7 @@ import com.bahmanm.persianutils.NumToWord
 
 // Cardinal numbers
 assert(NumToWord.cardinal(100) == "صد")
-assert(NumToWord.cardinal(299792458) == "دویست و نود و نه میلیون و هفتصد و نود و دو هزار و چهارصد و پنجاه و هشت")
+assert(NumToWord.cardinal(299792458) == "دویست و نود و نه میلیون و هفت‌صد و نود و دو هزار و چهار‌صد و پنجاه و هشت")
 
 // Zero
 assert(NumToWord.cardinal(0) == "صفر")

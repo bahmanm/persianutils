@@ -7,9 +7,9 @@
 ### Capabilities
 
 - Full verbal expansion: Converts numeric years, month names, and ordinal day numbers into elegant Persian phrasing.
-- Extension methods: Enriches `PersianDate` and `GregorianDate` instances with the `.toWords` method in Scala.
+- Built-in member methods: Provides the `.toWords` method directly on `PersianDate` and `GregorianDate` instances in Scala.
 - Multi-calendar support: Supports date transformation for both Persian (Solar Hijri) and Gregorian dates.
-- Discrete component conversion: Accepts discrete `(year, month, day)` tuples directly.
+- Discrete component conversion: Accepts individual year, month, and day integer arguments directly.
 
 ---
 
@@ -19,7 +19,7 @@
 import com.bahmanm.persianutils.DateToWord
 import com.bahmanm.persianutils.{GregorianDate, PersianDate}
 
-// Using extension method on PersianDate
+// Using the built-in .toWords member method on PersianDate
 val pDate = PersianDate(1361, 3, 3)
 println(pDate.toWords)
 // Output: "سوم خرداد یک هزار و سیصد و شصت و یک"
