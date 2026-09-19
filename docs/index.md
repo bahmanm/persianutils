@@ -13,6 +13,7 @@
 - DateConverter: Precision conversion between Gregorian and Persian (Solar Hijri) calendars based on astronomical algorithms covering a 3,000-year epoch.
 - DateToWord: Converts calendar dates into natural Persian verbal expressions and text representations.
 - NumToWord: Converts cardinal numbers and integers into written Persian words.
+- TextSanitiser: Automated typography normalisation, character variant standardisation, digit unification, and whitespace/ZWNJ sanitisation.
 - Cross-Platform & Dual-Ecosystem: Native support for Scala 2.13 and Scala 3.x across the JVM and Scala.js, with seamless Java interop.
 
 ---
@@ -24,6 +25,7 @@
 - [DateConverter Guide](modules/date-converter.md): Detailed algorithmic background, date representations, and dual-calendar conversion recipes.
 - [DateToWord Guide](modules/date-to-word.md): Transforming Persian calendar dates into spoken and written words.
 - [NumToWord Guide](modules/num-to-word.md): Cardinal number to Persian word conversions.
+- [TextSanitiser Guide](modules/text-sanitiser.md): Normalising Persian text, standardising Arabic letter variants, converting digits, cleaning non-breaking spaces, and deduplicating zero-width non-joiners (ZWNJ).
 
 #### Reference & API
 

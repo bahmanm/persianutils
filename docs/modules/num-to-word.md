@@ -21,9 +21,8 @@ import com.bahmanm.persianutils.NumToWord
 assert(NumToWord.cardinal(100) == "صد")
 assert(NumToWord.cardinal(299792458) == "دویست و نود و نه میلیون و هفتصد و نود و دو هزار و چهارصد و پنجاه و هشت")
 
-// Negative numbers and zero
+// Zero
 assert(NumToWord.cardinal(0) == "صفر")
-assert(NumToWord.cardinal(-42) == "منفی چهل و دو")
 
 // Ordinal numbers
 assert(NumToWord.ordinal(1) == "یکم")
@@ -55,4 +54,5 @@ public class NumberWordExample {
 - [Back to Documentation Hub](../index.md)
 - [DateConverter Guide](date-converter.md)
 - [DateToWord Guide](date-to-word.md)
+- [TextSanitiser Guide](text-sanitiser.md)
 - [Interactive Scaladoc API (Scala 3)](../api/scala-3/com/bahmanm/persianutils.html){:target="_blank" rel="noopener"}

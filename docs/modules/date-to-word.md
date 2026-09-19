@@ -76,4 +76,5 @@ public class DateVerbalExample {
 - [Back to Documentation Hub](../index.md)
 - [DateConverter Guide](date-converter.md)
 - [NumToWord Guide](num-to-word.md)
+- [TextSanitiser Guide](text-sanitiser.md)
 - [Interactive Scaladoc API (Scala 3)](../api/scala-3/com/bahmanm/persianutils.html){:target="_blank" rel="noopener"}

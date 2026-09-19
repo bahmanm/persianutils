@@ -69,22 +69,10 @@ public class CalendarExample {
 
 ---
 
-### Leap Year Verification
-
-The library models leap year arithmetic for both calendar systems according to astronomical cycles:
-
-```scala
-import com.bahmanm.persianutils.DateConverter._
-
-assert(isPersianLeap(1399))
-assert(!isPersianLeap(1400))
-```
-
----
-
 ### Navigation
 
 - [Back to Documentation Hub](../index.md)
 - [DateToWord Guide](date-to-word.md)
 - [NumToWord Guide](num-to-word.md)
+- [TextSanitiser Guide](text-sanitiser.md)
 - [Interactive Scaladoc API (Scala 3)](../api/scala-3/com/bahmanm/persianutils.html){:target="_blank" rel="noopener"}
