@@ -8,7 +8,7 @@
 
 - Character standardisation: Replaces Arabic and non-standard character variants (such as Arabic Kaf `ك` and Yeh `ي`/`ى`) with standard Persian characters (`ک` and `ی`).
 - Numerals conversion: Standardises Western ASCII digits (`0-9`) and Eastern Arabic digits (`٠-٩`) into standard Persian digits (`۰-۹`).
-- Spacing and half-spaces: Collapses duplicate spaces, converts non-breaking spaces, deduplicates zero-width non-joiners (`\u200C` / ZWNJ), and strips dangling non-joiners.
+- Spacing and half-spaces: Collapses duplicate spaces, converts non-breaking spaces, deduplicates zero-width non-joiners (`\u200C` / ZWNJ), strips spaces flanking half-spaces, and strips dangling non-joiners.
 - Tatweel removal: Strips typographic elongation / Kashida (`ـ`).
 - Punctuation standardisation: Normalises commas, semicolons, and question marks to Persian punctuation marks (`،`, `؛`, `؟`).
 - Diacritics stripping: Optionally strips Arabic Tashkeel / Harakat short vowels when configured.
