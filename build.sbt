@@ -100,7 +100,7 @@ lazy val smokeTests = crossProject(JVMPlatform, JSPlatform)
   )
   .jvmSettings(
     libraryDependencies ++= Seq(
-      "org.junit.jupiter" % "junit-jupiter-api" % "5.11.4" % Test
+      "org.junit.jupiter" % "junit-jupiter-api" % "6.1.3" % Test
     ),
     Test / unmanagedSourceDirectories ++= Seq(
       (ThisBuild / baseDirectory).value / "smoke-tests" / "jvm" / "src" / "test" / "scala",
