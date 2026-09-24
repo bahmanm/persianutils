@@ -157,6 +157,14 @@ lazy val smokeTests = crossProject(JVMPlatform, JSPlatform)
 // command aliases
 ////////////////////////////////////////////////////////////////////////////////
 addCommandAlias(
+  "compileAll",
+  "+ compile ; + Test/compile ; smokeTestCompile"
+)
+addCommandAlias(
+  "testAll",
+  "+ test"
+)
+addCommandAlias(
   "smokeTestCompile",
   "+ smokeTestsJVM/Test/compile ; + smokeTestsJS/Test/compile"
 )
@@ -171,4 +179,8 @@ addCommandAlias(
 addCommandAlias(
   "format",
   "scalafmtAll ; scalafmtSbt ; smokeTestsJVM/scalafmtAll ; smokeTestsJS/scalafmtAll"
+)
+addCommandAlias(
+  "check",
+  "checkFormat ; testAll ; smokeTest"
 )
