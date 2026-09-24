@@ -3,7 +3,8 @@ import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 ////////////////////////////////////////////////////////////////////////////////
 // root aggregate
 ////////////////////////////////////////////////////////////////////////////////
-lazy val root = project.in(file("."))
+lazy val root = project
+  .in(file("."))
   .aggregate(
     persianutils.jvm,
     persianutils.js
@@ -19,6 +20,41 @@ lazy val root = project.in(file("."))
     Test / unmanagedSourceDirectories := Seq.empty
   )
 
+lazy val commonScalacOptions = Def.setting {
+  val baseOptions = Seq(
+    "-encoding",
+    "utf8",
+    "-deprecation",
+    "-feature",
+    "-unchecked"
+  )
+  val versionSpecificOptions =
+    CrossVersion.partialVersion(scalaVersion.value) match {
+      case Some((2, 13)) =>
+        Seq(
+          "-explaintypes",
+          "-Wdead-code",
+          "-Wextra-implicit",
+          "-Wnumeric-widen",
+          "-Wunused:imports",
+          "-Wunused:patvars",
+          "-Wunused:privates",
+          "-Wunused:locals",
+          "-Xlint:_,-byname-implicit",
+          "-Xfatal-warnings"
+        )
+      case Some((3, _)) =>
+        Seq(
+          "-explain",
+          "-Werror",
+          "-Wunused:all"
+        )
+      case _ =>
+        Seq.empty
+    }
+  baseOptions ++ versionSpecificOptions
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // cross-platform module (JVM & Scala.js)
 ////////////////////////////////////////////////////////////////////////////////
@@ -29,12 +65,15 @@ lazy val persianutils = crossProject(JVMPlatform, JSPlatform)
     name := "persianutils",
     description := "A collection of utilities for Scala/Java developers who are targeting Persian (Farsi) speaking users.",
     homepage := Some(url("https://github.com/bahmanm/persianutils")),
-    licenses += "Apache 2" -> url("http://www.apache.org/licenses/LICENSE-2.0.txt"),
+    licenses += "Apache 2" -> url(
+      "http://www.apache.org/licenses/LICENSE-2.0.txt"
+    ),
     organization := "com.bahmanm",
     organizationHomepage := Some(url("http://BahmanM.com")),
 
     scalaVersion := "2.13.18",
     crossScalaVersions := Seq("2.13.18", "3.3.8"),
+    scalacOptions ++= commonScalacOptions.value,
     libraryDependencies ++= Seq(
       "org.scalameta" %%% "munit" % "1.3.6" % Test
     ),
@@ -53,22 +92,22 @@ lazy val persianutils = crossProject(JVMPlatform, JSPlatform)
     ),
     developers := List(
       Developer(
-        id    = "bahmanm",
-        name  = "Bahman Movaqar",
+        id = "bahmanm",
+        name = "Bahman Movaqar",
         email = "Bahman@BahmanM.com",
-        url   = url("https://BahmanM.com/")
+        url = url("https://BahmanM.com/")
       ),
       Developer(
-        id    = "amirkarimi",
-        name  = "Amir Karimi",
+        id = "amirkarimi",
+        name = "Amir Karimi",
         email = "a.karimi.k@gmail.com",
-        url   = url("https://amirkarimi.me/")
+        url = url("https://amirkarimi.me/")
       ),
       Developer(
-        id    = "KeivanAbdi",
-        name  = "Keivan Abdi",
+        id = "KeivanAbdi",
+        name = "Keivan Abdi",
         email = "keivan.a.khorsand@gmail.com",
-        url   = url("https://keivanabdi.com/")
+        url = url("https://keivanabdi.com/")
       )
     )
   )
@@ -93,6 +132,7 @@ lazy val smokeTests = crossProject(JVMPlatform, JSPlatform)
     publish / skip := true,
     scalaVersion := "2.13.18",
     crossScalaVersions := Seq("2.13.18", "3.3.8"),
+    scalacOptions ++= commonScalacOptions.value,
     libraryDependencies ++= Seq(
       "org.scalameta" %%% "munit" % "1.3.6" % Test
     ),
@@ -123,4 +163,12 @@ addCommandAlias(
 addCommandAlias(
   "smokeTest",
   "+ smokeTestsJVM/test ; + smokeTestsJS/test"
+)
+addCommandAlias(
+  "checkFormat",
+  "scalafmtCheckAll ; scalafmtSbtCheck ; smokeTestsJVM/scalafmtCheckAll ; smokeTestsJS/scalafmtCheckAll"
+)
+addCommandAlias(
+  "format",
+  "scalafmtAll ; scalafmtSbt ; smokeTestsJVM/scalafmtAll ; smokeTestsJS/scalafmtAll"
 )

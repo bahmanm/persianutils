@@ -25,7 +25,9 @@ class TextSanitiserTest extends munit.FunSuite {
     assertEquals(TextSanitiser.sanitise("ایـــــران"), "ایران")
   }
 
-  test("default: ASCII and Eastern Arabic digits should convert to Persian digits") {
+  test(
+    "default: ASCII and Eastern Arabic digits should convert to Persian digits"
+  ) {
     assertEquals(TextSanitiser.sanitise("0123456789"), "۰۱۲۳۴۵۶۷۸۹")
     assertEquals(TextSanitiser.sanitise("٠١٢٣٤٥٦٧٨٩"), "۰۱۲۳۴۵۶۷۸۹")
     assertEquals(
@@ -36,7 +38,10 @@ class TextSanitiserTest extends munit.FunSuite {
 
   test("default: punctuation marks should convert to Persian equivalents") {
     assertEquals(TextSanitiser.sanitise("سلام, چطوری?"), "سلام، چطوری؟")
-    assertEquals(TextSanitiser.sanitise("گزینه اول; گزینه دوم"), "گزینه اول؛ گزینه دوم")
+    assertEquals(
+      TextSanitiser.sanitise("گزینه اول; گزینه دوم"),
+      "گزینه اول؛ گزینه دوم"
+    )
   }
 
   test("default: spacing and ZWNJ should be cleaned") {
@@ -47,9 +52,15 @@ class TextSanitiserTest extends munit.FunSuite {
     assertEquals(TextSanitiser.sanitise("کتاب\u200C ها"), "کتاب\u200Cها")
     assertEquals(TextSanitiser.sanitise("کتاب \u200Cها"), "کتاب\u200Cها")
     assertEquals(TextSanitiser.sanitise("می \u200C روم"), "می\u200Cروم")
-    assertEquals(TextSanitiser.sanitise("کتاب   \u200C  \u200C   ها"), "کتاب\u200Cها")
+    assertEquals(
+      TextSanitiser.sanitise("کتاب   \u200C  \u200C   ها"),
+      "کتاب\u200Cها"
+    )
     assertEquals(TextSanitiser.sanitise("کتاب\t\u200C\tها"), "کتاب\u200Cها")
-    assertEquals(TextSanitiser.sanitise("  \u200Cسلام جهان\u200C  "), "سلام جهان")
+    assertEquals(
+      TextSanitiser.sanitise("  \u200Cسلام جهان\u200C  "),
+      "سلام جهان"
+    )
     assertEquals(
       TextSanitiser.sanitise("سلام\u200B\u200Dجهان\u00AD"),
       "سلام جهان"

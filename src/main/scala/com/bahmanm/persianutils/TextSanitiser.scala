@@ -2,30 +2,37 @@ package com.bahmanm.persianutils
 
 import scala.util.matching.Regex
 
-/**
- * Configuration options for [[TextSanitiser]].
- *
- * @param standardiseCharacters replaces Arabic and non-standard character variants with standard Persian characters
- * @param cleanSpacing cleans and canonicalises whitespace, non-breaking spaces, and zero-width non-joiners
- * @param removeTatweel strips Kashida / Tatweel elongation characters
- * @param standardiseDigits converts Western ASCII and Eastern Arabic digits into Persian digits
- * @param standardisePunctuation normalises punctuation symbols into Persian equivalents
- * @param removeDiacritics strips Arabic Tashkeel (harakat) short vowel diacritics
- *
- * @author Bahman Movaqar (Bahman AT BahmanM.com)
- */
+/** Configuration options for [[TextSanitiser]].
+  *
+  * @param standardiseCharacters
+  *   replaces Arabic and non-standard character variants with standard Persian
+  *   characters
+  * @param cleanSpacing
+  *   cleans and canonicalises whitespace, non-breaking spaces, and zero-width
+  *   non-joiners
+  * @param removeTatweel
+  *   strips Kashida / Tatweel elongation characters
+  * @param standardiseDigits
+  *   converts Western ASCII and Eastern Arabic digits into Persian digits
+  * @param standardisePunctuation
+  *   normalises punctuation symbols into Persian equivalents
+  * @param removeDiacritics
+  *   strips Arabic Tashkeel (harakat) short vowel diacritics
+  *
+  * @author
+  *   Bahman Movaqar (Bahman AT BahmanM.com)
+  */
 final case class SanitiserConfig(
-  standardiseCharacters: Boolean = true,
-  cleanSpacing: Boolean = true,
-  removeTatweel: Boolean = true,
-  standardiseDigits: Boolean = true,
-  standardisePunctuation: Boolean = true,
-  removeDiacritics: Boolean = false
+    standardiseCharacters: Boolean = true,
+    cleanSpacing: Boolean = true,
+    removeTatweel: Boolean = true,
+    standardiseDigits: Boolean = true,
+    standardisePunctuation: Boolean = true,
+    removeDiacritics: Boolean = false
 ) {
 
-  /**
-   * Auxiliary zero-argument constructor for seamless Java interoperability.
-   */
+  /** Auxiliary zero-argument constructor for seamless Java interoperability.
+    */
   def this() = this(
     standardiseCharacters = true,
     cleanSpacing = true,
@@ -36,11 +43,11 @@ final case class SanitiserConfig(
   )
 }
 
-/**
- * Utility for sanitising and normalising Persian text.
- *
- * @author Bahman Movaqar (Bahman AT BahmanM.com)
- */
+/** Utility for sanitising and normalising Persian text.
+  *
+  * @author
+  *   Bahman Movaqar (Bahman AT BahmanM.com)
+  */
 object TextSanitiser {
 
   private val LeadingSpacing: Regex = "^[ \t\u200C]+".r
@@ -48,16 +55,21 @@ object TextSanitiser {
   private val ZwnjSpacing: Regex = "[ \t]*\u200C[ \t\u200C]*".r
   private val MultipleSpaces: Regex = "[ \t]{2,}".r
 
-  /**
-   * Sanitises the given Persian text according to the provided configuration.
-   *
-   * @param text the input text to sanitise
-   * @param config the sanitisation configuration options
-   * @return the sanitised text
-   */
-  def sanitise(text: String, config: SanitiserConfig = SanitiserConfig()): String =
+  /** Sanitises the given Persian text according to the provided configuration.
+    *
+    * @param text
+    *   the input text to sanitise
+    * @param config
+    *   the sanitisation configuration options
+    * @return
+    *   the sanitised text
+    */
+  def sanitise(
+      text: String,
+      config: SanitiserConfig = SanitiserConfig()
+  ): String =
     Option(text).filterNot(_.isEmpty) match {
-      case None => ""
+      case None        => ""
       case Some(input) =>
         val steps = List.newBuilder[String => String]
         if (config.standardiseCharacters) steps += standardiseCharacters
@@ -72,11 +84,11 @@ object TextSanitiser {
 
   private def standardiseCharacters(text: String): String =
     text.flatMap {
-      case '\u0643' => "ک"
+      case '\u0643'            => "ک"
       case '\u064A' | '\u0649' => "ی"
       case '\u06BE' | '\u0629' => "ه"
-      case '\u06C0' => "هٔ"
-      case other => other.toString
+      case '\u06C0'            => "هٔ"
+      case other               => other.toString
     }
 
   private def removeTatweel(text: String): String =
@@ -87,16 +99,17 @@ object TextSanitiser {
 
   private def standardiseDigits(text: String): String =
     text.map {
-      case c if c >= '0' && c <= '9' => (c - '0' + '\u06F0').toChar
-      case c if c >= '\u0660' && c <= '\u0669' => (c - '\u0660' + '\u06F0').toChar
+      case c if c >= '0' && c <= '9'           => (c - '0' + '\u06F0').toChar
+      case c if c >= '\u0660' && c <= '\u0669' =>
+        (c - '\u0660' + '\u06F0').toChar
       case other => other
     }
 
   private def standardisePunctuation(text: String): String =
     text.map {
-      case ',' => '\u060C'
-      case ';' => '\u061B'
-      case '?' => '\u061F'
+      case ','   => '\u060C'
+      case ';'   => '\u061B'
+      case '?'   => '\u061F'
       case other => other
     }
 

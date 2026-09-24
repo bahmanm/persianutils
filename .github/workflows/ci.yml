@@ -58,8 +58,12 @@ jobs:
         with:
           node-version: "22"
 
+      - name: Check code formatting
+        run: sbt checkFormat
+
       - name: Compile library and unit tests
         run: sbt '+ compile ; + Test/compile'
 
       - name: Run unit tests
         run: sbt '+ test'
+

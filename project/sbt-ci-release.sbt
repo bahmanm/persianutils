@@ -7,21 +7,21 @@ scmInfo := Some(
 
 developers := List(
   Developer(
-    id    = "bahmanm",
-    name  = "Bahman Movaqar",
+    id = "bahmanm",
+    name = "Bahman Movaqar",
     email = "Bahman@BahmanM.com",
-    url   = url("https://BahmanM.com/")
+    url = url("https://BahmanM.com/")
   ),
   Developer(
-    id    = "amirkarimi",
-    name  = "Amir Karimi",
+    id = "amirkarimi",
+    name = "Amir Karimi",
     email = "a.karimi.k@gmail.com",
-    url   = url("https://amirkarimi.me/")
+    url = url("https://amirkarimi.me/")
   ),
   Developer(
-    id    = "KeivanAbdi",
-    name  = "Keivan Abdi",
+    id = "KeivanAbdi",
+    name = "Keivan Abdi",
     email = "keivan.a.khorsand@gmail.com",
-    url   = url("https://keivanabdi.com/")
+    url = url("https://keivanabdi.com/")
   )
 )
