@@ -19,8 +19,13 @@ class NumToWordTest extends munit.FunSuite {
     assertEquals(NumToWord.cardinal(220), "دویست و بیست")
   }
 
-  test("cardinal: 220,983 should convert to دویست و بیست هزار و نه‌صد و هشتاد و سه") {
-    assertEquals(NumToWord.cardinal(220983), "دویست و بیست هزار و نه‌صد و هشتاد و سه")
+  test(
+    "cardinal: 220,983 should convert to دویست و بیست هزار و نه‌صد و هشتاد و سه"
+  ) {
+    assertEquals(
+      NumToWord.cardinal(220983),
+      "دویست و بیست هزار و نه‌صد و هشتاد و سه"
+    )
   }
 
   test("cardinal: 100,000 should convert to صد هزار") {
@@ -39,8 +44,13 @@ class NumToWordTest extends munit.FunSuite {
     assertEquals(NumToWord.cardinal(100000000000000L), "صد هزار میلیارد")
   }
 
-  test("cardinal: 100,000,233,000,110 should convert to صد هزار میلیارد و دویست و سی و سه میلیون و صد و ده") {
-    assertEquals(NumToWord.cardinal(100000233000110L), "صد هزار میلیارد و دویست و سی و سه میلیون و صد و ده")
+  test(
+    "cardinal: 100,000,233,000,110 should convert to صد هزار میلیارد و دویست و سی و سه میلیون و صد و ده"
+  ) {
+    assertEquals(
+      NumToWord.cardinal(100000233000110L),
+      "صد هزار میلیارد و دویست و سی و سه میلیون و صد و ده"
+    )
   }
 
   // Ordinal tests
@@ -174,10 +184,18 @@ class NumToWordTest extends munit.FunSuite {
 
   // Deprecated apply backwards compatibility tests
   test("apply (deprecated): 0 should convert to صفر") {
-    assertEquals(NumToWord(0), "صفر")
+    @scala.annotation.nowarn("cat=deprecation")
+    def check(): Unit = {
+      assertEquals(NumToWord(0), "صفر")
+    }
+    check()
   }
 
   test("apply (deprecated): 235 should convert to دویست و سی و پنج") {
-    assertEquals(NumToWord(235), "دویست و سی و پنج")
+    @scala.annotation.nowarn("cat=deprecation")
+    def check(): Unit = {
+      assertEquals(NumToWord(235), "دویست و سی و پنج")
+    }
+    check()
   }
 }

@@ -1,21 +1,18 @@
-/**
- * This file is part of PersianUtils.
- *
- * CREDITS:
- *   All the credits go to Mr. Kazimierz M. Borkowski for his
- *   priceless article:
- *     The Persian calendar for 3000 years
- *     http://www.astro.uni.torun.pl/~kb/Papers/EMP/PersianC-EMP.htm
- */
+/** This file is part of PersianUtils.
+  *
+  * CREDITS: All the credits go to Mr. Kazimierz M. Borkowski for his priceless
+  * article: The Persian calendar for 3000 years
+  * http://www.astro.uni.torun.pl/~kb/Papers/EMP/PersianC-EMP.htm
+  */
 package com.bahmanm.persianutils
 
 import java.time.LocalDate
 
 class InvalidDateException extends Exception {}
 
-/**
- * Base trait for date representations that can be converted across calendar systems.
- */
+/** Base trait for date representations that can be converted across calendar
+  * systems.
+  */
 sealed trait ConvertibleDate {
   def year: Int
   def month: Int
@@ -23,41 +20,41 @@ sealed trait ConvertibleDate {
 
   override def toString: String = s"$year/$month/$day"
 
-  /**
-   * Converts this date to a java.time.LocalDate.
-   */
+  /** Converts this date to a java.time.LocalDate.
+    */
   def asLocalDate: LocalDate
 
-  /**
-   * Converts this date to a legacy java.util.Date.
-   *
-   * @deprecated Use [[asLocalDate]] instead. Scheduled for removal in version 7.0.0.
-   */
-  @deprecated("Use asLocalDate instead; will be removed in version 7.0.0", "6.0.0")
+  /** Converts this date to a legacy java.util.Date.
+    *
+    * @deprecated
+    *   Use [[asLocalDate]] instead. Scheduled for removal in version 7.0.0.
+    */
+  @deprecated(
+    "Use asLocalDate instead; will be removed in version 7.0.0",
+    "6.0.0"
+  )
   def asDate: java.util.Date =
     new java.util.Date(year - 1900, month - 1, day)
 
-  /**
-   * Converts this date into Persian words.
-   */
+  /** Converts this date into Persian words.
+    */
   def toWords: String
 
 }
 
-/**
- * Represents a date in the Persian (Solar Hijri / Jalali) calendar.
- */
-final case class PersianDate(year: Int, month: Int, day: Int) extends ConvertibleDate {
+/** Represents a date in the Persian (Solar Hijri / Jalali) calendar.
+  */
+final case class PersianDate(year: Int, month: Int, day: Int)
+    extends ConvertibleDate {
 
-  /**
-   * Converts this Persian date to its Gregorian java.time.LocalDate equivalent.
-   */
+  /** Converts this Persian date to its Gregorian java.time.LocalDate
+    * equivalent.
+    */
   override def asLocalDate: LocalDate =
     DateConverter.persianToGregorian(this).asLocalDate
 
-  /**
-   * Converts this Persian date into Persian words.
-   */
+  /** Converts this Persian date into Persian words.
+    */
   override def toWords: String =
     DateToWord(this)
 
@@ -70,28 +67,25 @@ object PersianDate {
     PersianDate(y, m, d)
   }
 
-  /**
-   * Constructs a PersianDate from a Gregorian java.time.LocalDate.
-   */
+  /** Constructs a PersianDate from a Gregorian java.time.LocalDate.
+    */
   def apply(date: LocalDate): PersianDate =
     DateConverter.gregorianToPersian(GregorianDate(date))
 
 }
 
-/**
- * Represents a date in the Gregorian calendar.
- */
-final case class GregorianDate(year: Int, month: Int, day: Int) extends ConvertibleDate {
+/** Represents a date in the Gregorian calendar.
+  */
+final case class GregorianDate(year: Int, month: Int, day: Int)
+    extends ConvertibleDate {
 
-  /**
-   * Converts this Gregorian date to a java.time.LocalDate.
-   */
+  /** Converts this Gregorian date to a java.time.LocalDate.
+    */
   override def asLocalDate: LocalDate =
     LocalDate.of(year, month, day)
 
-  /**
-   * Converts this Gregorian date into Persian words.
-   */
+  /** Converts this Gregorian date into Persian words.
+    */
   override def toWords: String =
     DateToWord(this)
 
@@ -104,17 +98,16 @@ object GregorianDate {
     GregorianDate(y, m, d)
   }
 
-  /**
-   * Constructs a GregorianDate from a java.time.LocalDate.
-   */
+  /** Constructs a GregorianDate from a java.time.LocalDate.
+    */
   def apply(date: LocalDate): GregorianDate =
     GregorianDate(date.getYear, date.getMonthValue, date.getDayOfMonth)
 
 }
 
-/**
- * @author Bahman Movaqar (Bahman AT BahmanM.com)
- */
+/** @author
+  *   Bahman Movaqar (Bahman AT BahmanM.com)
+  */
 object DateConverter {
 
   type PersianDate = com.bahmanm.persianutils.PersianDate
@@ -125,21 +118,19 @@ object DateConverter {
 
   type ConvertibleDate = com.bahmanm.persianutils.ConvertibleDate
 
-  /**
-   * A simple date representation used in DateConverter. Retained for backward
-   * compatibility.
-   */
-  case class SimpleDate(year: Int, month: Int, day: Int) extends ConvertibleDate {
+  /** A simple date representation used in DateConverter. Retained for backward
+    * compatibility.
+    */
+  case class SimpleDate(year: Int, month: Int, day: Int)
+      extends ConvertibleDate {
 
-    /**
-     * Converts this date to a java.time.LocalDate assuming Gregorian calendar.
-     */
+    /** Converts this date to a java.time.LocalDate assuming Gregorian calendar.
+      */
     override def asLocalDate: LocalDate =
       LocalDate.of(year, month, day)
 
-    /**
-     * Converts this date into Persian words assuming Persian calendar.
-     */
+    /** Converts this date into Persian words assuming Persian calendar.
+      */
     override def toWords: String =
       DateToWord.persian(this)
 
@@ -152,25 +143,27 @@ object DateConverter {
       new SimpleDate(y, m, d)
     }
 
-    /**
-     * Constructs a SimpleDate from a java.time.LocalDate.
-     */
+    /** Constructs a SimpleDate from a java.time.LocalDate.
+      */
     def apply(date: LocalDate): SimpleDate =
       new SimpleDate(date.getYear, date.getMonthValue, date.getDayOfMonth)
 
-    /**
-     * Constructs a SimpleDate from a legacy java.util.Date.
-     *
-     * @deprecated Use [[apply(date: java.time.LocalDate)]] instead. Scheduled for removal in version 7.0.0.
-     */
-    @deprecated("Use apply(date: java.time.LocalDate) instead; will be removed in version 7.0.0", "6.0.0")
+    /** Constructs a SimpleDate from a legacy java.util.Date.
+      *
+      * @deprecated
+      *   Use [[apply(date: java.time.LocalDate)]] instead. Scheduled for
+      *   removal in version 7.0.0.
+      */
+    @deprecated(
+      "Use apply(date: java.time.LocalDate) instead; will be removed in version 7.0.0",
+      "6.0.0"
+    )
     def apply(date: java.util.Date): SimpleDate =
       new SimpleDate(
         date.getYear + 1900,
         date.getMonth + 1,
         date.getDate
       )
-
 
   }
 
@@ -182,51 +175,57 @@ object DateConverter {
       case _                  => throw new InvalidDateException()
     }
 
-  /**
-   * Converts a Persian (a.k.a Jalali) date to Gregorian date.
-   * @param date Persian date as PersianDate
-   * @return Gregorian date as GregorianDate
-   */
+  /** Converts a Persian (a.k.a Jalali) date to Gregorian date.
+    * @param date
+    *   Persian date as PersianDate
+    * @return
+    *   Gregorian date as GregorianDate
+    */
   def persianToGregorian(date: PersianDate): GregorianDate = {
     val jDay = persianDateToJulianDay(date.year, date.month, date.day)
     julianDayToGregorianDate(jDay)
   }
 
-  /**
-   * Converts a Persian (a.k.a Jalali) date to Gregorian date.
-   * @param date Persian date as SimpleDate
-   * @return Gregorian date as SimpleDate
-   */
+  /** Converts a Persian (a.k.a Jalali) date to Gregorian date.
+    * @param date
+    *   Persian date as SimpleDate
+    * @return
+    *   Gregorian date as SimpleDate
+    */
   def persianToGregorian(date: SimpleDate): SimpleDate = {
     val gd = persianToGregorian(PersianDate(date.year, date.month, date.day))
     SimpleDate(gd.year, gd.month, gd.day)
   }
 
-  /**
-   * Converts a Gregorian date to Persian (a.k.a Jalali) date.
-   * @param date Gregorian date as GregorianDate
-   * @return Persian date as PersianDate
-   */
+  /** Converts a Gregorian date to Persian (a.k.a Jalali) date.
+    * @param date
+    *   Gregorian date as GregorianDate
+    * @return
+    *   Persian date as PersianDate
+    */
   def gregorianToPersian(date: GregorianDate): PersianDate = {
     val jDay = gregorianDateToJulianDay(date.year, date.month, date.day)
     julianDayToPersianDate(jDay)
   }
 
-  /**
-   * Converts a Gregorian date to Persian (a.k.a Jalali) date.
-   * @param date Gregorian date as SimpleDate
-   * @return Persian date as SimpleDate
-   */
+  /** Converts a Gregorian date to Persian (a.k.a Jalali) date.
+    * @param date
+    *   Gregorian date as SimpleDate
+    * @return
+    *   Persian date as SimpleDate
+    */
   def gregorianToPersian(date: SimpleDate): SimpleDate = {
     val pd = gregorianToPersian(GregorianDate(date.year, date.month, date.day))
     SimpleDate(pd.year, pd.month, pd.day)
   }
 
-  /**
-   * Converts a Gregorian date (as java.time.LocalDate) to Persian (a.k.a Jalali) date.
-   * @param date Gregorian date as java.time.LocalDate
-   * @return Persian date as PersianDate
-   */
+  /** Converts a Gregorian date (as java.time.LocalDate) to Persian (a.k.a
+    * Jalali) date.
+    * @param date
+    *   Gregorian date as java.time.LocalDate
+    * @return
+    *   Persian date as PersianDate
+    */
   def gregorianToPersian(date: LocalDate): PersianDate =
     gregorianToPersian(GregorianDate(date))
 
@@ -277,9 +276,10 @@ object DateConverter {
   }
 
   private def persianYearInfo(pYear: Int) = {
-    val breaks = Seq(-61, 9, 38, 199, 426, 686, 756, 818, 1111,
-      1181, 1210, 1635, 2060, 2097, 2192, 2262, 2324, 2394,
-      2456, 3178) filter { x => x <= pYear }
+    val breaks = Seq(-61, 9, 38, 199, 426, 686, 756, 818, 1111, 1181, 1210,
+      1635, 2060, 2097, 2192, 2262, 2324, 2394, 2456, 3178) filter { x =>
+      x <= pYear
+    }
     val gYear = pYear + 621
     val gLeaps = gYear / 4 - (gYear / 100 + 1) * 3 / 4 - 150
     val (pLeaps, remainingBreaks) = computePersianLeaps(-14, breaks, 0, pYear)
@@ -291,7 +291,9 @@ object DateConverter {
   }
 
   private def computeN(
-    initialBreak: Int, breaks: Seq[Int], pYear: Int
+      initialBreak: Int,
+      breaks: Seq[Int],
+      pYear: Int
   ): Int = {
     if (breaks.length < 1)
       pYear - initialBreak
@@ -306,8 +308,10 @@ object DateConverter {
   }
 
   private def computePersianLeaps(
-    accResult: Int, breaks: Seq[Int],
-    previousDelta: Int, pYear: Int
+      accResult: Int,
+      breaks: Seq[Int],
+      previousDelta: Int,
+      pYear: Int
   ): (Int, Seq[Int]) = {
     if (pYear < breaks.head)
       (breaks.head, breaks)
