@@ -18,20 +18,18 @@ A collection of utilities for Scala/Java developers who are targeting Persian (F
 
 | Library Version | Scala 2.10 | Scala 2.11 | Scala 2.12 | Scala 2.13 | Scala 3.x |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| 6.x _(not released yet)_ | - | - | - | ✅ | ✅ |
+| 6.x | - | - | - | ✅ | ✅ |
 | 5.x | - | - | ✅ | ✅ | ✅ |
 | 4.x | - | ✅ | ✅ | ✅ | - |
 | 3.x | - | ✅ | ✅ | - | - |
 | 2.x | ✅ | ✅ | - | - | - |
 
-_Note: version 6.x is not released yet. For current projects, please use version 5.0._
-
 # Installation
 
 ## SBT
 
-- JVM: `libraryDependencies += "com.bahmanm" %% "persianutils" % "5.0"`
-- Scala.js (upcoming in 6.x): `libraryDependencies += "com.bahmanm" %%% "persianutils" % "6.0"`
+- JVM: `libraryDependencies += "com.bahmanm" %% "persianutils" % "6.0"`
+- Scala.js: `libraryDependencies += "com.bahmanm" %%% "persianutils" % "6.0"`
 
 ## Other Build Tools
 
