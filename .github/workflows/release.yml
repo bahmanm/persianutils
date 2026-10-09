@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: false
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   publish:
@@ -42,3 +42,17 @@ jobs:
           PGP_SECRET: ${{ secrets.PGP_SECRET }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
+
+      - name: Create GitHub Release
+        run: |
+          if [[ "$GITHUB_REF_NAME" =~ -testing ]]; then
+            gh release create "$GITHUB_REF_NAME" \
+              --verify-tag --generate-notes --title "$GITHUB_REF_NAME" \
+              --prerelease
+          else
+            gh release create "$GITHUB_REF_NAME" \
+              --verify-tag --generate-notes --title "$GITHUB_REF_NAME" \
+              --latest
+          fi
+        env:
+          GH_TOKEN: ${{ github.token }}
