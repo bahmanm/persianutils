@@ -43,7 +43,7 @@ For JVM projects:
 
 ```scala
 libraryDependencies ++= Seq(
-  "com.bahmanm" %% "persianutils" % "5.0"
+  "com.bahmanm" %% "persianutils" % "6.0"
 )
 ```
 
@@ -63,7 +63,7 @@ With Scala 3.x:
 <dependency>
   <groupId>com.bahmanm</groupId>
   <artifactId>persianutils_3</artifactId>
-  <version>5.0</version>
+  <version>6.0</version>
 </dependency>
 ```
 
@@ -73,21 +73,21 @@ With Scala 2.13.x:
 <dependency>
   <groupId>com.bahmanm</groupId>
   <artifactId>persianutils_2.13</artifactId>
-  <version>5.0</version>
+  <version>6.0</version>
 </dependency>
 ```
 
 #### Scala-CLI
 
 ```scala
-//> using dep com.bahmanm::persianutils:5.0
+//> using dep com.bahmanm::persianutils:6.0
 ```
 
 #### Mill
 
 ```scala
 def ivyDeps = Agg(
-  ivy"com.bahmanm::persianutils:5.0"
+  ivy"com.bahmanm::persianutils:6.0"
 )
 ```
 
@@ -96,13 +96,13 @@ def ivyDeps = Agg(
 With Scala 3.x:
 
 ```groovy
-implementation 'com.bahmanm:persianutils_3:5.0'
+implementation 'com.bahmanm:persianutils_3:6.0'
 ```
 
 With Scala 2.13.x:
 
 ```groovy
-implementation 'com.bahmanm:persianutils_2.13:5.0'
+implementation 'com.bahmanm:persianutils_2.13:6.0'
 ```
 
 ---

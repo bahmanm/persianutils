@@ -8,7 +8,7 @@ This document outlines the binary and source compatibility guarantees of `persia
 
 | Library Version | Scala 2.10 | Scala 2.11 | Scala 2.12 | Scala 2.13 | Scala 3.x |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| 6.x _(not released yet)_ | - | - | - | ✅ | ✅ |
+| 6.x | - | - | - | ✅ | ✅ |
 | 5.x | - | - | ✅ | ✅ | ✅ |
 | 4.x | - | ✅ | ✅ | ✅ | - |
 | 3.x | - | ✅ | ✅ | - | - |
