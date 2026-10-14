@@ -59,6 +59,12 @@ extra_css:
 
 extra_javascript:
   - javascripts/open-in-new-window.js
+
+extra:
+  analytics:
+    provider: google
+    property: G-V9RCW4GH7C
+
 validation:
   nav:
     omitted_files: info
